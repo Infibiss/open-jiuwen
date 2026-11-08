@@ -1,8 +1,11 @@
 """Deterministic solver for the sales.csv aggregation questions.
 
 Supported (everything else is escalated to the LLM):
-  * metric: units sold (sum of `units`), number of orders (row count),
+  * totals: units sold (sum of `units`), number of orders (row count),
     revenue (sum of units*price)
+  * "which <column> sold the most/least units|orders|revenue" (ties -> LLM)
+  * largest/smallest units in a single order, average units/price
+    (integer or explicit rounding only), number of distinct values
   * filters: any categorical column given as  <column> 'value'
              (product 'widget', region 'north'), month ranges
              ("months 7 through 8 inclusive", "month 5").
@@ -102,7 +105,120 @@ def solve(task, workspace):
                 filters.append(("month", lambda r, k=k: int(r["month"]) == k))
                 q = q[:ms.start()] + " " + q[ms.end():]
 
-    ql = q.lower()
+    sel = [r for r in rows if all(p(r) for _, p in filters)]
+    try:
+        res = _answer(q.lower(), header, rows, sel)
+    except (KeyError, ValueError, ZeroDivisionError) as e:
+        return SolveResult.unknown(f"bad numeric data: {e}")
+    if isinstance(res, SolveResult):
+        if res.status == "unknown":
+            res.reason += f" in {question!r}"
+        return res
+    kind, ans = res
+    return SolveResult.solved(_fmt(ans), f"{kind} with {len(filters)} filters over {len(sel)} rows",
+                              rows=len(rows), selected=len(sel))
+
+
+def _leftover(ql, extra=()):
+    allowed = ALLOWED | set(extra)
+    return [w for w in re.findall(r"[a-z]+", ql) if w not in allowed]
+
+
+def _col(word, header):
+    word = word.lower()
+    for c in (word, word[:-1] if word.endswith("s") else None, word[:-2] if word.endswith("es") else None):
+        if c and c in header:
+            return c
+    return None
+
+
+MAX_W = {"most", "highest", "largest", "greatest", "biggest", "maximum", "max", "top"}
+MIN_W = {"least", "lowest", "smallest", "fewest", "minimum", "min"}
+EXT = "|".join(sorted(MAX_W | MIN_W))
+GROUP_EXTRA = ("which", "had", "has", "have", "recorded", "generated", "got", "saw", "most", "least", "highest",
+               "lowest", "largest", "smallest", "fewest", "greatest", "biggest", "answer", "name", "just", "only",
+               "its", "value", "sold")
+
+
+def _metric_value(metric, rs):
+    if metric == "units":
+        return sum(_to_num(r["units"]) for r in rs)
+    if metric == "orders":
+        return len(rs)
+    return sum(_to_num(r["units"]) * _to_num(r["price"]) for r in rs)
+
+
+def _answer(ql, header, rows, sel):
+    """Returns (kind, value) or a SolveResult (unknown / infeasible)."""
+    # 1. arg-extreme over a group: "Which region sold the most units ...", "In which month were the most units ..."
+    m = re.search(rf"\b(?:in )?which (\w+) (?:\w+ )?(?:the )?({EXT}) (?:total )?(?:number of )?(units|revenue|orders)\b", ql)
+    if m:
+        col = _col(m[1], header)
+        if col is None:
+            return SolveResult.unknown(f"group column {m[1]!r} not in csv")
+        metric = m[3]
+        if metric == "revenue" and ("units" not in header or "price" not in header):
+            return SolveResult.unknown("revenue without units/price")
+        rest = ql[:m.start()] + " " + ql[m.end():]
+        rest = re.sub(r"\(?\s*units\s*[*x×]\s*price\s*\)?", " ", rest)
+        left = _leftover(rest, GROUP_EXTRA + (m[1],))
+        if left:
+            return SolveResult.unknown(f"unrecognised words {left}")
+        groups = {}
+        for r in sel:
+            groups.setdefault(r[col], []).append(r)
+        if not groups:
+            return SolveResult.unknown("no matching rows")
+        if m[2] in MIN_W and len(groups) < len({r[col] for r in rows}):
+            return SolveResult.unknown("some groups have no rows (minimum ambiguous)")
+        tot = sorted(((_metric_value(metric, rs), g) for g, rs in groups.items()), reverse=m[2] in MAX_W)
+        if len(tot) > 1 and tot[0][0] == tot[1][0]:
+            return SolveResult.unknown("tie for the extreme group")
+        return f"argext {metric} by {col}", tot[0][1]
+
+    # 2. extreme of a single order: "largest number of units in a single order"
+    m = re.search(rf"\b({EXT}) (?:number of )?units (?:in|of|for|sold in|within) (?:a|one|any) (?:single )?order\b", ql)
+    if m:
+        rest = ql[:m.start()] + " " + ql[m.end():]
+        left = _leftover(rest, ("single", "one"))
+        if left:
+            return SolveResult.unknown(f"unrecognised words {left}")
+        if not sel:
+            return SolveResult.infeasible("no order matches the filters")
+        vals = [_to_num(r["units"]) for r in sel]
+        return "single-order extreme", (max(vals) if m[1] in MAX_W else min(vals))
+
+    # 3. average units / price
+    m = re.search(r"\baverage (?:number of )?(units|price)(?: per order| of an order| in an order| per unit)?\b", ql)
+    if m:
+        rest = ql[:m.start()] + " " + ql[m.end():]
+        rnd = re.search(r"\(?\s*(?:rounded|round) (down|to the nearest (?:integer|whole number))\s*\)?", rest)
+        if rnd:
+            rest = rest[:rnd.start()] + " " + rest[rnd.end():]
+        left = _leftover(rest)
+        if left:
+            return SolveResult.unknown(f"unrecognised words {left}")
+        if not sel:
+            return SolveResult.infeasible("average over no rows")
+        avg = sum(_to_num(r[m[1]]) for r in sel) / len(sel)
+        if rnd:
+            avg = int(avg // 1) if rnd[1] == "down" else round(avg)
+        elif not float(avg).is_integer():
+            return SolveResult.unknown("non-integer average without rounding rule")
+        return f"average {m[1]}", avg
+
+    # 4. distinct count: "How many different products ..."
+    m = re.match(r"\s*how many (?:different|distinct|unique) (\w+)\b", ql)
+    if m:
+        col = _col(m[1], header)
+        if col is None:
+            return SolveResult.unknown(f"column {m[1]!r} not in csv")
+        left = _leftover(ql[m.end():], ("appear", "appears", "occur", "occurs", "exist", "exists", "had", "have"))
+        if left:
+            return SolveResult.unknown(f"unrecognised words {left}")
+        return f"distinct {col}", len({r[col] for r in sel})
+
+    # 5. totals: units / orders / revenue
     if re.search(r"\b(revenue|value|amount|income|earn)", ql):
         if "units" not in header or "price" not in header:
             return SolveResult.unknown("revenue without units/price")
@@ -114,21 +230,8 @@ def solve(task, workspace):
     elif re.match(r"\s*how many orders\b", ql) or re.search(r"\bnumber of orders\b", ql):
         metric = "orders"
     else:
-        return SolveResult.unknown(f"metric not recognised: {question!r}")
-
-    leftover = [w for w in re.findall(r"[a-z]+", ql) if w not in ALLOWED]
-    if leftover:
-        return SolveResult.unknown(f"unrecognised words {leftover} in {question!r}")
-
-    sel = [r for r in rows if all(p(r) for _, p in filters)]
-    try:
-        if metric == "units":
-            ans = sum(_to_num(r["units"]) for r in sel)
-        elif metric == "orders":
-            ans = len(sel)
-        else:
-            ans = sum(_to_num(r["units"]) * _to_num(r["price"]) for r in sel)
-    except (KeyError, ValueError) as e:
-        return SolveResult.unknown(f"bad numeric data: {e}")
-    return SolveResult.solved(_fmt(ans), f"{metric} with {len(filters)} filters over {len(sel)} rows",
-                              rows=len(rows), selected=len(sel))
+        return SolveResult.unknown("metric not recognised")
+    left = _leftover(ql)
+    if left:
+        return SolveResult.unknown(f"unrecognised words {left}")
+    return metric, _metric_value(metric, sel)

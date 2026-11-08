@@ -141,14 +141,19 @@ class Harness:
                     return res2, "oneshot+feedback"
                 res = res2 or res
             tried_infeasible = res is not None and res.status == INFEASIBLE
+            if tried_infeasible:
+                # cheap independent second opinion (other noreason model) instead of the
+                # reasoning model: an infeasible task earns nothing, so spend as little as possible
+                alt = await self._step(task, "oneshot", prompt, config.MODEL_ALT)
+                if alt is not None and alt.status == SOLVED:
+                    return alt, "oneshot-alt"
+                return res, "oneshot+alt-confirm"
             if config.ENABLE_REASONING_MODEL and self.ledger.remaining() > 0.15 * self.ledger.usable:
                 res3 = await self._step(task, "reason", prompt, config.MODEL_REASON)
                 if res3 is not None and res3.status == SOLVED:
                     return res3, "reason"
-                if res3 is not None and res3.status == INFEASIBLE and tried_infeasible:
-                    return res3, "reason"  # two independent INFEASIBLE verdicts
-                if res3 is not None and tried_infeasible:
-                    return res, "oneshot"  # INFEASIBLE and the stronger model could not solve it either
+                if res3 is not None and res3.status == INFEASIBLE:
+                    return res3, "reason"
                 if res3 is not None:
                     res = res3
         if config.ENABLE_REACT and self.time_left() > 120 and not self.llm.dead:
@@ -169,8 +174,6 @@ class Harness:
                     log(f"{task.id}: react error {e!r}")
                 finally:
                     self.ledger.release(hold)
-        if tried_infeasible:
-            return res, "oneshot"
         return res, "exhausted"
 
     async def _worker(self, task, sem):

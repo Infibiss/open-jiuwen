@@ -19,19 +19,19 @@ import threading
 from . import config
 from .budget import approx_tokens
 
-# Priors fitted on trajectories/ (qwen3.8-27b, 87 calls): mean output tokens
-# per call, calls per attempt, success probability of the attempt.
+# Priors fitted on trajectories/ (compact prompts, qwen3.8-27b-noreason):
+# mean output tokens per call, calls per attempt, success probability.
 PRIORS = {
-    ("math", "oneshot"): (65, 1.0, 0.92),
-    ("data_analysis", "oneshot"): (95, 1.0, 0.90),
-    ("search", "oneshot"): (33, 1.0, 0.92),
-    ("coding", "oneshot"): (None, 1.1, 0.85),  # None -> size of the file the model re-emits
+    ("math", "oneshot"): (24, 1.0, 0.92),
+    ("data_analysis", "oneshot"): (75, 1.0, 0.90),
+    ("search", "oneshot"): (24, 1.0, 0.92),
+    ("coding", "oneshot"): (None, 1.1, 0.85),  # None -> size of the code the model re-emits
     ("default", "oneshot"): (200, 1.0, 0.6),
-    ("any", "reason"): (260, 1.0, 0.8),  # thinking tokens included
+    ("any", "reason"): (300, 1.0, 0.8),  # thinking tokens included
     ("any", "react"): (55, 3.5, 0.75),
 }
 # chars per prompt token measured on our prompts (Qwen tokenizer; names / digits tokenize densely)
-CHARS_PER_TOKEN = {"math": 3.95, "search": 2.95, "data_analysis": 3.2, "coding": 3.25}
+CHARS_PER_TOKEN = {"math": 3.65, "search": 3.0, "data_analysis": 2.85, "coding": 3.2}
 TEMPLATE_OVERHEAD = 20  # chat-template tokens per request
 REACT_CONTEXT = 950  # mean prompt tokens per ReAct iteration (system + tool schema + history)
 
@@ -54,7 +54,7 @@ class Estimator:
         if strategy == "react":
             tin = REACT_CONTEXT + approx_tokens(task.instruction)
         if out is None:  # coding: the model re-emits the whole file
-            out = int(len(target_text) / cpt) + 15
+            out = int(len(target_text) / 4.8) + 8  # code: ~4.9 chars per output token
         raw = calls * (tin * config.INPUT_WEIGHT + out)
         with self._lock:
             s = self.scale.get((task.type, strategy), 1.0)
@@ -68,11 +68,13 @@ class Estimator:
         return (p0 * 4 + k) / (4 + n)  # Beta prior with strength 4
 
     def expected_total(self, task, first):
-        """Expected spend to finish `task` starting from prediction `first`."""
+        """Expected spend to finish `task` starting from prediction `first`:
+        a failed one-shot is followed either by a second cheap opinion (if the
+        model said INFEASIBLE) or by the reasoning model."""
         cost = first["cost"]
         p = self.p_success(task, first["strategy"])
-        esc = self.predict(task, "reason")["cost"] if config.ENABLE_REASONING_MODEL else 0
-        return round(cost + (1 - p) * esc, 1)
+        esc = self.predict(task, "reason")["cost"] if config.ENABLE_REASONING_MODEL else cost
+        return round(cost + (1 - p) * (0.5 * cost + 0.5 * esc), 1)
 
     def observe(self, task, strategy, predicted, actual, success):
         key = (task.type, strategy)
