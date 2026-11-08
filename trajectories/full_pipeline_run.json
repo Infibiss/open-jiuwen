@@ -1,111 +1,119 @@
 {
- "elapsed_s": 10.7,
+ "elapsed_s": 15.3,
  "ledger": {
   "budget": 100000.0,
-  "spent": 1138.1,
+  "spent": 1420.4,
   "reserved": 0.0,
-  "calls": 6
+  "calls": 7
  },
- "solved": 76,
- "infeasible": 24,
- "expected_points": 225.0,
+ "solved": 84,
+ "infeasible": 16,
+ "expected_points": 232.0,
  "answers": {
   "coding_0003": "DONE",
   "coding_0007": "DONE",
-  "coding_0011": "DONE",
-  "coding_0015": "DONE",
   "coding_0019": "DONE",
   "coding_0023": "DONE",
   "coding_0027": "DONE",
   "coding_0031": "DONE",
   "coding_0035": "DONE",
+  "coding_0043": "DONE",
   "coding_0047": "DONE",
   "coding_0051": "DONE",
+  "coding_0055": "DONE",
   "coding_0059": "DONE",
   "coding_0063": "DONE",
   "coding_0067": "DONE",
   "coding_0071": "DONE",
-  "coding_0079": "DONE",
-  "coding_0087": "DONE",
+  "coding_0075": "DONE",
+  "coding_0083": "DONE",
+  "coding_0091": "DONE",
   "coding_0095": "DONE",
-  "coding_0099": "DONE",
-  "data_analysis_0001": "31",
-  "data_analysis_0005": "16673",
-  "data_analysis_0009": "55",
-  "data_analysis_0025": "194",
-  "data_analysis_0029": "south",
-  "data_analysis_0037": "25",
-  "data_analysis_0041": "12",
-  "data_analysis_0045": "0",
-  "data_analysis_0049": "0",
-  "data_analysis_0053": "28",
-  "data_analysis_0057": "0",
-  "data_analysis_0061": "217",
-  "data_analysis_0065": "168",
-  "data_analysis_0073": "136",
-  "data_analysis_0077": "north",
-  "data_analysis_0081": "23",
-  "data_analysis_0085": "35",
-  "data_analysis_0089": "202",
-  "data_analysis_0093": "south",
-  "data_analysis_0097": "147",
-  "math_0004": "1365",
-  "math_0012": "5",
-  "math_0020": "6720",
-  "math_0028": "3794",
-  "math_0036": "1386",
-  "math_0040": "8736",
-  "math_0044": "5970",
-  "math_0048": "4782",
-  "math_0052": "4830",
-  "math_0060": "537",
-  "math_0064": "515",
-  "math_0068": "1640",
-  "math_0072": "595",
-  "math_0076": "524",
-  "math_0080": "52",
-  "math_0084": "361",
-  "math_0088": "2026",
-  "math_0092": "3716",
-  "search_0002": "1977",
-  "search_0006": "1963",
-  "search_0010": "1974",
-  "search_0014": "Fjord Data",
-  "search_0018": "Bluefin Systems",
-  "search_0026": "Irina Wang",
-  "search_0030": "1984",
-  "search_0034": "Tallinn",
-  "search_0038": "1970",
-  "search_0046": "1974",
-  "search_0050": "1962",
-  "search_0066": "Juniper Foods",
-  "search_0070": "1977",
-  "search_0074": "Lisbon",
-  "search_0078": "2010",
-  "search_0082": "Lisbon",
-  "search_0090": "Tbilisi",
-  "search_0094": "1979",
-  "search_0098": "1977"
+  "data_analysis_0005": "10",
+  "data_analysis_0009": "39",
+  "data_analysis_0017": "0",
+  "data_analysis_0021": "232",
+  "data_analysis_0029": "71",
+  "data_analysis_0033": "3",
+  "data_analysis_0037": "60",
+  "data_analysis_0041": "10",
+  "data_analysis_0045": "40",
+  "data_analysis_0049": "34",
+  "data_analysis_0057": "north",
+  "data_analysis_0061": "12740",
+  "data_analysis_0065": "90",
+  "data_analysis_0069": "1607",
+  "data_analysis_0073": "south",
+  "data_analysis_0081": "128",
+  "data_analysis_0085": "268",
+  "data_analysis_0089": "333",
+  "data_analysis_0093": "212",
+  "data_analysis_0097": "68",
+  "math_0000": "77",
+  "math_0004": "3340",
+  "math_0008": "818",
+  "math_0012": "2694",
+  "math_0016": "11528",
+  "math_0020": "1296",
+  "math_0024": "3874",
+  "math_0028": "946",
+  "math_0040": "133",
+  "math_0044": "171",
+  "math_0052": "-392",
+  "math_0056": "1200",
+  "math_0060": "1287",
+  "math_0064": "708",
+  "math_0072": "3242",
+  "math_0076": "1459",
+  "math_0080": "2578",
+  "math_0084": "583",
+  "math_0088": "2711",
+  "math_0092": "1126",
+  "math_0096": "1560",
+  "search_0002": "Granite AI",
+  "search_0006": "Olga Smith",
+  "search_0010": "1970",
+  "search_0014": "Iris Optics",
+  "search_0018": "1970",
+  "search_0026": "Graz",
+  "search_0030": "Medan",
+  "search_0034": "Tanya Muller",
+  "search_0038": "1977",
+  "search_0042": "Sergei Haddad",
+  "search_0046": "1953",
+  "search_0050": "Graz",
+  "search_0054": "Pavel Ivanova",
+  "search_0058": "1983",
+  "search_0062": "1989",
+  "search_0066": "Iris Optics",
+  "search_0070": "1962",
+  "search_0074": "1979",
+  "search_0078": "Rosa Sato",
+  "search_0082": "2011",
+  "search_0086": "1974",
+  "search_0090": "Dmitri Smith",
+  "search_0094": "Quito",
+  "search_0098": "1968"
  },
  "tasks": [
   {
    "task_id": "coding_0003",
    "task_type": "coding",
-   "reward": 5.0,
+   "reward": 3.0,
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['count_vowels', 'maximum', 'minimum']",
+   "reason": "fixed by 3 mutation(s) in ['count_vowels', 'is_palindrome', 'product']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1024,
-    "output_tokens": 161,
-    "cost": 264.1,
-    "expected_total": 316.6
+    "input_tokens": 991,
+    "output_tokens": 126,
+    "cost": 225.6,
+    "expected_total": 278.1
    },
    "actual_cost": 0,
    "seconds": 0.23
@@ -113,183 +121,183 @@
   {
    "task_id": "coding_0007",
    "task_type": "coding",
-   "reward": 2.0,
+   "reward": 1.0,
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 2 mutation(s) in ['product', 'total']",
+   "reason": "fixed by 4 mutation(s) in ['clamp', 'fib', 'is_palindrome', 'word_count']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 798,
-    "output_tokens": 119,
-    "cost": 199.8,
-    "expected_total": 252.3
+    "input_tokens": 993,
+    "output_tokens": 122,
+    "cost": 221.4,
+    "expected_total": 273.9
    },
    "actual_cost": 0,
-   "seconds": 0.23
+   "seconds": 0.31
   },
   {
    "task_id": "coding_0011",
    "task_type": "coding",
-   "reward": 3.0,
-   "status": "solved",
-   "answer": "DONE",
+   "reward": 1.0,
+   "status": "infeasible",
+   "answer": null,
    "strategy": "deterministic",
-   "reason": "fixed by 4 mutation(s) in ['clamp', 'count_even', 'factorial', 'is_palindrome']",
+   "reason": "contradictory tests: m.count_vowels('Hello World') asserted both == and != 3",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1060,
-    "output_tokens": 151,
-    "cost": 257.8,
-    "expected_total": 310.3
+    "input_tokens": 950,
+    "output_tokens": 165,
+    "cost": 260.0,
+    "expected_total": 312.5
    },
    "actual_cost": 0,
-   "seconds": 0.37
+   "seconds": 0.31
   },
   {
    "task_id": "coding_0015",
    "task_type": "coding",
    "reward": 4.0,
-   "status": "solved",
-   "answer": "DONE",
+   "status": "infeasible",
+   "answer": null,
    "strategy": "deterministic",
-   "reason": "fixed by 4 mutation(s) in ['fib', 'first_n', 'is_palindrome', 'total']",
+   "reason": "contradictory tests: m.fib(10) asserted both == and != 55",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 933,
-    "output_tokens": 101,
-    "cost": 194.6,
-    "expected_total": 247.1
+    "input_tokens": 1017,
+    "output_tokens": 151,
+    "cost": 253.6,
+    "expected_total": 306.1
    },
    "actual_cost": 0,
-   "seconds": 0.37
+   "seconds": 0.31
   },
   {
    "task_id": "coding_0019",
    "task_type": "coding",
-   "reward": 4.0,
+   "reward": 2.0,
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 4 mutation(s) in ['clamp', 'count_even', 'factorial', 'minimum']",
+   "reason": "fixed by 2 mutation(s) in ['first_n', 'minimum']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1007,
-    "output_tokens": 148,
-    "cost": 249.3,
-    "expected_total": 301.8
+    "input_tokens": 958,
+    "output_tokens": 143,
+    "cost": 238.8,
+    "expected_total": 291.3
    },
    "actual_cost": 0,
-   "seconds": 0.33
+   "seconds": 0.31
   },
   {
    "task_id": "coding_0023",
+   "task_type": "coding",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "deterministic",
+   "reason": "fixed by 3 mutation(s) in ['count_vowels', 'first_n', 'total']",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 940,
+    "output_tokens": 97,
+    "cost": 192.0,
+    "expected_total": 244.5
+   },
+   "actual_cost": 0,
+   "seconds": 0.32
+  },
+  {
+   "task_id": "coding_0027",
    "task_type": "coding",
    "reward": 1.0,
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 4 mutation(s) in ['average', 'count_even', 'maximum', 'product']",
+   "reason": "fixed by 2 mutation(s) in ['minimum', 'reverse_words']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1048,
-    "output_tokens": 170,
-    "cost": 275.3,
-    "expected_total": 327.8
+    "input_tokens": 816,
+    "output_tokens": 115,
+    "cost": 197.1,
+    "expected_total": 249.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.18
+  },
+  {
+   "task_id": "coding_0031",
+   "task_type": "coding",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "deterministic",
+   "reason": "fixed by 4 mutation(s) in ['clamp', 'fib', 'minimum', 'word_count']",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1045,
+    "output_tokens": 155,
+    "cost": 259.6,
+    "expected_total": 312.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.34
+  },
+  {
+   "task_id": "coding_0035",
+   "task_type": "coding",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "deterministic",
+   "reason": "fixed by 3 mutation(s) in ['fib', 'minimum', 'product']",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1014,
+    "output_tokens": 171,
+    "cost": 273.0,
+    "expected_total": 325.5
    },
    "actual_cost": 0,
    "seconds": 0.35
   },
   {
-   "task_id": "coding_0027",
-   "task_type": "coding",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "DONE",
-   "strategy": "deterministic",
-   "reason": "fixed by 4 mutation(s) in ['first_n', 'is_palindrome', 'product', 'reverse_words']",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1043,
-    "output_tokens": 143,
-    "cost": 247.4,
-    "expected_total": 299.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.33
-  },
-  {
-   "task_id": "coding_0031",
-   "task_type": "coding",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "DONE",
-   "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['first_n', 'reverse_words', 'square_all']",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1027,
-    "output_tokens": 130,
-    "cost": 233.6,
-    "expected_total": 286.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "coding_0035",
-   "task_type": "coding",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "DONE",
-   "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['fib', 'maximum', 'minimum']",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1005,
-    "output_tokens": 166,
-    "cost": 266.6,
-    "expected_total": 319.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
    "task_id": "coding_0039",
    "task_type": "coding",
-   "reward": 4.0,
+   "reward": 3.0,
    "status": "infeasible",
    "answer": null,
    "strategy": "deterministic",
@@ -300,101 +308,101 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 930,
-    "output_tokens": 128,
-    "cost": 221.8,
-    "expected_total": 274.3
+    "input_tokens": 1065,
+    "output_tokens": 121,
+    "cost": 227.6,
+    "expected_total": 280.1
    },
    "actual_cost": 0,
-   "seconds": 0.2
+   "seconds": 0.27
   },
   {
    "task_id": "coding_0043",
-   "task_type": "coding",
-   "reward": 3.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "contradictory tests: m.average([2, 4, 6]) asserted both == and != 4",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 856,
-    "output_tokens": 103,
-    "cost": 189.1,
-    "expected_total": 241.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.2
-  },
-  {
-   "task_id": "coding_0047",
    "task_type": "coding",
    "reward": 5.0,
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['clamp', 'count_even', 'product']",
+   "reason": "fixed by 2 mutation(s) in ['product', 'word_count']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 943,
-    "output_tokens": 103,
-    "cost": 197.8,
-    "expected_total": 250.3
+    "input_tokens": 831,
+    "output_tokens": 113,
+    "cost": 196.5,
+    "expected_total": 249.0
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.28
+  },
+  {
+   "task_id": "coding_0047",
+   "task_type": "coding",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "deterministic",
+   "reason": "fixed by 3 mutation(s) in ['count_vowels', 'factorial', 'reverse_words']",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 942,
+    "output_tokens": 122,
+    "cost": 216.4,
+    "expected_total": 268.9
+   },
+   "actual_cost": 0,
+   "seconds": 0.24
   },
   {
    "task_id": "coding_0051",
    "task_type": "coding",
-   "reward": 4.0,
+   "reward": 2.0,
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 2 mutation(s) in ['count_vowels', 'minimum']",
+   "reason": "fixed by 2 mutation(s) in ['count_vowels', 'maximum']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 801,
-    "output_tokens": 108,
-    "cost": 189.1,
-    "expected_total": 241.6
+    "input_tokens": 866,
+    "output_tokens": 156,
+    "cost": 242.9,
+    "expected_total": 295.4
    },
    "actual_cost": 0,
-   "seconds": 0.22
+   "seconds": 0.19
   },
   {
    "task_id": "coding_0055",
    "task_type": "coding",
-   "reward": 4.0,
-   "status": "infeasible",
-   "answer": null,
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "contradictory tests: m.total([1, 2, 3]) asserted both == and != 6",
+   "reason": "fixed by 3 mutation(s) in ['fib', 'is_palindrome', 'word_count']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1008,
-    "output_tokens": 108,
-    "cost": 209.8,
-    "expected_total": 262.3
+    "input_tokens": 1018,
+    "output_tokens": 126,
+    "cost": 228.4,
+    "expected_total": 280.9
    },
    "actual_cost": 0,
-   "seconds": 0.22
+   "seconds": 0.24
   },
   {
    "task_id": "coding_0059",
@@ -403,42 +411,42 @@
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['clamp', 'count_vowels', 'reverse_words']",
+   "reason": "fixed by 3 mutation(s) in ['first_n', 'maximum', 'square_all']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 994,
-    "output_tokens": 117,
-    "cost": 217.1,
-    "expected_total": 269.6
+    "input_tokens": 976,
+    "output_tokens": 123,
+    "cost": 220.9,
+    "expected_total": 273.4
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.23
   },
   {
    "task_id": "coding_0063",
    "task_type": "coding",
-   "reward": 1.0,
+   "reward": 5.0,
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['maximum', 'reverse_words', 'total']",
+   "reason": "fixed by 3 mutation(s) in ['average', 'fib', 'product']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 947,
-    "output_tokens": 128,
-    "cost": 223.4,
-    "expected_total": 275.9
+    "input_tokens": 929,
+    "output_tokens": 118,
+    "cost": 211.8,
+    "expected_total": 264.3
    },
    "actual_cost": 0,
-   "seconds": 0.23
+   "seconds": 0.25
   },
   {
    "task_id": "coding_0067",
@@ -447,20 +455,20 @@
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['count_vowels', 'factorial', 'minimum']",
+   "reason": "fixed by 2 mutation(s) in ['is_palindrome', 'maximum']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1041,
-    "output_tokens": 168,
-    "cost": 272.5,
-    "expected_total": 325.0
+    "input_tokens": 877,
+    "output_tokens": 149,
+    "cost": 237.4,
+    "expected_total": 289.9
    },
    "actual_cost": 0,
-   "seconds": 0.25
+   "seconds": 0.21
   },
   {
    "task_id": "coding_0071",
@@ -469,267 +477,179 @@
    "status": "solved",
    "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['count_even', 'fib', 'maximum']",
+   "reason": "fixed by 2 mutation(s) in ['first_n', 'is_palindrome']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 997,
-    "output_tokens": 137,
-    "cost": 237.3,
-    "expected_total": 289.8
+    "input_tokens": 863,
+    "output_tokens": 108,
+    "cost": 195.3,
+    "expected_total": 247.8
    },
    "actual_cost": 0,
-   "seconds": 0.24
+   "seconds": 0.18
   },
   {
    "task_id": "coding_0075",
    "task_type": "coding",
-   "reward": 3.0,
-   "status": "infeasible",
-   "answer": null,
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "contradictory tests: m.fib(10) asserted both == and != 55",
+   "reason": "fixed by 2 mutation(s) in ['clamp', 'total']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 798,
-    "output_tokens": 105,
-    "cost": 185.5,
-    "expected_total": 238.0
+    "input_tokens": 831,
+    "output_tokens": 106,
+    "cost": 189.9,
+    "expected_total": 242.4
    },
    "actual_cost": 0,
-   "seconds": 0.19
+   "seconds": 0.2
   },
   {
    "task_id": "coding_0079",
    "task_type": "coding",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "DONE",
+   "reward": 2.0,
+   "status": "infeasible",
+   "answer": null,
    "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['count_even', 'reverse_words', 'total']",
+   "reason": "contradictory tests: m.minimum([3, 1, 2]) asserted both == and != 1",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 994,
-    "output_tokens": 138,
-    "cost": 238.0,
-    "expected_total": 290.5
+    "input_tokens": 973,
+    "output_tokens": 122,
+    "cost": 219.5,
+    "expected_total": 272.0
+   },
+   "actual_cost": 0,
+   "seconds": 0.17
+  },
+  {
+   "task_id": "coding_0083",
+   "task_type": "coding",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "deterministic",
+   "reason": "fixed by 3 mutation(s) in ['is_palindrome', 'reverse_words', 'word_count']",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1056,
+    "output_tokens": 161,
+    "cost": 267.3,
+    "expected_total": 319.8
+   },
+   "actual_cost": 0,
+   "seconds": 0.26
+  },
+  {
+   "task_id": "coding_0087",
+   "task_type": "coding",
+   "reward": 5.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "deterministic",
+   "reason": "contradictory tests: m.is_palindrome('abba') asserted both true and false",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 984,
+    "output_tokens": 97,
+    "cost": 196.4,
+    "expected_total": 248.9
    },
    "actual_cost": 0,
    "seconds": 0.23
   },
   {
-   "task_id": "coding_0083",
+   "task_id": "coding_0091",
    "task_type": "coding",
    "reward": 5.0,
-   "status": "infeasible",
-   "answer": null,
+   "status": "solved",
+   "answer": "DONE",
    "strategy": "deterministic",
-   "reason": "contradictory tests: m.maximum([3, 9, 2]) asserted both == and != 9",
+   "reason": "fixed by 3 mutation(s) in ['first_n', 'square_all', 'total']",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1065,
-    "output_tokens": 167,
-    "cost": 273.8,
-    "expected_total": 326.3
+    "input_tokens": 1043,
+    "output_tokens": 166,
+    "cost": 270.5,
+    "expected_total": 323.0
+   },
+   "actual_cost": 0,
+   "seconds": 0.26
+  },
+  {
+   "task_id": "coding_0095",
+   "task_type": "coding",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "deterministic",
+   "reason": "fixed by 1 mutation(s) in ['count_vowels']",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 713,
+    "output_tokens": 154,
+    "cost": 225.4,
+    "expected_total": 277.9
+   },
+   "actual_cost": 0,
+   "seconds": 0.22
+  },
+  {
+   "task_id": "coding_0099",
+   "task_type": "coding",
+   "reward": 3.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "deterministic",
+   "reason": "contradictory tests: m.is_palindrome('abba') asserted both true and false",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1086,
+    "output_tokens": 141,
+    "cost": 250.6,
+    "expected_total": 303.1
    },
    "actual_cost": 0,
    "seconds": 0.12
   },
   {
-   "task_id": "coding_0087",
-   "task_type": "coding",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "DONE",
-   "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['clamp', 'maximum', 'square_all']",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 994,
-    "output_tokens": 133,
-    "cost": 232.5,
-    "expected_total": 285.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "coding_0091",
-   "task_type": "coding",
-   "reward": 2.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "contradictory tests: m.fib(10) asserted both == and != 55",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1067,
-    "output_tokens": 167,
-    "cost": 273.9,
-    "expected_total": 326.4
-   },
-   "actual_cost": 0,
-   "seconds": 0.22
-  },
-  {
-   "task_id": "coding_0095",
-   "task_type": "coding",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "DONE",
-   "strategy": "deterministic",
-   "reason": "fixed by 4 mutation(s) in ['average', 'fib', 'product', 'word_count']",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1016,
-    "output_tokens": 140,
-    "cost": 242.4,
-    "expected_total": 294.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.29
-  },
-  {
-   "task_id": "coding_0099",
-   "task_type": "coding",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "DONE",
-   "strategy": "deterministic",
-   "reason": "fixed by 3 mutation(s) in ['factorial', 'fib', 'is_palindrome']",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1013,
-    "output_tokens": 152,
-    "cost": 254.2,
-    "expected_total": 306.7
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
    "task_id": "data_analysis_0001",
    "task_type": "data_analysis",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "31",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 3 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 369,
-    "output_tokens": 95,
-    "cost": 131.9,
-    "expected_total": 166.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.22
-  },
-  {
-   "task_id": "data_analysis_0005",
-   "task_type": "data_analysis",
    "reward": 3.0,
-   "status": "solved",
-   "answer": "16673",
-   "strategy": "deterministic",
-   "reason": "revenue with 2 filters over 15 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 370,
-    "output_tokens": 95,
-    "cost": 132.0,
-    "expected_total": 167.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.22
-  },
-  {
-   "task_id": "data_analysis_0009",
-   "task_type": "data_analysis",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "55",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 3 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 370,
-    "output_tokens": 95,
-    "cost": 132.0,
-    "expected_total": 167.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.22
-  },
-  {
-   "task_id": "data_analysis_0013",
-   "task_type": "data_analysis",
-   "reward": 5.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "invalid month range 13..14",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 370,
-    "output_tokens": 95,
-    "cost": 132.0,
-    "expected_total": 167.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.22
-  },
-  {
-   "task_id": "data_analysis_0017",
-   "task_type": "data_analysis",
-   "reward": 5.0,
    "status": "infeasible",
    "answer": null,
    "strategy": "deterministic",
@@ -740,22 +660,22 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 367,
+    "input_tokens": 368,
     "output_tokens": 95,
-    "cost": 131.7,
-    "expected_total": 166.7
+    "cost": 131.8,
+    "expected_total": 166.8
    },
    "actual_cost": 0,
-   "seconds": 0.22
+   "seconds": 0.12
   },
   {
-   "task_id": "data_analysis_0021",
+   "task_id": "data_analysis_0005",
    "task_type": "data_analysis",
-   "reward": 5.0,
-   "status": "infeasible",
-   "answer": null,
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "10",
    "strategy": "deterministic",
-   "reason": "invalid month range 13..14",
+   "reason": "orders with 2 filters over 10 rows",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
@@ -768,14 +688,83 @@
     "expected_total": 167.1
    },
    "actual_cost": 0,
-   "seconds": 0.22
+   "seconds": 0.12
   },
   {
-   "task_id": "data_analysis_0025",
+   "task_id": "data_analysis_0009",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "39",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 1 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.12
+  },
+  {
+   "task_id": "data_analysis_0013",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "code printed INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 372,
+    "output_tokens": 95,
+    "cost": 132.2,
+    "expected_total": 167.2
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 372,
+    "output_tokens": 95,
+    "cost": 132.2,
+    "expected_total": 167.2
+   },
+   "actual_cost": 418.8,
+   "seconds": 8.96
+  },
+  {
+   "task_id": "data_analysis_0017",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "0",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 0 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 372,
+    "output_tokens": 95,
+    "cost": 132.2,
+    "expected_total": 167.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.12
+  },
+  {
+   "task_id": "data_analysis_0021",
    "task_type": "data_analysis",
    "reward": 5.0,
    "status": "solved",
-   "answer": "194",
+   "answer": "232",
    "strategy": "deterministic",
    "reason": "units with 2 filters over 11 rows",
    "predicted_cost": {
@@ -784,43 +773,18 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 370,
+    "input_tokens": 373,
     "output_tokens": 95,
-    "cost": 132.0,
-    "expected_total": 167.0
+    "cost": 132.3,
+    "expected_total": 167.3
    },
    "actual_cost": 0,
-   "seconds": 0.22
+   "seconds": 0.12
   },
   {
-   "task_id": "data_analysis_0029",
+   "task_id": "data_analysis_0025",
    "task_type": "data_analysis",
-   "reward": 3.0,
-   "status": "solved",
-   "answer": "south",
-   "strategy": "oneshot",
-   "reason": "llm code",
-   "predicted_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 372,
-    "output_tokens": 95,
-    "cost": 132.2,
-    "expected_total": 167.2
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 372,
-    "output_tokens": 95,
-    "cost": 132.2,
-    "expected_total": 167.2
-   },
-   "actual_cost": 163.1,
-   "seconds": 3.15
-  },
-  {
-   "task_id": "data_analysis_0033",
-   "task_type": "data_analysis",
-   "reward": 1.0,
+   "reward": 5.0,
    "status": "infeasible",
    "answer": null,
    "strategy": "deterministic",
@@ -831,45 +795,20 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 371,
+    "input_tokens": 372,
     "output_tokens": 95,
-    "cost": 132.1,
-    "expected_total": 167.1
+    "cost": 132.2,
+    "expected_total": 167.2
    },
    "actual_cost": 0,
-   "seconds": 0.22
+   "seconds": 0.12
   },
   {
-   "task_id": "data_analysis_0037",
+   "task_id": "data_analysis_0029",
    "task_type": "data_analysis",
-   "reward": 3.0,
+   "reward": 1.0,
    "status": "solved",
-   "answer": "25",
-   "strategy": "oneshot",
-   "reason": "llm code",
-   "predicted_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 374,
-    "output_tokens": 95,
-    "cost": 132.4,
-    "expected_total": 167.4
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 374,
-    "output_tokens": 95,
-    "cost": 132.4,
-    "expected_total": 167.4
-   },
-   "actual_cost": 157.0,
-   "seconds": 6.98
-  },
-  {
-   "task_id": "data_analysis_0041",
-   "task_type": "data_analysis",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "12",
+   "answer": "71",
    "strategy": "deterministic",
    "reason": "units with 2 filters over 2 rows",
    "predicted_cost": {
@@ -878,270 +817,22 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 367,
+    "input_tokens": 365,
     "output_tokens": 95,
-    "cost": 131.7,
-    "expected_total": 166.7
+    "cost": 131.5,
+    "expected_total": 166.5
    },
    "actual_cost": 0,
-   "seconds": 0.22
+   "seconds": 0.13
   },
   {
-   "task_id": "data_analysis_0045",
-   "task_type": "data_analysis",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "0",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 0 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 364,
-    "output_tokens": 95,
-    "cost": 131.4,
-    "expected_total": 166.4
-   },
-   "actual_cost": 0,
-   "seconds": 0.22
-  },
-  {
-   "task_id": "data_analysis_0049",
-   "task_type": "data_analysis",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "0",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 0 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 366,
-    "output_tokens": 95,
-    "cost": 131.6,
-    "expected_total": 166.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0053",
+   "task_id": "data_analysis_0033",
    "task_type": "data_analysis",
    "reward": 1.0,
    "status": "solved",
-   "answer": "28",
+   "answer": "3",
    "strategy": "deterministic",
-   "reason": "units with 2 filters over 1 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 371,
-    "output_tokens": 95,
-    "cost": 132.1,
-    "expected_total": 167.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0057",
-   "task_type": "data_analysis",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "0",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 0 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 364,
-    "output_tokens": 95,
-    "cost": 131.4,
-    "expected_total": 166.4
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0061",
-   "task_type": "data_analysis",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "217",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 9 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 370,
-    "output_tokens": 95,
-    "cost": 132.0,
-    "expected_total": 167.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0065",
-   "task_type": "data_analysis",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "168",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 7 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 371,
-    "output_tokens": 95,
-    "cost": 132.1,
-    "expected_total": 167.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0069",
-   "task_type": "data_analysis",
-   "reward": 3.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "reason",
-   "reason": "code printed INFEASIBLE",
-   "predicted_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 375,
-    "output_tokens": 95,
-    "cost": 132.5,
-    "expected_total": 167.5
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 375,
-    "output_tokens": 95,
-    "cost": 132.5,
-    "expected_total": 167.5
-   },
-   "actual_cost": 468.2,
-   "seconds": 7.27
-  },
-  {
-   "task_id": "data_analysis_0073",
-   "task_type": "data_analysis",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "136",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 6 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 369,
-    "output_tokens": 95,
-    "cost": 131.9,
-    "expected_total": 166.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0077",
-   "task_type": "data_analysis",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "north",
-   "strategy": "oneshot",
-   "reason": "llm code",
-   "predicted_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 374,
-    "output_tokens": 95,
-    "cost": 132.4,
-    "expected_total": 167.4
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 374,
-    "output_tokens": 95,
-    "cost": 132.4,
-    "expected_total": 167.4
-   },
-   "actual_cost": 185.5,
-   "seconds": 3.52
-  },
-  {
-   "task_id": "data_analysis_0081",
-   "task_type": "data_analysis",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "23",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 3 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 371,
-    "output_tokens": 95,
-    "cost": 132.1,
-    "expected_total": 167.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0085",
-   "task_type": "data_analysis",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "35",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 1 rows",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 366,
-    "output_tokens": 95,
-    "cost": 131.6,
-    "expected_total": 166.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.23
-  },
-  {
-   "task_id": "data_analysis_0089",
-   "task_type": "data_analysis",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "202",
-   "strategy": "deterministic",
-   "reason": "units with 2 filters over 9 rows",
+   "reason": "orders with 2 filters over 3 rows",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
@@ -1154,41 +845,38 @@
     "expected_total": 167.2
    },
    "actual_cost": 0,
-   "seconds": 0.23
+   "seconds": 0.13
   },
   {
-   "task_id": "data_analysis_0093",
+   "task_id": "data_analysis_0037",
    "task_type": "data_analysis",
-   "reward": 1.0,
+   "reward": 4.0,
    "status": "solved",
-   "answer": "south",
-   "strategy": "oneshot",
-   "reason": "llm code",
+   "answer": "60",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 2 rows",
    "predicted_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 374,
-    "output_tokens": 95,
-    "cost": 132.4,
-    "expected_total": 167.4
+    "strategy": "deterministic",
+    "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 374,
+    "input_tokens": 373,
     "output_tokens": 95,
-    "cost": 132.4,
-    "expected_total": 167.4
+    "cost": 132.3,
+    "expected_total": 167.3
    },
-   "actual_cost": 164.3,
-   "seconds": 2.21
+   "actual_cost": 0,
+   "seconds": 0.13
   },
   {
-   "task_id": "data_analysis_0097",
+   "task_id": "data_analysis_0041",
    "task_type": "data_analysis",
-   "reward": 3.0,
+   "reward": 1.0,
    "status": "solved",
-   "answer": "147",
+   "answer": "10",
    "strategy": "deterministic",
-   "reason": "units with 2 filters over 7 rows",
+   "reason": "orders with 2 filters over 10 rows",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
@@ -1201,36 +889,356 @@
     "expected_total": 167.1
    },
    "actual_cost": 0,
-   "seconds": 0.23
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0045",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "40",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 373,
+    "output_tokens": 95,
+    "cost": 132.3,
+    "expected_total": 167.3
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 373,
+    "output_tokens": 95,
+    "cost": 132.3,
+    "expected_total": 167.3
+   },
+   "actual_cost": 156.8,
+   "seconds": 1.38
+  },
+  {
+   "task_id": "data_analysis_0049",
+   "task_type": "data_analysis",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "34",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 4 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0053",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "deterministic",
+   "reason": "invalid month range 13..14",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 372,
+    "output_tokens": 95,
+    "cost": 132.2,
+    "expected_total": 167.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0057",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "north",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 368,
+    "output_tokens": 95,
+    "cost": 131.8,
+    "expected_total": 166.8
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 368,
+    "output_tokens": 95,
+    "cost": 131.8,
+    "expected_total": 166.8
+   },
+   "actual_cost": 164.5,
+   "seconds": 2.4
+  },
+  {
+   "task_id": "data_analysis_0061",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "12740",
+   "strategy": "deterministic",
+   "reason": "revenue with 2 filters over 15 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0065",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "90",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 4 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0069",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "1607",
+   "strategy": "deterministic",
+   "reason": "revenue with 2 filters over 3 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 372,
+    "output_tokens": 95,
+    "cost": 132.2,
+    "expected_total": 167.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0073",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "south",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "actual_cost": 164.1,
+   "seconds": 3.79
+  },
+  {
+   "task_id": "data_analysis_0077",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "code printed INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 367,
+    "output_tokens": 95,
+    "cost": 131.7,
+    "expected_total": 166.7
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 367,
+    "output_tokens": 95,
+    "cost": 131.7,
+    "expected_total": 166.7
+   },
+   "actual_cost": 516.2,
+   "seconds": 12.08
+  },
+  {
+   "task_id": "data_analysis_0081",
+   "task_type": "data_analysis",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "128",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 6 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 370,
+    "output_tokens": 95,
+    "cost": 132.0,
+    "expected_total": 167.0
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0085",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "268",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 12 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0089",
+   "task_type": "data_analysis",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "333",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 17 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 371,
+    "output_tokens": 95,
+    "cost": 132.1,
+    "expected_total": 167.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0093",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "212",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 10 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 370,
+    "output_tokens": 95,
+    "cost": 132.0,
+    "expected_total": 167.0
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
+  },
+  {
+   "task_id": "data_analysis_0097",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "68",
+   "strategy": "deterministic",
+   "reason": "units with 2 filters over 3 rows",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 366,
+    "output_tokens": 95,
+    "cost": 131.6,
+    "expected_total": 166.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.13
   },
   {
    "task_id": "math_0000",
    "task_type": "math",
-   "reward": 2.0,
-   "status": "infeasible",
-   "answer": null,
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "77",
    "strategy": "deterministic",
-   "reason": "quantity not given: 'It ships some boxes per day for a few days'",
+   "reason": "warehouse template",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 230,
+    "input_tokens": 213,
     "output_tokens": 65,
-    "cost": 88.0,
-    "expected_total": 116.0
+    "cost": 86.3,
+    "expected_total": 114.3
    },
    "actual_cost": 0,
-   "seconds": 0.23
+   "seconds": 0.13
   },
   {
    "task_id": "math_0004",
    "task_type": "math",
-   "reward": 2.0,
+   "reward": 4.0,
    "status": "solved",
-   "answer": "1365",
+   "answer": "3340",
    "strategy": "deterministic",
    "reason": "warehouse template",
    "predicted_cost": {
@@ -1239,42 +1247,20 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 210,
+    "input_tokens": 189,
     "output_tokens": 65,
-    "cost": 86.0,
-    "expected_total": 114.0
+    "cost": 83.9,
+    "expected_total": 111.9
    },
    "actual_cost": 0,
-   "seconds": 0.24
+   "seconds": 0.13
   },
   {
    "task_id": "math_0008",
    "task_type": "math",
-   "reward": 4.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "division by zero in: 'Then the stock is split equally into 0 warehouses and it keeps one share (rounded down)'",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 215,
-    "output_tokens": 65,
-    "cost": 86.5,
-    "expected_total": 114.5
-   },
-   "actual_cost": 0,
-   "seconds": 0.24
-  },
-  {
-   "task_id": "math_0012",
-   "task_type": "math",
    "reward": 3.0,
    "status": "solved",
-   "answer": "5",
+   "answer": "818",
    "strategy": "deterministic",
    "reason": "warehouse template",
    "predicted_cost": {
@@ -1283,42 +1269,42 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 236,
+    "input_tokens": 198,
     "output_tokens": 65,
-    "cost": 88.6,
-    "expected_total": 116.6
+    "cost": 84.8,
+    "expected_total": 112.8
    },
    "actual_cost": 0,
-   "seconds": 0.24
+   "seconds": 0.13
   },
   {
-   "task_id": "math_0016",
+   "task_id": "math_0012",
    "task_type": "math",
-   "reward": 5.0,
-   "status": "infeasible",
-   "answer": null,
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "2694",
    "strategy": "deterministic",
-   "reason": "division by zero in: 'Then the stock is split equally into 0 warehouses and it keeps one share (rounded down)'",
+   "reason": "warehouse template",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 228,
+    "input_tokens": 217,
     "output_tokens": 65,
-    "cost": 87.8,
-    "expected_total": 115.8
+    "cost": 86.7,
+    "expected_total": 114.7
    },
    "actual_cost": 0,
-   "seconds": 0.24
+   "seconds": 0.13
   },
   {
-   "task_id": "math_0020",
+   "task_id": "math_0016",
    "task_type": "math",
-   "reward": 2.0,
+   "reward": 4.0,
    "status": "solved",
-   "answer": "6720",
+   "answer": "11528",
    "strategy": "deterministic",
    "reason": "warehouse template",
    "predicted_cost": {
@@ -1333,412 +1319,38 @@
     "expected_total": 112.0
    },
    "actual_cost": 0,
-   "seconds": 0.24
+   "seconds": 0.13
+  },
+  {
+   "task_id": "math_0020",
+   "task_type": "math",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "1296",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 216,
+    "output_tokens": 65,
+    "cost": 86.6,
+    "expected_total": 114.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.14
   },
   {
    "task_id": "math_0024",
    "task_type": "math",
-   "reward": 2.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "division by zero in: 'Then the stock is split equally into 0 warehouses and it keeps one share (rounded down)'",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 186,
-    "output_tokens": 65,
-    "cost": 83.6,
-    "expected_total": 111.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.24
-  },
-  {
-   "task_id": "math_0028",
-   "task_type": "math",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "3794",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 186,
-    "output_tokens": 65,
-    "cost": 83.6,
-    "expected_total": 111.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.24
-  },
-  {
-   "task_id": "math_0032",
-   "task_type": "math",
-   "reward": 4.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "quantity not given: 'It ships some boxes per day for a few days'",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 181,
-    "output_tokens": 65,
-    "cost": 83.1,
-    "expected_total": 111.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.24
-  },
-  {
-   "task_id": "math_0036",
-   "task_type": "math",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "1386",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 173,
-    "output_tokens": 65,
-    "cost": 82.3,
-    "expected_total": 110.3
-   },
-   "actual_cost": 0,
-   "seconds": 0.24
-  },
-  {
-   "task_id": "math_0040",
-   "task_type": "math",
    "reward": 3.0,
    "status": "solved",
-   "answer": "8736",
+   "answer": "3874",
    "strategy": "deterministic",
    "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 176,
-    "output_tokens": 65,
-    "cost": 82.6,
-    "expected_total": 110.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0044",
-   "task_type": "math",
-   "reward": 3.0,
-   "status": "solved",
-   "answer": "5970",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 196,
-    "output_tokens": 65,
-    "cost": 84.6,
-    "expected_total": 112.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0048",
-   "task_type": "math",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "4782",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 197,
-    "output_tokens": 65,
-    "cost": 84.7,
-    "expected_total": 112.7
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0052",
-   "task_type": "math",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "4830",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 199,
-    "output_tokens": 65,
-    "cost": 84.9,
-    "expected_total": 112.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0056",
-   "task_type": "math",
-   "reward": 4.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "initial quantity not given: 'A warehouse starts with an unknown number of boxes'",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 187,
-    "output_tokens": 65,
-    "cost": 83.7,
-    "expected_total": 111.7
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0060",
-   "task_type": "math",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "537",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 220,
-    "output_tokens": 65,
-    "cost": 87.0,
-    "expected_total": 115.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0064",
-   "task_type": "math",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "515",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 196,
-    "output_tokens": 65,
-    "cost": 84.6,
-    "expected_total": 112.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0068",
-   "task_type": "math",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "1640",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 186,
-    "output_tokens": 65,
-    "cost": 83.6,
-    "expected_total": 111.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.25
-  },
-  {
-   "task_id": "math_0072",
-   "task_type": "math",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "595",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 171,
-    "output_tokens": 65,
-    "cost": 82.1,
-    "expected_total": 110.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "math_0076",
-   "task_type": "math",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "524",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 177,
-    "output_tokens": 65,
-    "cost": 82.7,
-    "expected_total": 110.7
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "math_0080",
-   "task_type": "math",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "52",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 218,
-    "output_tokens": 65,
-    "cost": 86.8,
-    "expected_total": 114.8
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "math_0084",
-   "task_type": "math",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "361",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 176,
-    "output_tokens": 65,
-    "cost": 82.6,
-    "expected_total": 110.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "math_0088",
-   "task_type": "math",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "2026",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 208,
-    "output_tokens": 65,
-    "cost": 85.8,
-    "expected_total": 113.8
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "math_0092",
-   "task_type": "math",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "3716",
-   "strategy": "deterministic",
-   "reason": "warehouse template",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 170,
-    "output_tokens": 65,
-    "cost": 82.0,
-    "expected_total": 110.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "math_0096",
-   "task_type": "math",
-   "reward": 1.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "quantity not given: 'It ships some boxes per day for a few days'",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
@@ -1751,192 +1363,412 @@
     "expected_total": 110.9
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.14
+  },
+  {
+   "task_id": "math_0028",
+   "task_type": "math",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "946",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 185,
+    "output_tokens": 65,
+    "cost": 83.5,
+    "expected_total": 111.5
+   },
+   "actual_cost": 0,
+   "seconds": 0.14
+  },
+  {
+   "task_id": "math_0032",
+   "task_type": "math",
+   "reward": 4.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "deterministic",
+   "reason": "division by zero in: 'Then the stock is split equally into 0 warehouses and it keeps one share (rounded down)'",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 222,
+    "output_tokens": 65,
+    "cost": 87.2,
+    "expected_total": 115.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.14
+  },
+  {
+   "task_id": "math_0036",
+   "task_type": "math",
+   "reward": 3.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "deterministic",
+   "reason": "quantity not given: 'It ships some boxes per day for a few days'",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 207,
+    "output_tokens": 65,
+    "cost": 85.7,
+    "expected_total": 113.7
+   },
+   "actual_cost": 0,
+   "seconds": 0.14
+  },
+  {
+   "task_id": "math_0040",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "133",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 196,
+    "output_tokens": 65,
+    "cost": 84.6,
+    "expected_total": 112.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.14
+  },
+  {
+   "task_id": "math_0044",
+   "task_type": "math",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "171",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 204,
+    "output_tokens": 65,
+    "cost": 85.4,
+    "expected_total": 113.4
+   },
+   "actual_cost": 0,
+   "seconds": 0.14
+  },
+  {
+   "task_id": "math_0048",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "deterministic",
+   "reason": "quantity not given: 'It ships some boxes per day for a few days'",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 204,
+    "output_tokens": 65,
+    "cost": 85.4,
+    "expected_total": 113.4
+   },
+   "actual_cost": 0,
+   "seconds": 0.14
+  },
+  {
+   "task_id": "math_0052",
+   "task_type": "math",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "-392",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 217,
+    "output_tokens": 65,
+    "cost": 86.7,
+    "expected_total": 114.7
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0056",
+   "task_type": "math",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "1200",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 182,
+    "output_tokens": 65,
+    "cost": 83.2,
+    "expected_total": 111.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0060",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "1287",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 179,
+    "output_tokens": 65,
+    "cost": 82.9,
+    "expected_total": 110.9
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0064",
+   "task_type": "math",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "708",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 203,
+    "output_tokens": 65,
+    "cost": 85.3,
+    "expected_total": 113.3
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0068",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "deterministic",
+   "reason": "quantity not given: 'It ships some boxes per day for a few days'",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 198,
+    "output_tokens": 65,
+    "cost": 84.8,
+    "expected_total": 112.8
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0072",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "3242",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 188,
+    "output_tokens": 65,
+    "cost": 83.8,
+    "expected_total": 111.8
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0076",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "1459",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 202,
+    "output_tokens": 65,
+    "cost": 85.2,
+    "expected_total": 113.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0080",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "2578",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 179,
+    "output_tokens": 65,
+    "cost": 82.9,
+    "expected_total": 110.9
+   },
+   "actual_cost": 0,
+   "seconds": 0.15
+  },
+  {
+   "task_id": "math_0084",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "583",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 186,
+    "output_tokens": 65,
+    "cost": 83.6,
+    "expected_total": 111.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "math_0088",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "2711",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 195,
+    "output_tokens": 65,
+    "cost": 84.5,
+    "expected_total": 112.5
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "math_0092",
+   "task_type": "math",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "1126",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 189,
+    "output_tokens": 65,
+    "cost": 83.9,
+    "expected_total": 111.9
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "math_0096",
+   "task_type": "math",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "1560",
+   "strategy": "deterministic",
+   "reason": "warehouse template",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 192,
+    "output_tokens": 65,
+    "cost": 84.2,
+    "expected_total": 112.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
   },
   {
    "task_id": "search_0002",
    "task_type": "search",
    "reward": 4.0,
    "status": "solved",
-   "answer": "1977",
-   "strategy": "deterministic",
-   "reason": "mentor -> born",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1034,
-    "output_tokens": 33,
-    "cost": 136.4,
-    "expected_total": 164.4
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0006",
-   "task_type": "search",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "1963",
-   "strategy": "deterministic",
-   "reason": "born",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1044,
-    "output_tokens": 33,
-    "cost": 137.4,
-    "expected_total": 165.4
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0010",
-   "task_type": "search",
-   "reward": 4.0,
-   "status": "solved",
-   "answer": "1974",
-   "strategy": "deterministic",
-   "reason": "born",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1030,
-    "output_tokens": 33,
-    "cost": 136.0,
-    "expected_total": 164.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0014",
-   "task_type": "search",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "Fjord Data",
+   "answer": "Granite AI",
    "strategy": "deterministic",
    "reason": "employer",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1029,
-    "output_tokens": 33,
-    "cost": 135.9,
-    "expected_total": 163.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0018",
-   "task_type": "search",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "Bluefin Systems",
-   "strategy": "deterministic",
-   "reason": "employer",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1029,
-    "output_tokens": 33,
-    "cost": 135.9,
-    "expected_total": 163.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0022",
-   "task_type": "search",
-   "reward": 5.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "no kb entry for 'Granite AI' (needed for 'headquarters')",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1025,
-    "output_tokens": 33,
-    "cost": 135.5,
-    "expected_total": 163.5
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0026",
-   "task_type": "search",
-   "reward": 5.0,
-   "status": "solved",
-   "answer": "Irina Wang",
-   "strategy": "deterministic",
-   "reason": "mentor",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1029,
-    "output_tokens": 33,
-    "cost": 135.9,
-    "expected_total": 163.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0030",
-   "task_type": "search",
-   "reward": 3.0,
-   "status": "solved",
-   "answer": "1984",
-   "strategy": "deterministic",
-   "reason": "born",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1037,
-    "output_tokens": 33,
-    "cost": 136.7,
-    "expected_total": 164.7
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0034",
-   "task_type": "search",
-   "reward": 2.0,
-   "status": "solved",
-   "answer": "Tallinn",
-   "strategy": "deterministic",
-   "reason": "employer -> headquarters",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
@@ -1949,10 +1781,32 @@
     "expected_total": 164.5
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0038",
+   "task_id": "search_0006",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Olga Smith",
+   "strategy": "deterministic",
+   "reason": "mentor",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1032,
+    "output_tokens": 33,
+    "cost": 136.2,
+    "expected_total": 164.2
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0010",
    "task_type": "search",
    "reward": 3.0,
    "status": "solved",
@@ -1965,152 +1819,20 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1049,
-    "output_tokens": 33,
-    "cost": 137.9,
-    "expected_total": 165.9
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0042",
-   "task_type": "search",
-   "reward": 3.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "entity 'Nikolai Ivanova' not found in kb",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1036,
-    "output_tokens": 33,
-    "cost": 136.6,
-    "expected_total": 164.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0046",
-   "task_type": "search",
-   "reward": 3.0,
-   "status": "solved",
-   "answer": "1974",
-   "strategy": "deterministic",
-   "reason": "mentor -> employer -> founded",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1041,
-    "output_tokens": 33,
-    "cost": 137.1,
-    "expected_total": 165.1
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0050",
-   "task_type": "search",
-   "reward": 1.0,
-   "status": "solved",
-   "answer": "1962",
-   "strategy": "deterministic",
-   "reason": "mentor -> born",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1030,
-    "output_tokens": 33,
-    "cost": 136.0,
-    "expected_total": 164.0
-   },
-   "actual_cost": 0,
-   "seconds": 0.27
-  },
-  {
-   "task_id": "search_0054",
-   "task_type": "search",
-   "reward": 2.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "no kb entry for 'Cobalt Works' (needed for 'headquarters')",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
     "input_tokens": 1032,
     "output_tokens": 33,
     "cost": 136.2,
     "expected_total": 164.2
    },
    "actual_cost": 0,
-   "seconds": 0.27
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0058",
-   "task_type": "search",
-   "reward": 2.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "entity 'Kira Wang' not found in kb",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1032,
-    "output_tokens": 33,
-    "cost": 136.2,
-    "expected_total": 164.2
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0062",
-   "task_type": "search",
-   "reward": 4.0,
-   "status": "infeasible",
-   "answer": null,
-   "strategy": "deterministic",
-   "reason": "no kb entry for 'Ember Bio' (needed for 'headquarters')",
-   "predicted_cost": {
-    "strategy": "deterministic",
-    "cost": 0
-   },
-   "predicted_llm_cost": {
-    "strategy": "oneshot",
-    "input_tokens": 1016,
-    "output_tokens": 33,
-    "cost": 134.6,
-    "expected_total": 162.6
-   },
-   "actual_cost": 0,
-   "seconds": 0.26
-  },
-  {
-   "task_id": "search_0066",
+   "task_id": "search_0014",
    "task_type": "search",
    "reward": 1.0,
    "status": "solved",
-   "answer": "Juniper Foods",
+   "answer": "Iris Optics",
    "strategy": "deterministic",
    "reason": "employer",
    "predicted_cost": {
@@ -2119,20 +1841,20 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1035,
+    "input_tokens": 1030,
     "output_tokens": 33,
-    "cost": 136.5,
-    "expected_total": 164.5
+    "cost": 136.0,
+    "expected_total": 164.0
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0070",
+   "task_id": "search_0018",
    "task_type": "search",
-   "reward": 4.0,
+   "reward": 1.0,
    "status": "solved",
-   "answer": "1977",
+   "answer": "1970",
    "strategy": "deterministic",
    "reason": "born",
    "predicted_cost": {
@@ -2141,44 +1863,44 @@
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1030,
+    "input_tokens": 1026,
     "output_tokens": 33,
-    "cost": 136.0,
-    "expected_total": 164.0
+    "cost": 135.6,
+    "expected_total": 163.6
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0074",
+   "task_id": "search_0022",
    "task_type": "search",
-   "reward": 3.0,
-   "status": "solved",
-   "answer": "Lisbon",
+   "reward": 1.0,
+   "status": "infeasible",
+   "answer": null,
    "strategy": "deterministic",
-   "reason": "employer -> headquarters",
+   "reason": "no kb entry for 'Helix Motors' (needed for 'headquarters')",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1035,
+    "input_tokens": 1017,
     "output_tokens": 33,
-    "cost": 136.5,
-    "expected_total": 164.5
+    "cost": 134.7,
+    "expected_total": 162.7
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0078",
+   "task_id": "search_0026",
    "task_type": "search",
-   "reward": 4.0,
+   "reward": 5.0,
    "status": "solved",
-   "answer": "2010",
+   "answer": "Graz",
    "strategy": "deterministic",
-   "reason": "mentor -> employer -> founded",
+   "reason": "employer -> headquarters",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
@@ -2191,14 +1913,14 @@
     "expected_total": 164.4
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0082",
+   "task_id": "search_0030",
    "task_type": "search",
-   "reward": 3.0,
+   "reward": 4.0,
    "status": "solved",
-   "answer": "Lisbon",
+   "answer": "Medan",
    "strategy": "deterministic",
    "reason": "employer -> headquarters",
    "predicted_cost": {
@@ -2213,36 +1935,102 @@
     "expected_total": 165.7
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0086",
+   "task_id": "search_0034",
    "task_type": "search",
-   "reward": 2.0,
-   "status": "infeasible",
-   "answer": null,
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "Tanya Muller",
    "strategy": "deterministic",
-   "reason": "no kb entry for 'Helix Motors' (needed for 'headquarters')",
+   "reason": "mentor",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1029,
+    "input_tokens": 1033,
     "output_tokens": 33,
-    "cost": 135.9,
-    "expected_total": 163.9
+    "cost": 136.3,
+    "expected_total": 164.3
    },
    "actual_cost": 0,
-   "seconds": 0.26
+   "seconds": 0.16
   },
   {
-   "task_id": "search_0090",
+   "task_id": "search_0038",
    "task_type": "search",
-   "reward": 4.0,
+   "reward": 1.0,
    "status": "solved",
-   "answer": "Tbilisi",
+   "answer": "1977",
+   "strategy": "deterministic",
+   "reason": "mentor -> born",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1040,
+    "output_tokens": 33,
+    "cost": 137.0,
+    "expected_total": 165.0
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0042",
+   "task_type": "search",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "Sergei Haddad",
+   "strategy": "deterministic",
+   "reason": "mentor",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1035,
+    "output_tokens": 33,
+    "cost": 136.5,
+    "expected_total": 164.5
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0046",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "1953",
+   "strategy": "deterministic",
+   "reason": "mentor -> employer -> founded",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1040,
+    "output_tokens": 33,
+    "cost": 137.0,
+    "expected_total": 165.0
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0050",
+   "task_type": "search",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "Graz",
    "strategy": "deterministic",
    "reason": "employer -> headquarters",
    "predicted_cost": {
@@ -2257,127 +2045,357 @@
     "expected_total": 164.9
    },
    "actual_cost": 0,
-   "seconds": 0.25
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0054",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Pavel Ivanova",
+   "strategy": "deterministic",
+   "reason": "mentor",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1029,
+    "output_tokens": 33,
+    "cost": 135.9,
+    "expected_total": 163.9
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0058",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "1983",
+   "strategy": "deterministic",
+   "reason": "mentor -> born",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1033,
+    "output_tokens": 33,
+    "cost": 136.3,
+    "expected_total": 164.3
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0062",
+   "task_type": "search",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "1989",
+   "strategy": "deterministic",
+   "reason": "born",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1031,
+    "output_tokens": 33,
+    "cost": 136.1,
+    "expected_total": 164.1
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0066",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Iris Optics",
+   "strategy": "deterministic",
+   "reason": "employer",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1036,
+    "output_tokens": 33,
+    "cost": 136.6,
+    "expected_total": 164.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.17
+  },
+  {
+   "task_id": "search_0070",
+   "task_type": "search",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "1962",
+   "strategy": "deterministic",
+   "reason": "born",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1036,
+    "output_tokens": 33,
+    "cost": 136.6,
+    "expected_total": 164.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.17
+  },
+  {
+   "task_id": "search_0074",
+   "task_type": "search",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "1979",
+   "strategy": "deterministic",
+   "reason": "mentor -> employer -> founded",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1044,
+    "output_tokens": 33,
+    "cost": 137.4,
+    "expected_total": 165.4
+   },
+   "actual_cost": 0,
+   "seconds": 0.17
+  },
+  {
+   "task_id": "search_0078",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Rosa Sato",
+   "strategy": "deterministic",
+   "reason": "mentor",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1028,
+    "output_tokens": 33,
+    "cost": 135.8,
+    "expected_total": 163.8
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0082",
+   "task_type": "search",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "2011",
+   "strategy": "deterministic",
+   "reason": "mentor -> employer -> founded",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1036,
+    "output_tokens": 33,
+    "cost": 136.6,
+    "expected_total": 164.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0086",
+   "task_type": "search",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "1974",
+   "strategy": "deterministic",
+   "reason": "mentor -> born",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1036,
+    "output_tokens": 33,
+    "cost": 136.6,
+    "expected_total": 164.6
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
+  },
+  {
+   "task_id": "search_0090",
+   "task_type": "search",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "Dmitri Smith",
+   "strategy": "deterministic",
+   "reason": "mentor",
+   "predicted_cost": {
+    "strategy": "deterministic",
+    "cost": 0
+   },
+   "predicted_llm_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1044,
+    "output_tokens": 33,
+    "cost": 137.4,
+    "expected_total": 165.4
+   },
+   "actual_cost": 0,
+   "seconds": 0.16
   },
   {
    "task_id": "search_0094",
    "task_type": "search",
    "reward": 4.0,
    "status": "solved",
-   "answer": "1979",
+   "answer": "Quito",
    "strategy": "deterministic",
-   "reason": "mentor -> born",
+   "reason": "employer -> headquarters",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1033,
+    "input_tokens": 1041,
     "output_tokens": 33,
-    "cost": 136.3,
-    "expected_total": 164.3
+    "cost": 137.1,
+    "expected_total": 165.1
    },
    "actual_cost": 0,
-   "seconds": 0.25
+   "seconds": 0.16
   },
   {
    "task_id": "search_0098",
    "task_type": "search",
-   "reward": 1.0,
+   "reward": 5.0,
    "status": "solved",
-   "answer": "1977",
+   "answer": "1968",
    "strategy": "deterministic",
-   "reason": "mentor -> born",
+   "reason": "born",
    "predicted_cost": {
     "strategy": "deterministic",
     "cost": 0
    },
    "predicted_llm_cost": {
     "strategy": "oneshot",
-    "input_tokens": 1033,
+    "input_tokens": 1036,
     "output_tokens": 33,
-    "cost": 136.3,
-    "expected_total": 164.3
+    "cost": 136.6,
+    "expected_total": 164.6
    },
    "actual_cost": 0,
-   "seconds": 0.25
+   "seconds": 0.16
   }
  ],
  "calls": [
   {
-   "t": 1794161437.62,
-   "task": "data_analysis_0029",
+   "t": 1794161697.89,
+   "task": "data_analysis_0057",
    "model": "qwen3.8-27b-noreason",
-   "tag": "data_analysis/oneshot 3.1s",
+   "tag": "data_analysis/oneshot 2.4s",
+   "in": 345,
+   "out": 130,
+   "reason": 0,
+   "cost": 164.5
+  },
+  {
+   "t": 1794161698.95,
+   "task": "data_analysis_0073",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 3.7s",
    "in": 351,
-   "out": 128,
-   "reason": 0,
-   "cost": 163.1
-  },
-  {
-   "t": 1794161437.7,
-   "task": "data_analysis_0077",
-   "model": "qwen3.8-27b-noreason",
-   "tag": "data_analysis/oneshot 3.5s",
-   "in": 355,
-   "out": 150,
-   "reason": 0,
-   "cost": 185.5
-  },
-  {
-   "t": 1794161439.23,
-   "task": "data_analysis_0069",
-   "model": "qwen3.8-27b-noreason",
-   "tag": "data_analysis/oneshot 4.7s",
-   "in": 359,
-   "out": 273,
-   "reason": 0,
-   "cost": 308.9
-  },
-  {
-   "t": 1794161439.83,
-   "task": "data_analysis_0093",
-   "model": "qwen3.8-27b-noreason",
-   "tag": "data_analysis/oneshot 2.2s",
-   "in": 353,
    "out": 129,
    "reason": 0,
-   "cost": 164.3
+   "cost": 164.1
   },
   {
-   "t": 1794161441.46,
-   "task": "data_analysis_0037",
+   "t": 1794161699.27,
+   "task": "data_analysis_0045",
    "model": "qwen3.8-27b-noreason",
-   "tag": "data_analysis/oneshot 2.5s",
-   "in": 360,
+   "tag": "data_analysis/oneshot 1.3s",
+   "in": 358,
    "out": 121,
    "reason": 0,
-   "cost": 157.0
+   "cost": 156.8
   },
   {
-   "t": 1794161441.76,
-   "task": "data_analysis_0069",
+   "t": 1794161701.42,
+   "task": "data_analysis_0013",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 2.2s",
+   "in": 352,
+   "out": 187,
+   "reason": 0,
+   "cost": 222.2
+  },
+  {
+   "t": 1794161702.55,
+   "task": "data_analysis_0077",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 7.0s",
+   "in": 349,
+   "out": 323,
+   "reason": 0,
+   "cost": 357.9
+  },
+  {
+   "t": 1794161704.43,
+   "task": "data_analysis_0013",
    "model": "qwen3.8-27b",
-   "tag": "data_analysis/reason 2.5s",
-   "in": 383,
+   "tag": "data_analysis/reason 3.0s",
+   "in": 376,
+   "out": 159,
+   "reason": 144,
+   "cost": 196.6
+  },
+  {
+   "t": 1794161707.57,
+   "task": "data_analysis_0077",
+   "model": "qwen3.8-27b",
+   "tag": "data_analysis/reason 5.0s",
+   "in": 373,
    "out": 121,
    "reason": 106,
-   "cost": 159.3
+   "cost": 158.3
   }
  ],
  "estimator": {
   "scale": {
-   "data_analysis/oneshot": 1.343,
-   "data_analysis/reason": 0.861
+   "data_analysis/oneshot": 1.716,
+   "data_analysis/reason": 0.789
   },
   "stats": {
    "data_analysis/oneshot": [
     5,
-    4
+    3
    ],
    "data_analysis/reason": [
-    1,
+    2,
     0
    ]
   }

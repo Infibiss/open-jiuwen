@@ -80,6 +80,16 @@ async def run_react(task, ledger, model, token_cap, max_iters=None):
     agent.ability_manager.add_ability(bt.card, bt)
 
     over_cap = asyncio.Event()
+    stop_result = {"output": "FINAL: STOPPED (token cap)", "result_type": "answer"}
+
+    def _exhausted():
+        return ledger.task_cost(task.id) >= token_cap or ledger.remaining() <= 0
+
+    async def before_call(ctx):
+        # openJiuwen's graceful abort: skips the model call and ends the loop
+        if _exhausted():
+            over_cap.set()
+            ctx.request_force_finish(stop_result)
 
     async def after_call(ctx):
         resp = getattr(ctx.inputs, "response", None)
@@ -88,21 +98,22 @@ async def run_react(task, ledger, model, token_cap, max_iters=None):
         pout = getattr(um, "output_tokens", 0) or 0
         prs = getattr(um, "reasoning_tokens", 0) or 0
         ledger.charge(task.id, model, pin, pout, prs, not (prs and prs > pout), tag="react")
-        if ledger.task_cost(task.id) >= token_cap or ledger.remaining() <= 0:
+        if _exhausted():
             over_cap.set()
+            ctx.request_force_finish(stop_result)
 
+    await agent.register_callback(AgentCallbackEvent.BEFORE_MODEL_CALL, before_call)
     await agent.register_callback(AgentCallbackEvent.AFTER_MODEL_CALL, after_call)
     query = task.instruction
+    # The token cap is enforced inside the loop (force_finish in the model-call
+    # callbacks), so the run ends by itself; the wall-clock timeout is a backstop.
     run = asyncio.create_task(agent.invoke({"query": query, "conversation_id": f"{task.id}-{uuid.uuid4().hex[:6]}"}))
-    stop = asyncio.create_task(over_cap.wait())
-    done, _ = await asyncio.wait({run, stop}, return_when=asyncio.FIRST_COMPLETED,
-                                 timeout=config.LLM_TIMEOUT_S * (max_iters + 1))
+    done, _ = await asyncio.wait({run}, timeout=config.LLM_TIMEOUT_S * (max_iters + 1))
     result = None
     if run in done and not run.cancelled() and run.exception() is None:
         result = run.result()
-    for t in (run, stop):
-        if not t.done():
-            t.cancel()
+    if not run.done():
+        run.cancel()
     # restore tests if the agent touched them
     if tests_before is not None:
         tp = os.path.join(workdir, test_file)
@@ -113,7 +124,7 @@ async def run_react(task, ledger, model, token_cap, max_iters=None):
     output = ""
     if isinstance(result, dict):
         output = str(result.get("output") or "")
-    final = re.findall(r"FINAL:\s*(.+)", output)
+    final = [f for f in re.findall(r"FINAL:\s*(.+)", output) if not f.startswith("STOPPED")]
     file_ans = open(ans_path, encoding="utf-8").read().strip() if os.path.isfile(ans_path) else None
     if os.path.isfile(ans_path):
         os.remove(ans_path)  # the harness writes the official answer files itself

@@ -147,14 +147,16 @@ class Harness:
                     return res3, "reason"
                 if res3 is not None and res3.status == INFEASIBLE and tried_infeasible:
                     return res3, "reason"  # two independent INFEASIBLE verdicts
+                if res3 is not None and tried_infeasible:
+                    return res, "oneshot"  # INFEASIBLE and the stronger model could not solve it either
                 if res3 is not None:
                     res = res3
         if config.ENABLE_REACT and self.time_left() > 120 and not self.llm.dead:
             from .react import run_react  # imported lazily: heavier agent stack
             pred = self.est.predict(task, "react")
             cap = max(1500.0, min(pred["cost"] * 2.5, self.ledger.remaining()))
-            if self.ledger.try_reserve(min(cap, pred["cost"])):
-                self.ledger.release(min(cap, pred["cost"]))
+            hold = min(cap, pred["cost"])
+            if self.ledger.try_reserve(hold):
                 before = self.ledger.task_cost(task.id)
                 try:
                     r = await run_react(task, self.ledger, config.MODEL_FAST, token_cap=before + cap)
@@ -162,8 +164,11 @@ class Harness:
                                      r.status == SOLVED)
                     if r.status in (SOLVED, INFEASIBLE):
                         return r, "react"
+                    res = r
                 except Exception as e:  # noqa: BLE001
                     log(f"{task.id}: react error {e!r}")
+                finally:
+                    self.ledger.release(hold)
         if tried_infeasible:
             return res, "oneshot"
         return res, "exhausted"

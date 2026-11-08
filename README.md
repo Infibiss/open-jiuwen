@@ -7,8 +7,8 @@
 | Прогон (синтетика, см. «Траектории») | Баллы | Токены | Время |
 |---|---|---|---|
 | 8 примеров организаторов | 20 / 20 | 0 | 0.2 с |
-| 104 задачи, Docker как у жюри (`--read-only`, `--cap-drop ALL`) | 266 / 266 | 2 588 | 25 с |
-| 100 новых задач, полный конвейер | 225 / 225 | 1 138 | 11 с |
+| 104 задачи (8 примеров + синтетика), Docker как у жюри (`--read-only`, `--cap-drop ALL`) | 241 / 241 | 1 829 | 38 с |
+| 100 новых задач (16 невыполнимых), полный конвейер — `trajectories/full_pipeline_run.json` | 232 / 232 | 1 420 | 15 с |
 | 48 задач **без** детерминированных решателей (только LLM-лестница) | 99 / 99 | 12 562 | 60 с |
 
 ---
@@ -79,12 +79,12 @@ run_agent.py
 harness/budget.py     Ledger: учёт токенов по usage каждого вызова, резервирование, запас прочности
 harness/estimator.py  прогноз расхода до запуска + онлайн-калибровка
 harness/llm.py        вызовы через openjiuwen Model (OpenAI-совместимый клиент), ретраи, 429, circuit breaker
-harness/react.py      openjiuwen ReActAgent + AFTER_MODEL_CALL-колбэк для учёта и жёсткого лимита токенов
+harness/react.py      openjiuwen ReActAgent + колбэки BEFORE/AFTER_MODEL_CALL: учёт токенов и force_finish на лимите
 ```
 
 **Где используется openJiuwen.** Все обращения к LLM идут через SDK openJiuwen:
 * `openjiuwen.core.foundation.llm.Model` с `ModelClientConfig` и `ModelRequestConfig`: для one-shot и reasoning-ступеней;
-* `openjiuwen.core.single_agent.ReActAgent`: агентный цикл с инструментом `bash`, собранным через `openjiuwen.core.foundation.tool.tool`. Длина цикла ограничена `max_iterations`, расход считается колбэком `AgentCallbackEvent.AFTER_MODEL_CALL`.
+* `openjiuwen.core.single_agent.ReActAgent`: агентный цикл с инструментом `bash`, собранным через `openjiuwen.core.foundation.tool.tool`. Длина цикла ограничена `max_iterations`, расход считается колбэком `AgentCallbackEvent.AFTER_MODEL_CALL`, остановка на лимите — через `request_force_finish`.
 
 Логи SDK перенастраиваются до первого импорта (`harness/oj.py`), потому что в `--read-only` контейнере писать в `./logs` нельзя.
 
@@ -123,7 +123,7 @@ harness/react.py      openjiuwen ReActAgent + AFTER_MODEL_CALL-колбэк дл
 **Использование прогноза:**
 * *Отбор и порядок.* Задачи phase 1 сортируются по `reward / E[cost]`: баллы случайны и не связаны со сложностью, поэтому выгоднее всего дешёвые задачи с высокими баллами.
 * *Допуск.* Шаг начинается, только если `Ledger.try_reserve(прогноз)` успешен. Не хватает бюджета или времени — задача пропускается и не тратит токены.
-* *Остановка во время выполнения.* ReAct-агент снимается, как только расход задачи превышает её лимит: колбэк после каждого вызова модели. Длина цикла ограничена `max_iterations`, у каждого вызова есть `max_tokens`.
+* *Остановка во время выполнения.* ReAct-агент останавливается штатным механизмом openJiuwen `ctx.request_force_finish()` из колбэков `BEFORE_MODEL_CALL` и `AFTER_MODEL_CALL`, как только расход задачи достигает её лимита (`max(1500, 2.5·прогноз)`) или заканчивается общий бюджет. Длина цикла ограничена `max_iterations`, у каждого вызова есть `max_tokens`. До этого механизма отменённый цикл в тесте успевал потратить 2466 токенов, с ним — 1541 при лимите 1500.
 * *Запас прочности.* Последние 6 % бюджета не планируются. Учёт ведётся по `usage` из ответа прокси. Запросы, оборванные по тайм-ауту, списываются по пессимистичной оценке.
 * *Отчёт.* В `results.json` для каждой задачи есть `predicted_cost` (выбранный план), `predicted_llm_cost` (сколько стоила бы LLM-лестница) и `actual_cost`. `--predict-only` выдаёт прогноз для новых задач **до запуска**, не трогая их файлы.
 
