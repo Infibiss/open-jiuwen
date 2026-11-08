@@ -1,0 +1,641 @@
+{
+ "elapsed_s": 25.2,
+ "ledger": {
+  "budget": 100000.0,
+  "spent": 3615.0,
+  "reserved": 0.0,
+  "calls": 20
+ },
+ "solved": 17,
+ "infeasible": 1,
+ "expected_points": 51.0,
+ "answers": {
+  "coding_0003": "DONE",
+  "coding_0023": "DONE",
+  "coding_0043": "DONE",
+  "coding_0063": "DONE",
+  "data_analysis_0041": "85",
+  "data_analysis_0061": "0",
+  "data_analysis_0081": "0",
+  "math_0000": "3109",
+  "math_0020": "696",
+  "math_0040": "2149",
+  "math_0060": "INFEASIBLE",
+  "math_0080": "1906",
+  "search_0002": "1997",
+  "search_0022": "2003",
+  "search_0042": "1970",
+  "search_0062": "Farid Smith",
+  "search_0082": "1998"
+ },
+ "tasks": [
+  {
+   "task_id": "coding_0003",
+   "task_type": "coding",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 960,
+    "output_tokens": 233,
+    "cost": 329.5,
+    "expected_total": 627.5
+   },
+   "actual_cost": 242.1,
+   "seconds": 1.6
+  },
+  {
+   "task_id": "coding_0023",
+   "task_type": "coding",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 930,
+    "output_tokens": 247,
+    "cost": 340.3,
+    "expected_total": 638.3
+   },
+   "actual_cost": 246.8,
+   "seconds": 3.39
+  },
+  {
+   "task_id": "coding_0043",
+   "task_type": "coding",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 831,
+    "output_tokens": 227,
+    "cost": 310.8,
+    "expected_total": 608.8
+   },
+   "actual_cost": 217.2,
+   "seconds": 8.78
+  },
+  {
+   "task_id": "coding_0063",
+   "task_type": "coding",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 730,
+    "output_tokens": 197,
+    "cost": 270.8,
+    "expected_total": 568.8
+   },
+   "actual_cost": 170.0,
+   "seconds": 3.06
+  },
+  {
+   "task_id": "coding_0083",
+   "task_type": "coding",
+   "reward": 1.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "model: INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1007,
+    "output_tokens": 235,
+    "cost": 336.5,
+    "expected_total": 634.5
+   },
+   "actual_cost": 838.3,
+   "seconds": 8.48
+  },
+  {
+   "task_id": "data_analysis_0001",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "failed",
+   "answer": null,
+   "strategy": "exhausted",
+   "reason": "skipped (budget/time)",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 279,
+    "output_tokens": 170,
+    "cost": 197.9,
+    "expected_total": 376.7
+   },
+   "actual_cost": 0,
+   "seconds": 20.75
+  },
+  {
+   "task_id": "data_analysis_0021",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "failed",
+   "answer": null,
+   "strategy": "exhausted",
+   "reason": "skipped (budget/time)",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 279,
+    "output_tokens": 170,
+    "cost": 197.9,
+    "expected_total": 376.7
+   },
+   "actual_cost": 0,
+   "seconds": 9.29
+  },
+  {
+   "task_id": "data_analysis_0041",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "85",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 280,
+    "output_tokens": 170,
+    "cost": 198.0,
+    "expected_total": 376.8
+   },
+   "actual_cost": 115.4,
+   "seconds": 8.33
+  },
+  {
+   "task_id": "data_analysis_0061",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "0",
+   "strategy": "reason",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 277,
+    "output_tokens": 170,
+    "cost": 197.7,
+    "expected_total": 376.5
+   },
+   "actual_cost": 313.6,
+   "seconds": 4.0
+  },
+  {
+   "task_id": "data_analysis_0081",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "0",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 278,
+    "output_tokens": 170,
+    "cost": 197.8,
+    "expected_total": 376.6
+   },
+   "actual_cost": 116.1,
+   "seconds": 2.16
+  },
+  {
+   "task_id": "math_0000",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "3109",
+   "strategy": "reason",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 223,
+    "output_tokens": 110,
+    "cost": 132.3,
+    "expected_total": 251.5
+   },
+   "actual_cost": 271.6,
+   "seconds": 3.01
+  },
+  {
+   "task_id": "math_0020",
+   "task_type": "math",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "696",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 162,
+    "output_tokens": 110,
+    "cost": 126.2,
+    "expected_total": 245.4
+   },
+   "actual_cost": 40.8,
+   "seconds": 2.22
+  },
+  {
+   "task_id": "math_0040",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "2149",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 172,
+    "output_tokens": 110,
+    "cost": 127.2,
+    "expected_total": 246.4
+   },
+   "actual_cost": 47.0,
+   "seconds": 1.0
+  },
+  {
+   "task_id": "math_0060",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "INFEASIBLE",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 184,
+    "output_tokens": 110,
+    "cost": 128.4,
+    "expected_total": 247.6
+   },
+   "actual_cost": 136.8,
+   "seconds": 1.83
+  },
+  {
+   "task_id": "math_0080",
+   "task_type": "math",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "1906",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 162,
+    "output_tokens": 110,
+    "cost": 126.2,
+    "expected_total": 245.4
+   },
+   "actual_cost": 58.9,
+   "seconds": 1.15
+  },
+  {
+   "task_id": "search_0002",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "1997",
+   "strategy": "reason",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 833,
+    "output_tokens": 45,
+    "cost": 128.3,
+    "expected_total": 277.3
+   },
+   "actual_cost": 256.0,
+   "seconds": 2.13
+  },
+  {
+   "task_id": "search_0022",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "2003",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 830,
+    "output_tokens": 45,
+    "cost": 128.0,
+    "expected_total": 277.0
+   },
+   "actual_cost": 133.0,
+   "seconds": 8.29
+  },
+  {
+   "task_id": "search_0042",
+   "task_type": "search",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "1970",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 835,
+    "output_tokens": 45,
+    "cost": 128.5,
+    "expected_total": 277.5
+   },
+   "actual_cost": 135.3,
+   "seconds": 3.68
+  },
+  {
+   "task_id": "search_0062",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Farid Smith",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 837,
+    "output_tokens": 45,
+    "cost": 128.7,
+    "expected_total": 277.7
+   },
+   "actual_cost": 135.5,
+   "seconds": 1.27
+  },
+  {
+   "task_id": "search_0082",
+   "task_type": "search",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "1998",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 839,
+    "output_tokens": 45,
+    "cost": 128.9,
+    "expected_total": 277.9
+   },
+   "actual_cost": 140.6,
+   "seconds": 2.26
+  }
+ ],
+ "calls": [
+  {
+   "t": 1794160715.74,
+   "task": "math_0020",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.4s",
+   "in": 148,
+   "out": 26,
+   "reason": 0,
+   "cost": 40.8
+  },
+  {
+   "t": 1794160716.65,
+   "task": "search_0082",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 2.3s",
+   "in": 1036,
+   "out": 37,
+   "reason": 0,
+   "cost": 140.6
+  },
+  {
+   "t": 1794160717.69,
+   "task": "search_0042",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 3.7s",
+   "in": 1023,
+   "out": 33,
+   "reason": 0,
+   "cost": 135.3
+  },
+  {
+   "t": 1794160718.36,
+   "task": "data_analysis_0061",
+   "model": "qwen3.8-27b",
+   "tag": "data_analysis/reason 2.7s",
+   "in": 346,
+   "out": 279,
+   "reason": 195,
+   "cost": 313.6
+  },
+  {
+   "t": 1794160718.74,
+   "task": "data_analysis_0081",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 2.1s",
+   "in": 321,
+   "out": 84,
+   "reason": 0,
+   "cost": 116.1
+  },
+  {
+   "t": 1794160718.82,
+   "task": "math_0080",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.1s",
+   "in": 149,
+   "out": 44,
+   "reason": 0,
+   "cost": 58.9
+  },
+  {
+   "t": 1794160721.18,
+   "task": "search_0002",
+   "model": "qwen3.8-27b",
+   "tag": "search/reason 1.6s",
+   "in": 1040,
+   "out": 152,
+   "reason": 115,
+   "cost": 256.0
+  },
+  {
+   "t": 1794160722.45,
+   "task": "search_0062",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 1.3s",
+   "in": 1015,
+   "out": 34,
+   "reason": 0,
+   "cost": 135.5
+  },
+  {
+   "t": 1794160725.47,
+   "task": "coding_0063",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 3.0s",
+   "in": 670,
+   "out": 103,
+   "reason": 0,
+   "cost": 170.0
+  },
+  {
+   "t": 1794160727.05,
+   "task": "data_analysis_0041",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 8.3s",
+   "in": 324,
+   "out": 83,
+   "reason": 0,
+   "cost": 115.4
+  },
+  {
+   "t": 1794160727.13,
+   "task": "search_0022",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 8.3s",
+   "in": 1000,
+   "out": 33,
+   "reason": 0,
+   "cost": 133.0
+  },
+  {
+   "t": 1794160727.13,
+   "task": "coding_0043",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 8.7s",
+   "in": 782,
+   "out": 139,
+   "reason": 0,
+   "cost": 217.2
+  },
+  {
+   "t": 1794160728.06,
+   "task": "math_0040",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.0s",
+   "in": 150,
+   "out": 32,
+   "reason": 0,
+   "cost": 47.0
+  },
+  {
+   "t": 1794160728.87,
+   "task": "coding_0023",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 3.3s",
+   "in": 908,
+   "out": 156,
+   "reason": 0,
+   "cost": 246.8
+  },
+  {
+   "t": 1794160728.95,
+   "task": "math_0060",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.8s",
+   "in": 168,
+   "out": 120,
+   "reason": 0,
+   "cost": 136.8
+  },
+  {
+   "t": 1794160730.14,
+   "task": "math_0000",
+   "model": "qwen3.8-27b",
+   "tag": "math/reason 2.4s",
+   "in": 216,
+   "out": 250,
+   "reason": 186,
+   "cost": 271.6
+  },
+  {
+   "t": 1794160730.28,
+   "task": "coding_0003",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 1.5s",
+   "in": 951,
+   "out": 147,
+   "reason": 0,
+   "cost": 242.1
+  },
+  {
+   "t": 1794160731.87,
+   "task": "coding_0083",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 2.9s",
+   "in": 1004,
+   "out": 128,
+   "reason": 0,
+   "cost": 228.4
+  },
+  {
+   "t": 1794160732.53,
+   "task": "coding_0083",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 0.7s",
+   "in": 1161,
+   "out": 5,
+   "reason": 0,
+   "cost": 121.1
+  },
+  {
+   "t": 1794160737.39,
+   "task": "coding_0083",
+   "model": "qwen3.8-27b",
+   "tag": "coding/reason 4.9s",
+   "in": 1028,
+   "out": 386,
+   "reason": 379,
+   "cost": 488.8
+  }
+ ],
+ "estimator": {
+  "scale": {
+   "math/oneshot": 0.901,
+   "search/oneshot": 1.022,
+   "data_analysis/reason": 0.775,
+   "data_analysis/oneshot": 0.813,
+   "search/reason": 0.775,
+   "coding/oneshot": 0.71,
+   "math/reason": 0.775,
+   "coding/reason": 0.799
+  },
+  "stats": {
+   "math/oneshot": [
+    4,
+    4
+   ],
+   "search/oneshot": [
+    4,
+    4
+   ],
+   "data_analysis/reason": [
+    1,
+    1
+   ],
+   "data_analysis/oneshot": [
+    2,
+    2
+   ],
+   "search/reason": [
+    1,
+    1
+   ],
+   "coding/oneshot": [
+    6,
+    4
+   ],
+   "math/reason": [
+    1,
+    1
+   ],
+   "coding/reason": [
+    1,
+    0
+   ]
+  }
+ }
+}

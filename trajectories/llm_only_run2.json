@@ -1,0 +1,1727 @@
+{
+ "elapsed_s": 60.1,
+ "ledger": {
+  "budget": 100000.0,
+  "spent": 12561.7,
+  "reserved": 0.0,
+  "calls": 75
+ },
+ "solved": 39,
+ "infeasible": 8,
+ "expected_points": 102.0,
+ "answers": {
+  "coding_0011": "DONE",
+  "coding_0015": "DONE",
+  "coding_0031": "DONE",
+  "coding_0035": "DONE",
+  "coding_0051": "DONE",
+  "coding_0055": "DONE",
+  "data_analysis_0009": "0",
+  "data_analysis_0013": "62",
+  "data_analysis_0029": "108",
+  "data_analysis_0049": "257",
+  "data_analysis_0053": "95",
+  "data_analysis_0069": "1",
+  "data_analysis_0073": "south",
+  "data_analysis_0089": "205",
+  "math_0008": "2960",
+  "math_0012": "289",
+  "math_0032": "820",
+  "math_0048": "3602",
+  "math_0068": "616",
+  "math_0072": "2447",
+  "math_0088": "2486",
+  "math_0092": "1581",
+  "coding_0003": "DONE",
+  "coding_0007": "DONE",
+  "data_analysis_0002": "158",
+  "data_analysis_0006": "284",
+  "math_0000": "389",
+  "math_0004": "1735",
+  "search_0001": "1983",
+  "search_0005": "Osaka",
+  "search_0010": "Dune Robotics",
+  "search_0014": "1998",
+  "search_0030": "1997",
+  "search_0034": "Olga Muller",
+  "search_0050": "Alice Wang",
+  "search_0054": "1970",
+  "search_0070": "Tanya Muller",
+  "search_0074": "2003",
+  "search_0094": "2000"
+ },
+ "tasks": [
+  {
+   "task_id": "coding_0011",
+   "task_type": "coding",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 791,
+    "output_tokens": 190,
+    "cost": 270.0,
+    "expected_total": 568.0
+   },
+   "actual_cost": 172.0,
+   "seconds": 1.53
+  },
+  {
+   "task_id": "coding_0015",
+   "task_type": "coding",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 627,
+    "output_tokens": 220,
+    "cost": 283.6,
+    "expected_total": 581.6
+   },
+   "actual_cost": 197.7,
+   "seconds": 13.39
+  },
+  {
+   "task_id": "coding_0031",
+   "task_type": "coding",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 767,
+    "output_tokens": 208,
+    "cost": 284.9,
+    "expected_total": 582.9
+   },
+   "actual_cost": 181.8,
+   "seconds": 3.07
+  },
+  {
+   "task_id": "coding_0035",
+   "task_type": "coding",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 708,
+    "output_tokens": 185,
+    "cost": 256.0,
+    "expected_total": 554.0
+   },
+   "actual_cost": 169.6,
+   "seconds": 4.63
+  },
+  {
+   "task_id": "coding_0051",
+   "task_type": "coding",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 564,
+    "output_tokens": 173,
+    "cost": 230.1,
+    "expected_total": 528.1
+   },
+   "actual_cost": 132.7,
+   "seconds": 1.48
+  },
+  {
+   "task_id": "coding_0055",
+   "task_type": "coding",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 964,
+    "output_tokens": 246,
+    "cost": 342.6,
+    "expected_total": 640.6
+   },
+   "actual_cost": 258.9,
+   "seconds": 2.22
+  },
+  {
+   "task_id": "coding_0071",
+   "task_type": "coding",
+   "reward": 2.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "model: INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 1014,
+    "output_tokens": 261,
+    "cost": 362.5,
+    "expected_total": 660.5
+   },
+   "actual_cost": 605.8,
+   "seconds": 9.16
+  },
+  {
+   "task_id": "coding_0075",
+   "task_type": "coding",
+   "reward": 4.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "model: INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 910,
+    "output_tokens": 190,
+    "cost": 282.0,
+    "expected_total": 580.0
+   },
+   "actual_cost": 469.4,
+   "seconds": 10.09
+  },
+  {
+   "task_id": "coding_0091",
+   "task_type": "coding",
+   "reward": 5.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "model: INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 910,
+    "output_tokens": 181,
+    "cost": 272.8,
+    "expected_total": 570.8
+   },
+   "actual_cost": 672.4,
+   "seconds": 10.42
+  },
+  {
+   "task_id": "coding_0095",
+   "task_type": "coding",
+   "reward": 4.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "react",
+   "reason": "react: INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 988,
+    "output_tokens": 233,
+    "cost": 332.3,
+    "expected_total": 630.3
+   },
+   "actual_cost": 3366.7,
+   "seconds": 24.26
+  },
+  {
+   "task_id": "data_analysis_0009",
+   "task_type": "data_analysis",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "0",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 314,
+    "output_tokens": 170,
+    "cost": 201.4,
+    "expected_total": 380.2
+   },
+   "actual_cost": 116.4,
+   "seconds": 1.78
+  },
+  {
+   "task_id": "data_analysis_0013",
+   "task_type": "data_analysis",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "62",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 316,
+    "output_tokens": 170,
+    "cost": 201.6,
+    "expected_total": 380.4
+   },
+   "actual_cost": 118.6,
+   "seconds": 1.27
+  },
+  {
+   "task_id": "data_analysis_0029",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "108",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 318,
+    "output_tokens": 170,
+    "cost": 201.8,
+    "expected_total": 380.6
+   },
+   "actual_cost": 116.8,
+   "seconds": 1.17
+  },
+  {
+   "task_id": "data_analysis_0033",
+   "task_type": "data_analysis",
+   "reward": 4.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "code printed INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 317,
+    "output_tokens": 170,
+    "cost": 201.7,
+    "expected_total": 380.5
+   },
+   "actual_cost": 332.8,
+   "seconds": 9.63
+  },
+  {
+   "task_id": "data_analysis_0049",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "257",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 315,
+    "output_tokens": 170,
+    "cost": 201.5,
+    "expected_total": 380.3
+   },
+   "actual_cost": 117.3,
+   "seconds": 2.12
+  },
+  {
+   "task_id": "data_analysis_0053",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "95",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 317,
+    "output_tokens": 170,
+    "cost": 201.7,
+    "expected_total": 380.5
+   },
+   "actual_cost": 120.6,
+   "seconds": 2.24
+  },
+  {
+   "task_id": "data_analysis_0069",
+   "task_type": "data_analysis",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "1",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 319,
+    "output_tokens": 170,
+    "cost": 201.9,
+    "expected_total": 380.7
+   },
+   "actual_cost": 110.6,
+   "seconds": 4.33
+  },
+  {
+   "task_id": "data_analysis_0073",
+   "task_type": "data_analysis",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "south",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 317,
+    "output_tokens": 170,
+    "cost": 201.7,
+    "expected_total": 380.5
+   },
+   "actual_cost": 163.3,
+   "seconds": 1.46
+  },
+  {
+   "task_id": "data_analysis_0089",
+   "task_type": "data_analysis",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "205",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 315,
+    "output_tokens": 170,
+    "cost": 201.5,
+    "expected_total": 380.3
+   },
+   "actual_cost": 127.7,
+   "seconds": 1.66
+  },
+  {
+   "task_id": "data_analysis_0093",
+   "task_type": "data_analysis",
+   "reward": 4.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "code printed INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 319,
+    "output_tokens": 170,
+    "cost": 201.9,
+    "expected_total": 380.7
+   },
+   "actual_cost": 487.0,
+   "seconds": 15.87
+  },
+  {
+   "task_id": "math_0008",
+   "task_type": "math",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "2960",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 169,
+    "output_tokens": 110,
+    "cost": 126.9,
+    "expected_total": 246.1
+   },
+   "actual_cost": 53.4,
+   "seconds": 4.6
+  },
+  {
+   "task_id": "math_0012",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "289",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 212,
+    "output_tokens": 110,
+    "cost": 131.2,
+    "expected_total": 250.4
+   },
+   "actual_cost": 130.8,
+   "seconds": 1.58
+  },
+  {
+   "task_id": "math_0028",
+   "task_type": "math",
+   "reward": 4.0,
+   "status": "failed",
+   "answer": null,
+   "strategy": "oneshot",
+   "reason": "code failed: Traceback (most recent call last):\n  File \"/tmp/snip_bs28rwy0.py\", line 1, in <module>\n    INFEASIBLE\nNameError: name 'INFEASIBLE' is not defined\n",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 196,
+    "output_tokens": 110,
+    "cost": 129.6,
+    "expected_total": 248.8
+   },
+   "actual_cost": 498.9,
+   "seconds": 58.0
+  },
+  {
+   "task_id": "math_0032",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "820",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 204,
+    "output_tokens": 110,
+    "cost": 130.4,
+    "expected_total": 249.6
+   },
+   "actual_cost": 74.0,
+   "seconds": 1.56
+  },
+  {
+   "task_id": "math_0048",
+   "task_type": "math",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "3602",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 167,
+    "output_tokens": 110,
+    "cost": 126.7,
+    "expected_total": 245.9
+   },
+   "actual_cost": 64.9,
+   "seconds": 3.45
+  },
+  {
+   "task_id": "math_0052",
+   "task_type": "math",
+   "reward": 3.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "code printed INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 206,
+    "output_tokens": 110,
+    "cost": 130.6,
+    "expected_total": 249.8
+   },
+   "actual_cost": 232.2,
+   "seconds": 3.85
+  },
+  {
+   "task_id": "math_0068",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "616",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 210,
+    "output_tokens": 110,
+    "cost": 131.0,
+    "expected_total": 250.2
+   },
+   "actual_cost": 72.6,
+   "seconds": 6.33
+  },
+  {
+   "task_id": "math_0072",
+   "task_type": "math",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "2447",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 193,
+    "output_tokens": 110,
+    "cost": 129.3,
+    "expected_total": 248.5
+   },
+   "actual_cost": 69.4,
+   "seconds": 1.05
+  },
+  {
+   "task_id": "math_0088",
+   "task_type": "math",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "2486",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 200,
+    "output_tokens": 110,
+    "cost": 130.0,
+    "expected_total": 249.2
+   },
+   "actual_cost": 144.7,
+   "seconds": 1.75
+  },
+  {
+   "task_id": "math_0092",
+   "task_type": "math",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "1581",
+   "strategy": "react",
+   "reason": "react agent",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 188,
+    "output_tokens": 110,
+    "cost": 128.8,
+    "expected_total": 248.0
+   },
+   "actual_cost": 551.1,
+   "seconds": 13.89
+  },
+  {
+   "task_id": "coding_0003",
+   "task_type": "coding",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 846,
+    "output_tokens": 235,
+    "cost": 320.4,
+    "expected_total": 618.4
+   },
+   "actual_cost": 220.0,
+   "seconds": 2.09
+  },
+  {
+   "task_id": "coding_0007",
+   "task_type": "coding",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "oneshot",
+   "reason": "llm patch",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 753,
+    "output_tokens": 205,
+    "cost": 281.2,
+    "expected_total": 579.2
+   },
+   "actual_cost": 179.9,
+   "seconds": 2.65
+  },
+  {
+   "task_id": "data_analysis_0002",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "158",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 315,
+    "output_tokens": 170,
+    "cost": 201.5,
+    "expected_total": 380.3
+   },
+   "actual_cost": 117.2,
+   "seconds": 1.8
+  },
+  {
+   "task_id": "data_analysis_0006",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "284",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 316,
+    "output_tokens": 170,
+    "cost": 201.6,
+    "expected_total": 380.4
+   },
+   "actual_cost": 117.2,
+   "seconds": 1.49
+  },
+  {
+   "task_id": "math_0000",
+   "task_type": "math",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "389",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 248,
+    "output_tokens": 110,
+    "cost": 134.8,
+    "expected_total": 254.0
+   },
+   "actual_cost": 73.5,
+   "seconds": 4.01
+  },
+  {
+   "task_id": "math_0004",
+   "task_type": "math",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "1735",
+   "strategy": "oneshot",
+   "reason": "llm code",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 162,
+    "output_tokens": 110,
+    "cost": 126.2,
+    "expected_total": 245.4
+   },
+   "actual_cost": 41.9,
+   "seconds": 1.83
+  },
+  {
+   "task_id": "search_0001",
+   "task_type": "search",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "1983",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 800,
+    "output_tokens": 45,
+    "cost": 125.0,
+    "expected_total": 274.0
+   },
+   "actual_cost": 128.8,
+   "seconds": 1.28
+  },
+  {
+   "task_id": "search_0005",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Osaka",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 834,
+    "output_tokens": 45,
+    "cost": 128.4,
+    "expected_total": 277.4
+   },
+   "actual_cost": 126.9,
+   "seconds": 6.17
+  },
+  {
+   "task_id": "search_0010",
+   "task_type": "search",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "Dune Robotics",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 838,
+    "output_tokens": 45,
+    "cost": 128.8,
+    "expected_total": 277.8
+   },
+   "actual_cost": 133.8,
+   "seconds": 1.74
+  },
+  {
+   "task_id": "search_0014",
+   "task_type": "search",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "1998",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 834,
+    "output_tokens": 45,
+    "cost": 128.4,
+    "expected_total": 277.4
+   },
+   "actual_cost": 136.8,
+   "seconds": 1.19
+  },
+  {
+   "task_id": "search_0030",
+   "task_type": "search",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "1997",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 840,
+    "output_tokens": 45,
+    "cost": 129.0,
+    "expected_total": 278.0
+   },
+   "actual_cost": 136.5,
+   "seconds": 0.89
+  },
+  {
+   "task_id": "search_0034",
+   "task_type": "search",
+   "reward": 5.0,
+   "status": "solved",
+   "answer": "Olga Muller",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 838,
+    "output_tokens": 45,
+    "cost": 128.8,
+    "expected_total": 277.8
+   },
+   "actual_cost": 134.4,
+   "seconds": 5.79
+  },
+  {
+   "task_id": "search_0050",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Alice Wang",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 830,
+    "output_tokens": 45,
+    "cost": 128.0,
+    "expected_total": 277.0
+   },
+   "actual_cost": 128.3,
+   "seconds": 1.41
+  },
+  {
+   "task_id": "search_0054",
+   "task_type": "search",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "1970",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 839,
+    "output_tokens": 45,
+    "cost": 128.9,
+    "expected_total": 277.9
+   },
+   "actual_cost": 136.2,
+   "seconds": 5.72
+  },
+  {
+   "task_id": "search_0070",
+   "task_type": "search",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "Tanya Muller",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 817,
+    "output_tokens": 45,
+    "cost": 126.7,
+    "expected_total": 275.7
+   },
+   "actual_cost": 118.2,
+   "seconds": 1.41
+  },
+  {
+   "task_id": "search_0074",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "2003",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 839,
+    "output_tokens": 45,
+    "cost": 128.9,
+    "expected_total": 277.9
+   },
+   "actual_cost": 138.5,
+   "seconds": 2.69
+  },
+  {
+   "task_id": "search_0090",
+   "task_type": "search",
+   "reward": 3.0,
+   "status": "infeasible",
+   "answer": null,
+   "strategy": "reason",
+   "reason": "model: INFEASIBLE",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 815,
+    "output_tokens": 45,
+    "cost": 126.5,
+    "expected_total": 275.5
+   },
+   "actual_cost": 429.8,
+   "seconds": 4.05
+  },
+  {
+   "task_id": "search_0094",
+   "task_type": "search",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "2000",
+   "strategy": "oneshot",
+   "reason": "llm kb lookup",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 842,
+    "output_tokens": 45,
+    "cost": 129.2,
+    "expected_total": 278.2
+   },
+   "actual_cost": 133.7,
+   "seconds": 2.95
+  }
+ ],
+ "calls": [
+  {
+   "t": 1794160834.22,
+   "task": "math_0000",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 4.0s",
+   "in": 205,
+   "out": 53,
+   "reason": 0,
+   "cost": 73.5
+  },
+  {
+   "t": 1794160834.48,
+   "task": "math_0008",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 4.6s",
+   "in": 154,
+   "out": 38,
+   "reason": 0,
+   "cost": 53.4
+  },
+  {
+   "t": 1794160835.66,
+   "task": "search_0070",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 1.4s",
+   "in": 992,
+   "out": 19,
+   "reason": 0,
+   "cost": 118.2
+  },
+  {
+   "t": 1794160835.72,
+   "task": "search_0014",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 1.2s",
+   "in": 1008,
+   "out": 36,
+   "reason": 0,
+   "cost": 136.8
+  },
+  {
+   "t": 1794160836.02,
+   "task": "search_0034",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 5.8s",
+   "in": 1024,
+   "out": 32,
+   "reason": 0,
+   "cost": 134.4
+  },
+  {
+   "t": 1794160837.4,
+   "task": "search_0010",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 1.7s",
+   "in": 1018,
+   "out": 32,
+   "reason": 0,
+   "cost": 133.8
+  },
+  {
+   "t": 1794160837.76,
+   "task": "data_analysis_0009",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 1.7s",
+   "in": 354,
+   "out": 81,
+   "reason": 0,
+   "cost": 116.4
+  },
+  {
+   "t": 1794160838.67,
+   "task": "search_0094",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 2.9s",
+   "in": 1017,
+   "out": 32,
+   "reason": 0,
+   "cost": 133.7
+  },
+  {
+   "t": 1794160838.84,
+   "task": "math_0028",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 2.4s",
+   "in": 175,
+   "out": 83,
+   "reason": 0,
+   "cost": 100.5
+  },
+  {
+   "t": 1794160840.25,
+   "task": "math_0052",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.6s",
+   "in": 174,
+   "out": 53,
+   "reason": 0,
+   "cost": 70.4
+  },
+  {
+   "t": 1794160840.81,
+   "task": "math_0048",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 3.4s",
+   "in": 149,
+   "out": 50,
+   "reason": 0,
+   "cost": 64.9
+  },
+  {
+   "t": 1794160841.19,
+   "task": "math_0028",
+   "model": "qwen3.8-27b",
+   "tag": "math/reason 2.3s",
+   "in": 199,
+   "out": 108,
+   "reason": 96,
+   "cost": 127.9
+  },
+  {
+   "t": 1794160841.98,
+   "task": "search_0090",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 1.1s",
+   "in": 972,
+   "out": 33,
+   "reason": 0,
+   "cost": 130.2
+  },
+  {
+   "t": 1794160842.49,
+   "task": "math_0052",
+   "model": "qwen3.8-27b",
+   "tag": "math/reason 2.2s",
+   "in": 198,
+   "out": 142,
+   "reason": 127,
+   "cost": 161.8
+  },
+  {
+   "t": 1794160843.78,
+   "task": "math_0028",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 532,
+   "out": 97,
+   "reason": 0,
+   "cost": 150.2
+  },
+  {
+   "t": 1794160844.62,
+   "task": "math_0092",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 2.8s",
+   "in": 167,
+   "out": 121,
+   "reason": 0,
+   "cost": 137.7
+  },
+  {
+   "t": 1794160844.9,
+   "task": "search_0090",
+   "model": "qwen3.8-27b",
+   "tag": "search/reason 2.9s",
+   "in": 996,
+   "out": 200,
+   "reason": 162,
+   "cost": 299.6
+  },
+  {
+   "t": 1794160846.22,
+   "task": "math_0092",
+   "model": "qwen3.8-27b",
+   "tag": "math/reason 1.6s",
+   "in": 191,
+   "out": 94,
+   "reason": 82,
+   "cost": 113.1
+  },
+  {
+   "t": 1794160846.53,
+   "task": "data_analysis_0089",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 1.6s",
+   "in": 357,
+   "out": 92,
+   "reason": 0,
+   "cost": 127.7
+  },
+  {
+   "t": 1794160848.25,
+   "task": "search_0054",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 2.6s",
+   "in": 1002,
+   "out": 36,
+   "reason": 0,
+   "cost": 136.2
+  },
+  {
+   "t": 1794160848.36,
+   "task": "math_0028",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 663,
+   "out": 54,
+   "reason": 0,
+   "cost": 120.3
+  },
+  {
+   "t": 1794160849.17,
+   "task": "math_0028",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 0,
+   "out": 0,
+   "reason": 0,
+   "cost": 0.0
+  },
+  {
+   "t": 1794160849.63,
+   "task": "math_0092",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 524,
+   "out": 71,
+   "reason": 0,
+   "cost": 123.4
+  },
+  {
+   "t": 1794160849.98,
+   "task": "data_analysis_0033",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 3.4s",
+   "in": 357,
+   "out": 166,
+   "reason": 0,
+   "cost": 201.7
+  },
+  {
+   "t": 1794160850.6,
+   "task": "coding_0051",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 1.4s",
+   "in": 527,
+   "out": 80,
+   "reason": 0,
+   "cost": 132.7
+  },
+  {
+   "t": 1794160850.91,
+   "task": "math_0092",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 622,
+   "out": 38,
+   "reason": 0,
+   "cost": 100.2
+  },
+  {
+   "t": 1794160851.7,
+   "task": "math_0092",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 687,
+   "out": 8,
+   "reason": 0,
+   "cost": 76.7
+  },
+  {
+   "t": 1794160852.15,
+   "task": "coding_0091",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 1.5s",
+   "in": 834,
+   "out": 87,
+   "reason": 0,
+   "cost": 170.4
+  },
+  {
+   "t": 1794160853.49,
+   "task": "coding_0091",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 1.3s",
+   "in": 1092,
+   "out": 5,
+   "reason": 0,
+   "cost": 114.2
+  },
+  {
+   "t": 1794160853.5,
+   "task": "math_0004",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.8s",
+   "in": 149,
+   "out": 27,
+   "reason": 0,
+   "cost": 41.9
+  },
+  {
+   "t": 1794160853.74,
+   "task": "data_analysis_0093",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 5.5s",
+   "in": 358,
+   "out": 282,
+   "reason": 0,
+   "cost": 317.8
+  },
+  {
+   "t": 1794160854.56,
+   "task": "math_0072",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.0s",
+   "in": 174,
+   "out": 52,
+   "reason": 0,
+   "cost": 69.4
+  },
+  {
+   "t": 1794160856.16,
+   "task": "data_analysis_0033",
+   "model": "qwen3.8-27b",
+   "tag": "data_analysis/reason 3.2s",
+   "in": 381,
+   "out": 93,
+   "reason": 78,
+   "cost": 131.1
+  },
+  {
+   "t": 1794160856.31,
+   "task": "math_0088",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.7s",
+   "in": 187,
+   "out": 126,
+   "reason": 0,
+   "cost": 144.7
+  },
+  {
+   "t": 1794160857.74,
+   "task": "data_analysis_0006",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 1.4s",
+   "in": 352,
+   "out": 82,
+   "reason": 0,
+   "cost": 117.2
+  },
+  {
+   "t": 1794160857.97,
+   "task": "data_analysis_0002",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 1.8s",
+   "in": 352,
+   "out": 82,
+   "reason": 0,
+   "cost": 117.2
+  },
+  {
+   "t": 1794160859.39,
+   "task": "search_0050",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 1.4s",
+   "in": 1003,
+   "out": 28,
+   "reason": 0,
+   "cost": 128.3
+  },
+  {
+   "t": 1794160861.08,
+   "task": "coding_0091",
+   "model": "qwen3.8-27b",
+   "tag": "coding/reason 7.6s",
+   "in": 858,
+   "out": 302,
+   "reason": 295,
+   "cost": 387.8
+  },
+  {
+   "t": 1794160862.4,
+   "task": "coding_0035",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 4.5s",
+   "in": 686,
+   "out": 101,
+   "reason": 0,
+   "cost": 169.6
+  },
+  {
+   "t": 1794160863.57,
+   "task": "search_0074",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 2.5s",
+   "in": 1025,
+   "out": 36,
+   "reason": 0,
+   "cost": 138.5
+  },
+  {
+   "t": 1794160864.1,
+   "task": "data_analysis_0093",
+   "model": "qwen3.8-27b",
+   "tag": "data_analysis/reason 2.9s",
+   "in": 382,
+   "out": 131,
+   "reason": 116,
+   "cost": 169.2
+  },
+  {
+   "t": 1794160865.02,
+   "task": "coding_0075",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 2.5s",
+   "in": 930,
+   "out": 5,
+   "reason": 0,
+   "cost": 98.0
+  },
+  {
+   "t": 1794160865.58,
+   "task": "search_0005",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 6.2s",
+   "in": 999,
+   "out": 27,
+   "reason": 0,
+   "cost": 126.9
+  },
+  {
+   "t": 1794160865.61,
+   "task": "coding_0011",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 1.4s",
+   "in": 750,
+   "out": 97,
+   "reason": 0,
+   "cost": 172.0
+  },
+  {
+   "t": 1794160866.82,
+   "task": "data_analysis_0013",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 1.2s",
+   "in": 356,
+   "out": 83,
+   "reason": 0,
+   "cost": 118.6
+  },
+  {
+   "t": 1794160866.84,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 2.8s",
+   "in": 962,
+   "out": 138,
+   "reason": 0,
+   "cost": 234.2
+  },
+  {
+   "t": 1794160869.03,
+   "task": "coding_0055",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 2.1s",
+   "in": 999,
+   "out": 159,
+   "reason": 0,
+   "cost": 258.9
+  },
+  {
+   "t": 1794160869.54,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 2.6s",
+   "in": 1282,
+   "out": 141,
+   "reason": 0,
+   "cost": 269.2
+  },
+  {
+   "t": 1794160869.95,
+   "task": "data_analysis_0069",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 4.3s",
+   "in": 356,
+   "out": 75,
+   "reason": 0,
+   "cost": 110.6
+  },
+  {
+   "t": 1794160870.6,
+   "task": "math_0032",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.5s",
+   "in": 180,
+   "out": 56,
+   "reason": 0,
+   "cost": 74.0
+  },
+  {
+   "t": 1794160872.19,
+   "task": "math_0012",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 1.5s",
+   "in": 188,
+   "out": 112,
+   "reason": 0,
+   "cost": 130.8
+  },
+  {
+   "t": 1794160872.55,
+   "task": "coding_0075",
+   "model": "qwen3.8-27b",
+   "tag": "coding/reason 4.9s",
+   "in": 954,
+   "out": 276,
+   "reason": 269,
+   "cost": 371.4
+  },
+  {
+   "t": 1794160872.89,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b",
+   "tag": "coding/reason 3.3s",
+   "in": 986,
+   "out": 299,
+   "reason": 292,
+   "cost": 397.6
+  },
+  {
+   "t": 1794160873.44,
+   "task": "search_0030",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 0.9s",
+   "in": 1025,
+   "out": 34,
+   "reason": 0,
+   "cost": 136.5
+  },
+  {
+   "t": 1794160873.5,
+   "task": "search_0001",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "search/oneshot 1.3s",
+   "in": 968,
+   "out": 32,
+   "reason": 0,
+   "cost": 128.8
+  },
+  {
+   "t": 1794160873.97,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 485,
+   "out": 42,
+   "reason": 0,
+   "cost": 90.5
+  },
+  {
+   "t": 1794160875.19,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 1198,
+   "out": 38,
+   "reason": 0,
+   "cost": 157.8
+  },
+  {
+   "t": 1794160876.04,
+   "task": "coding_0007",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 2.5s",
+   "in": 699,
+   "out": 110,
+   "reason": 0,
+   "cost": 179.9
+  },
+  {
+   "t": 1794160876.28,
+   "task": "math_0068",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "math/oneshot 2.9s",
+   "in": 186,
+   "out": 54,
+   "reason": 0,
+   "cost": 72.6
+  },
+  {
+   "t": 1794160877.08,
+   "task": "coding_0071",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 0.7s",
+   "in": 1047,
+   "out": 5,
+   "reason": 0,
+   "cost": 109.7
+  },
+  {
+   "t": 1794160878.13,
+   "task": "coding_0003",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 2.0s",
+   "in": 800,
+   "out": 140,
+   "reason": 0,
+   "cost": 220.0
+  },
+  {
+   "t": 1794160878.48,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 1625,
+   "out": 165,
+   "reason": 0,
+   "cost": 327.5
+  },
+  {
+   "t": 1794160879.71,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 1836,
+   "out": 41,
+   "reason": 0,
+   "cost": 224.6
+  },
+  {
+   "t": 1794160880.26,
+   "task": "data_analysis_0049",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 2.1s",
+   "in": 353,
+   "out": 82,
+   "reason": 0,
+   "cost": 117.3
+  },
+  {
+   "t": 1794160881.32,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 2058,
+   "out": 101,
+   "reason": 0,
+   "cost": 306.8
+  },
+  {
+   "t": 1794160882.37,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 2203,
+   "out": 44,
+   "reason": 0,
+   "cost": 264.3
+  },
+  {
+   "t": 1794160882.52,
+   "task": "data_analysis_0053",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 2.2s",
+   "in": 356,
+   "out": 85,
+   "reason": 0,
+   "cost": 120.6
+  },
+  {
+   "t": 1794160883.97,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 2450,
+   "out": 105,
+   "reason": 0,
+   "cost": 350.0
+  },
+  {
+   "t": 1794160883.98,
+   "task": "data_analysis_0073",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 1.4s",
+   "in": 353,
+   "out": 128,
+   "reason": 0,
+   "cost": 163.3
+  },
+  {
+   "t": 1794160885.14,
+   "task": "data_analysis_0029",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "data_analysis/oneshot 1.1s",
+   "in": 358,
+   "out": 81,
+   "reason": 0,
+   "cost": 116.8
+  },
+  {
+   "t": 1794160885.47,
+   "task": "coding_0071",
+   "model": "qwen3.8-27b",
+   "tag": "coding/reason 8.4s",
+   "in": 1071,
+   "out": 389,
+   "reason": 382,
+   "cost": 496.1
+  },
+  {
+   "t": 1794160885.83,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 2601,
+   "out": 101,
+   "reason": 0,
+   "cost": 361.1
+  },
+  {
+   "t": 1794160886.84,
+   "task": "coding_0015",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 1.7s",
+   "in": 607,
+   "out": 137,
+   "reason": 0,
+   "cost": 197.7
+  },
+  {
+   "t": 1794160887.99,
+   "task": "coding_0095",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 2501,
+   "out": 133,
+   "reason": 0,
+   "cost": 383.1
+  },
+  {
+   "t": 1794160888.2,
+   "task": "coding_0031",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "coding/oneshot 3.0s",
+   "in": 718,
+   "out": 110,
+   "reason": 0,
+   "cost": 181.8
+  }
+ ],
+ "estimator": {
+  "scale": {
+   "math/oneshot": 0.835,
+   "search/oneshot": 1.021,
+   "data_analysis/oneshot": 0.801,
+   "math/reason": 0.507,
+   "search/reason": 0.775,
+   "math/react": 0.617,
+   "coding/oneshot": 0.785,
+   "data_analysis/reason": 0.617,
+   "coding/reason": 0.568,
+   "coding/react": 1.062
+  },
+  "stats": {
+   "math/oneshot": [
+    12,
+    9
+   ],
+   "search/oneshot": [
+    12,
+    11
+   ],
+   "data_analysis/oneshot": [
+    12,
+    10
+   ],
+   "math/reason": [
+    3,
+    0
+   ],
+   "search/reason": [
+    1,
+    0
+   ],
+   "math/react": [
+    2,
+    1
+   ],
+   "coding/oneshot": [
+    14,
+    8
+   ],
+   "data_analysis/reason": [
+    2,
+    0
+   ],
+   "coding/reason": [
+    4,
+    0
+   ],
+   "coding/react": [
+    1,
+    0
+   ]
+  }
+ }
+}

@@ -1,0 +1,299 @@
+{
+ "elapsed_s": 22.8,
+ "ledger": {
+  "budget": 100000.0,
+  "spent": 1926.9,
+  "reserved": 0.0,
+  "calls": 16
+ },
+ "solved": 5,
+ "infeasible": 0,
+ "expected_points": 11.0,
+ "answers": {
+  "coding_0003": "DONE",
+  "data_analysis_0041": "85",
+  "math_0020": "696",
+  "math_0060": "1921",
+  "search_0062": "Farid Smith"
+ },
+ "tasks": [
+  {
+   "task_id": "coding_0003",
+   "task_type": "coding",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "DONE",
+   "strategy": "react",
+   "reason": "react agent",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 960,
+    "output_tokens": 233,
+    "cost": 329.5,
+    "expected_total": 627.5
+   },
+   "actual_cost": 695.5,
+   "seconds": 12.09
+  },
+  {
+   "task_id": "data_analysis_0041",
+   "task_type": "data_analysis",
+   "reward": 3.0,
+   "status": "solved",
+   "answer": "85",
+   "strategy": "react",
+   "reason": "react agent",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 318,
+    "output_tokens": 170,
+    "cost": 201.8,
+    "expected_total": 380.6
+   },
+   "actual_cost": 322.7,
+   "seconds": 3.46
+  },
+  {
+   "task_id": "math_0020",
+   "task_type": "math",
+   "reward": 4.0,
+   "status": "solved",
+   "answer": "696",
+   "strategy": "react",
+   "reason": "react agent",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 162,
+    "output_tokens": 110,
+    "cost": 126.2,
+    "expected_total": 245.4
+   },
+   "actual_cost": 167.8,
+   "seconds": 9.01
+  },
+  {
+   "task_id": "math_0060",
+   "task_type": "math",
+   "reward": 1.0,
+   "status": "solved",
+   "answer": "1921",
+   "strategy": "react",
+   "reason": "react agent",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 184,
+    "output_tokens": 110,
+    "cost": 128.4,
+    "expected_total": 247.6
+   },
+   "actual_cost": 276.6,
+   "seconds": 11.65
+  },
+  {
+   "task_id": "search_0062",
+   "task_type": "search",
+   "reward": 2.0,
+   "status": "solved",
+   "answer": "Farid Smith",
+   "strategy": "react",
+   "reason": "react agent",
+   "predicted_cost": {
+    "strategy": "oneshot",
+    "input_tokens": 837,
+    "output_tokens": 45,
+    "cost": 128.7,
+    "expected_total": 277.7
+   },
+   "actual_cost": 464.3,
+   "seconds": 3.01
+  }
+ ],
+ "calls": [
+  {
+   "t": 1794160791.84,
+   "task": "data_analysis_0041",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 501,
+   "out": 96,
+   "reason": 0,
+   "cost": 146.1
+  },
+  {
+   "t": 1794160792.54,
+   "task": "data_analysis_0041",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 666,
+   "out": 32,
+   "reason": 0,
+   "cost": 98.6
+  },
+  {
+   "t": 1794160792.67,
+   "task": "math_0020",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 505,
+   "out": 52,
+   "reason": 0,
+   "cost": 102.5
+  },
+  {
+   "t": 1794160793.22,
+   "task": "data_analysis_0041",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 720,
+   "out": 6,
+   "reason": 0,
+   "cost": 78.0
+  },
+  {
+   "t": 1794160793.88,
+   "task": "search_0062",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 489,
+   "out": 42,
+   "reason": 0,
+   "cost": 90.9
+  },
+  {
+   "t": 1794160794.77,
+   "task": "search_0062",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 902,
+   "out": 35,
+   "reason": 0,
+   "cost": 125.2
+  },
+  {
+   "t": 1794160795.58,
+   "task": "search_0062",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 989,
+   "out": 38,
+   "reason": 0,
+   "cost": 136.9
+  },
+  {
+   "t": 1794160796.23,
+   "task": "search_0062",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 1053,
+   "out": 6,
+   "reason": 0,
+   "cost": 111.3
+  },
+  {
+   "t": 1794160797.25,
+   "task": "math_0060",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 525,
+   "out": 51,
+   "reason": 0,
+   "cost": 103.5
+  },
+  {
+   "t": 1794160798.49,
+   "task": "math_0020",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 583,
+   "out": 7,
+   "reason": 0,
+   "cost": 65.3
+  },
+  {
+   "t": 1794160800.83,
+   "task": "coding_0003",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 485,
+   "out": 42,
+   "reason": 0,
+   "cost": 90.5
+  },
+  {
+   "t": 1794160801.59,
+   "task": "math_0060",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 603,
+   "out": 38,
+   "reason": 0,
+   "cost": 98.3
+  },
+  {
+   "t": 1794160805.62,
+   "task": "coding_0003",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 1054,
+   "out": 29,
+   "reason": 0,
+   "cost": 134.4
+  },
+  {
+   "t": 1794160807.89,
+   "task": "math_0060",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 668,
+   "out": 8,
+   "reason": 0,
+   "cost": 74.8
+  },
+  {
+   "t": 1794160808.92,
+   "task": "coding_0003",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 1238,
+   "out": 142,
+   "reason": 0,
+   "cost": 265.8
+  },
+  {
+   "t": 1794160810.53,
+   "task": "coding_0003",
+   "model": "qwen3.8-27b-noreason",
+   "tag": "react",
+   "in": 1418,
+   "out": 63,
+   "reason": 0,
+   "cost": 204.8
+  }
+ ],
+ "estimator": {
+  "scale": {
+   "data_analysis/react": 0.775,
+   "search/react": 0.775,
+   "math/react": 0.617,
+   "coding/react": 0.802
+  },
+  "stats": {
+   "data_analysis/react": [
+    1,
+    1
+   ],
+   "search/react": [
+    1,
+    1
+   ],
+   "math/react": [
+    2,
+    2
+   ],
+   "coding/react": [
+    1,
+    1
+   ]
+  }
+ }
+}
