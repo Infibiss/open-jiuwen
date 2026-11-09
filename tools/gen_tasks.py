@@ -213,38 +213,73 @@ CORRECT = {
     "word_count": ("def word_count(s):\n    return len(s.split())\n", "self.assertEqual(m.word_count('a b  c'), 3)"),
     "product": ("def product(xs):\n    p = 1\n    for x in xs:\n        p *= x\n    return p\n",
                 "self.assertEqual(m.product([2, 3, 4]), 24)"),
+    "first": ("def first(xs):\n    return xs[0]\n", "self.assertEqual(m.first([4, 5, 6]), 4)"),
+    "last": ("def last(xs):\n    return xs[-1]\n", "self.assertEqual(m.last([4, 5, 6]), 6)"),
+    "contains": ("def contains(xs, v):\n    return v in xs\n", "self.assertTrue(m.contains([1, 2, 3], 2))"),
+    "is_sorted": ("def is_sorted(xs):\n    return all(xs[i] <= xs[i + 1] for i in range(len(xs) - 1))\n",
+                  "self.assertFalse(m.is_sorted([1, 3, 2]))"),
+    "abs_diff": ("def abs_diff(a, b):\n    return abs(a - b)\n", "self.assertEqual(m.abs_diff(3, 7), 4)"),
+    "count_positive": ("def count_positive(xs):\n    return sum(1 for x in xs if x > 0)\n",
+                       "self.assertEqual(m.count_positive([-1, 2, 0, 5]), 2)"),
 }
 BUGS = [("s += x", "s -= x"), ("x > best", "x < best"), ("x < best", "x > best"), ("reversed(", "sorted("),
         ("% 2 == 0", "% 2 == 1"), ("xs[:n]", "xs[:n - 1]"), ("s == s[::-1]", "s == s[::1]"), ("n + 1", "n"),
         ("r *= i", "r += i"), ("in 'aeiou'", "not in 'aeiou'"), ("x * x", "x + x"), ("xs[-n:]", "xs[n:]"),
         ("max(lo, min(x, hi))", "min(lo, max(x, hi))"), ("a + b", "a * b"), ("/ len(xs)", "// len(xs) + 1"),
-        ("p *= x", "p += x"), ("len(s.split())", "len(s.split(' '))")]
+        ("p *= x", "p += x"), ("len(s.split())", "len(s.split(' '))"),
+        # "other plausible one-token bugs" (reviewer's set): constants, indices, slices, operators
+        ("/ len(xs)", "* len(xs)"), ("for x in xs:", "for x in xs[1:]:"), ("xs[0]", "xs[1]"), ("xs[-1]", "xs[0]"),
+        ("p = 1", "p = 0"), ("range(2, n + 1)", "range(2, n)"), ("range(n)", "range(n - 1)"), ("a + b", "a - b"),
+        ("% 2 == 0", "% 3 == 0"), ("x * x", "x ** 3"), ("x * x", "x * 2"), ("v in xs", "v not in xs"),
+        ("<= xs[i + 1]", ">= xs[i + 1]"), ("abs(a - b)", "abs(a + b)"), ("x > 0", "x >= 0"), ("x > 0", "x < 0"),
+        ("c in 'aeiou'", "c in 'aeiouy'"), ("s.lower()", "s.upper()")]
+
+
+def _bug_visible(buggy_src, fname, assertion):
+    """True if the single visible assertion fails on the buggy function."""
+    import types
+    import unittest
+    ns = {}
+    try:
+        exec(buggy_src, ns)
+        tc = unittest.TestCase()
+        exec(assertion.replace("self.", "tc.").replace("\n        ", "\n"),
+             {"tc": tc, "m": types.SimpleNamespace(**{fname: ns[fname]})})
+    except Exception:  # noqa: BLE001 - assertion failed or the bug crashes: visible
+        return True
+    return False
 
 
 def gen_coding(rng):
     names = rng.sample(sorted(CORRECT), rng.randint(4, 6))
-    lib, tests, nbugs = [], [], 0
+    lib, ref, tests, bugged = [], [], [], []
     for nm in names:
         src, assertion = CORRECT[nm]
+        ref.append(src)
         bugs = [b for b in BUGS if b[0] in src]
-        if bugs and (nbugs < 1 or rng.random() < 0.5):
-            a, b = rng.choice(bugs)
-            src = src.replace(a, b, 1)
-            nbugs += 1
+        rng.shuffle(bugs)
+        if bugs and (not bugged or rng.random() < 0.5):
+            for a, b in bugs:  # only bugs the visible test can see (others no harness can find)
+                cand = src.replace(a, b, 1)
+                if _bug_visible(cand, nm, assertion):
+                    src = cand
+                    bugged.append(nm)
+                    break
         lib.append(src)
         tests.append(f"    def test_{nm}(self):\n        {assertion}\n")
-    infeasible = rng.random() < 0.15
+    infeasible = rng.random() < 0.15 or not bugged
     if infeasible:  # contradictory requirement on the same call
         nm = names[0]
         tests.append(f"    def test_{nm}_again(self):\n        "
                      + CORRECT[nm][1].replace("assertEqual(", "assertNotEqual(").replace("assertTrue(", "assertFalse(", 1)
-                     + "\n")
+                     .replace("assertFalse(m.is_sorted", "assertTrue(m.is_sorted") + "\n")
     test = "import unittest\n\nimport mylib as m\n\n\nclass T(unittest.TestCase):\n" + "\n".join(tests) + \
            "\n\nif __name__ == '__main__':\n    unittest.main()\n"
     files = {"mylib.py": "\n\n".join(lib), "test_mylib.py": test}
     text = ("Run `python3 test_mylib.py` in the current directory; some tests fail. Fix the bugs in mylib.py "
             "(do not edit the tests) until all tests pass.")
-    return text + CODE_TAIL, (INF if infeasible else "tests_pass"), "unittest", files
+    extra = {"reference_solution": "\n\n".join(ref), "bugged_functions": bugged}
+    return text + CODE_TAIL, (INF if infeasible else "tests_pass"), "unittest", files, extra
 
 
 GENS = {"math": gen_math, "data_analysis": gen_data, "search": gen_search, "coding": gen_coding}
@@ -260,11 +295,13 @@ def main():
     types = list(GENS)
     for i in range(args.n):
         tt = types[i % 4]
-        instr, exp, check, files = GENS[tt](rng)
+        res = GENS[tt](rng)
+        instr, exp, check, files = res[:4]
+        extra = res[4] if len(res) > 4 else {}
         tid = f"{tt}_{i:04d}"
         d = os.path.join(args.out, tid)
         task = {"task_id": tid, "task_type": tt, "instruction": instr, "reward": rng.randint(1, 5),
-                "expected": exp, "check": check}
+                "expected": exp, "check": check, **extra}
         w(os.path.join(d, "task.json"), json.dumps(task, indent=2))
         if files or tt != "math":
             os.makedirs(os.path.join(d, "workspace"), exist_ok=True)

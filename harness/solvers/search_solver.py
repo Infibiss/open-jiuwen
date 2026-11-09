@@ -100,6 +100,10 @@ def solve(task, workspace):
     if re.search(r"\b(?:mentored|employed|founded|headquartered|managed|owned) by\b|\bhow many\b|\bwho (?:works|worked)\b"
                  r"|\b(?:older|younger|earlier|later|more|fewer|less|before|after|both|same|all|list)\b", q, re.I):
         return SolveResult.unknown(f"non-chain question: {q!r}")
+    # "Who does X mentor?" asks the reverse relation (whom X mentors), not X's mentor
+    if re.search(r"\b(?:does|did|do)\s+.+?\s+(?:mentor|employ|manage|found|own|lead|supervise|teach|train|hire)\b",
+                 q, re.I):
+        return SolveResult.unknown(f"reverse relation: {q!r}")
 
     # anchor entity: longest KB title occurring in the question
     hits = [(k, e) for k, e in ents.items() if re.search(r"\b" + re.escape(k) + r"\b", q.lower())]
@@ -159,6 +163,6 @@ def solve(task, workspace):
     ql = q.lower()
     if re.search(r"\bwhich year|what year|\bwhen\b", ql) and not re.fullmatch(r"\d{3,4}", ans):
         return SolveResult.unknown(f"expected a year, got {ans!r}")
-    if re.search(r"\bwhich (city|company|person)|\bwho\b", ql) and re.fullmatch(r"\d+", ans):
-        return SolveResult.unknown(f"expected a name, got {ans!r}")
+    if re.search(r"\bwhich (city|company|person|place|country)|\bwho\b|\bwhere\b", ql) and re.fullmatch(r"\d+", ans):
+        return SolveResult.unknown(f"expected a name or place, got {ans!r}")
     return SolveResult.solved(ans, " -> ".join(chain), path=path)

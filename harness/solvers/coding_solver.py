@@ -6,15 +6,26 @@ We enumerate inverse mutations of every function, evaluate them in a sandboxed
 subprocess against the *unchanged* test file and greedily keep the mutation
 that removes the most failing tests without breaking passing ones. The final
 file is verified with the task's own command (`python3 test_mylib.py`).
+
+Scoring uses hidden tests, and one visible assertion per function often lets a
+wrong repair pass. So a repair is accepted without the LLM only when
+  * every applied mutation is a pure inverse flip (SAFE: +/-, </>, ==/!=,
+    and/or, min/max, sorted/reversed, ...), never a constant / index / slice /
+    `/`->`//` change (RISKY), and
+  * all equally good candidates for that function behave identically on
+    random inputs shaped like the test's arguments (differential probe).
+Otherwise the confirmed part is kept and the task goes to the LLM one-shot.
 """
 import ast
 import copy
 import json
 import os
+import random
 import re
 import subprocess
 import sys
 
+from ..fsutil import atomic_write
 from .base import SolveResult
 
 RUNNER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_runner.py")
@@ -30,6 +41,14 @@ CMP_ALT = {
     ast.Eq: [ast.NotEq], ast.NotEq: [ast.Eq], ast.In: [ast.NotIn], ast.NotIn: [ast.In],
     ast.Is: [ast.IsNot], ast.IsNot: [ast.Is],
 }
+SAFE, RISKY = "safe", "risky"
+SAFE_BIN = {(ast.Add, ast.Sub), (ast.Sub, ast.Add), (ast.Add, ast.Mult), (ast.Mult, ast.Add), (ast.Mult, ast.Div),
+            (ast.Div, ast.Mult)}
+SAFE_CMP = {(ast.Lt, ast.Gt), (ast.Gt, ast.Lt), (ast.LtE, ast.GtE), (ast.GtE, ast.LtE), (ast.Eq, ast.NotEq),
+            (ast.NotEq, ast.Eq), (ast.In, ast.NotIn), (ast.NotIn, ast.In), (ast.Is, ast.IsNot), (ast.IsNot, ast.Is)}
+SAFE_ATTR = {("upper", "lower"), ("lower", "upper"), ("startswith", "endswith"), ("endswith", "startswith"),
+             ("lstrip", "rstrip"), ("rstrip", "lstrip"), ("find", "rfind"), ("rfind", "find"),
+             ("isupper", "islower"), ("islower", "isupper")}
 NAME_ALT = {
     "min": ["max"], "max": ["min"], "sorted": ["reversed"], "reversed": ["sorted"], "any": ["all"], "all": ["any"],
 }
@@ -42,87 +61,95 @@ ATTR_ALT = {
 
 
 def _mutants_of_node(node):
-    """Yield callables that mutate `node` in place (applied on a deep copy)."""
+    """Yield (mutator, kind): mutator changes `node` in place (on a deep copy)
+    or is an UNWRAP_* marker; kind is SAFE (pure inverse flip) or RISKY."""
     if isinstance(node, (ast.BinOp, ast.AugAssign)):
+        # an operator flip next to a literal (`+ 1` -> `* 1`, `n - 1` -> `n + 1`) is a
+        # constant/index tweak in disguise, not a pure inverse flip
+        lit = any(isinstance(o, ast.Constant) for o in (
+            (node.left, node.right) if isinstance(node, ast.BinOp) else (node.value,)))
         for alt in BIN_ALT.get(type(node.op), []):
-            yield lambda n, alt=alt: setattr(n, "op", alt())
+            yield (lambda n, alt=alt: setattr(n, "op", alt())), \
+                SAFE if (type(node.op), alt) in SAFE_BIN and not lit else RISKY
     if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Sub, ast.Div, ast.FloorDiv, ast.Mod)):
         def swap(n):
             n.left, n.right = n.right, n.left
-        yield swap
+        yield swap, RISKY
     if isinstance(node, ast.Compare):
         for i, op in enumerate(node.ops):
             for alt in CMP_ALT.get(type(op), []):
                 def f(n, i=i, alt=alt):
                     n.ops[i] = alt()
-                yield f
+                yield f, SAFE if (type(op), alt) in SAFE_CMP else RISKY
     if isinstance(node, ast.BoolOp):
-        yield lambda n: setattr(n, "op", ast.Or() if isinstance(n.op, ast.And) else ast.And())
+        yield (lambda n: setattr(n, "op", ast.Or() if isinstance(n.op, ast.And) else ast.And())), SAFE
     if isinstance(node, ast.Constant):
         v = node.value
         if isinstance(v, bool):
-            yield lambda n: setattr(n, "value", not n.value)
+            yield (lambda n: setattr(n, "value", not n.value)), SAFE
         elif isinstance(v, int):
             for alt in dict.fromkeys([v + 1, v - 1, 0, 1, -v]):
                 if alt != v:
-                    yield lambda n, alt=alt: setattr(n, "value", alt)
+                    yield (lambda n, alt=alt: setattr(n, "value", alt)), RISKY
         elif isinstance(v, float):
             for alt in (0.0, 1.0, v + 1, v - 1):
                 if alt != v:
-                    yield lambda n, alt=alt: setattr(n, "value", alt)
+                    yield (lambda n, alt=alt: setattr(n, "value", alt)), RISKY
         elif isinstance(v, str) and v in ("", " ", ",", ", "):
             for alt in ("", " ", ",", ", "):
                 if alt != v:
-                    yield lambda n, alt=alt: setattr(n, "value", alt)
+                    yield (lambda n, alt=alt: setattr(n, "value", alt)), RISKY
     if isinstance(node, ast.Name) and node.id in NAME_ALT:
         for alt in NAME_ALT[node.id]:
-            yield lambda n, alt=alt: setattr(n, "id", alt)
+            yield (lambda n, alt=alt: setattr(n, "id", alt)), SAFE
     if isinstance(node, ast.Name) and node.id in ("True", "False"):
-        yield lambda n: setattr(n, "id", "False" if n.id == "True" else "True")
+        yield (lambda n: setattr(n, "id", "False" if n.id == "True" else "True")), SAFE
     if isinstance(node, ast.Attribute) and node.attr in ATTR_ALT:
         for alt in ATTR_ALT[node.attr]:
-            yield lambda n, alt=alt: setattr(n, "attr", alt)
+            yield (lambda n, alt=alt: setattr(n, "attr", alt)), SAFE if (node.attr, alt) in SAFE_ATTR else RISKY
     if isinstance(node, ast.Call):
         fn = node.func
         if isinstance(fn, ast.Name) and fn.id == "sorted":
             kws = [k for k in node.keywords if k.arg == "reverse"]
             if not kws:
-                yield lambda n: n.keywords.append(ast.keyword(arg="reverse", value=ast.Constant(True)))
+                yield (lambda n: n.keywords.append(ast.keyword(arg="reverse", value=ast.Constant(True)))), SAFE
         for i, kw in enumerate(node.keywords):
             if kw.arg == "reverse" and isinstance(kw.value, ast.Constant):
-                yield lambda n, i=i: n.keywords.pop(i)
+                yield (lambda n, i=i: n.keywords.pop(i)), SAFE
         if isinstance(fn, ast.Attribute) and node.args and fn.attr in ("split", "strip", "lstrip", "rstrip", "pop"):
-            yield lambda n: n.args.clear()  # s.split(' ') -> s.split()
+            yield (lambda n: n.args.clear()), RISKY  # s.split(' ') -> s.split()
         if isinstance(fn, ast.Name) and fn.id == "range" and node.args:
             def plus1(n):
                 n.args[-1 if len(n.args) < 3 else 1] = ast.BinOp(
                     n.args[-1 if len(n.args) < 3 else 1], ast.Add(), ast.Constant(1))
-            yield plus1
+            yield plus1, RISKY
 
             def minus1(n):
                 n.args[-1 if len(n.args) < 3 else 1] = ast.BinOp(
                     n.args[-1 if len(n.args) < 3 else 1], ast.Sub(), ast.Constant(1))
-            yield minus1
+            yield minus1, RISKY
             if len(node.args) == 1:
-                yield lambda n: n.args.insert(0, ast.Constant(1))
+                yield (lambda n: n.args.insert(0, ast.Constant(1))), RISKY
     if isinstance(node, ast.BinOp) and isinstance(node.right, ast.Constant) and node.right.value in (1, -1) \
             and isinstance(node.op, (ast.Add, ast.Sub)):
-        yield "UNWRAP_LEFT"
+        yield "UNWRAP_LEFT", RISKY
     if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.Not, ast.USub)):
-        yield "UNWRAP_OPERAND"
+        yield "UNWRAP_OPERAND", RISKY
     if isinstance(node, ast.Slice):
         for attr in ("lower", "upper"):
             b = getattr(node, attr)
             if b is not None:
-                yield lambda n, attr=attr: setattr(n, attr, ast.BinOp(getattr(n, attr), ast.Add(), ast.Constant(1)))
-                yield lambda n, attr=attr: setattr(n, attr, ast.BinOp(getattr(n, attr), ast.Sub(), ast.Constant(1)))
-                yield lambda n, attr=attr: setattr(n, attr, None)
+                yield (lambda n, attr=attr: setattr(n, attr, ast.BinOp(getattr(n, attr), ast.Add(),
+                                                                       ast.Constant(1)))), RISKY
+                yield (lambda n, attr=attr: setattr(n, attr, ast.BinOp(getattr(n, attr), ast.Sub(),
+                                                                       ast.Constant(1)))), RISKY
+                yield (lambda n, attr=attr: setattr(n, attr, None)), RISKY
         if node.step is not None:
-            yield lambda n: setattr(n, "step", None)
+            yield (lambda n: setattr(n, "step", None)), RISKY
         else:
-            yield lambda n: setattr(n, "step", ast.UnaryOp(ast.USub(), ast.Constant(1)))
+            yield (lambda n: setattr(n, "step", ast.UnaryOp(ast.USub(), ast.Constant(1)))), RISKY
     if isinstance(node, ast.Return) and node.value is not None:
-        yield lambda n: setattr(n, "value", ast.UnaryOp(ast.Not(), n.value))
+        yield (lambda n: setattr(n, "value", ast.UnaryOp(ast.Not(), n.value))), RISKY
 
 
 class _Unwrap(ast.NodeTransformer):
@@ -151,11 +178,11 @@ class _Unwrap(ast.NodeTransformer):
 
 
 def function_mutants(func_node):
-    """All single-site mutants of a FunctionDef, as source strings (ordered)."""
+    """All single-site mutants of a FunctionDef: ordered list of (source, kind)."""
     sites = list(ast.walk(func_node))
-    out = []
+    out = {}
     for idx, node in enumerate(sites):
-        for mut in _mutants_of_node(node):
+        for mut, kind in _mutants_of_node(node):
             fcopy = copy.deepcopy(func_node)
             target = list(ast.walk(fcopy))[idx]
             if isinstance(mut, str):
@@ -167,8 +194,9 @@ def function_mutants(func_node):
                 compile(src, "<mutant>", "exec")
             except Exception:  # noqa: BLE001 - invalid mutant
                 continue
-            out.append(src)
-    return list(dict.fromkeys(out))
+            if src not in out or (kind == SAFE and out[src] == RISKY):
+                out[src] = kind
+    return list(out.items())
 
 
 def _replace_function(src, func_node, new_func_src):
@@ -192,35 +220,136 @@ def _evaluate(workspace, test_file, module, candidates, timeout=120):
         return [{"ok": False, "failed": ["<runner>"]}] * len(candidates)
 
 
-def _second_order(workspace, test_file, module, src, funcs, failing, cap=6000):
-    """Two simultaneous mutations inside one implicated function (e.g. clamp:
-    min(lo, max(x, hi)) -> max(lo, min(x, hi)))."""
+def _second_order(src, funcs, failing, cap=6000):
+    """Candidates with two simultaneous mutations inside one implicated function
+    (e.g. clamp: min(lo, max(x, hi)) -> max(lo, min(x, hi)))."""
     fail_text = " ".join(failing).lower()
     implicated = [f for f in funcs if f.name.lower() in fail_text] or funcs
-    cands, meta = [], []
+    cands, meta, kinds = [], [], []
     for f in implicated:
         seen = set()
-        for m1 in function_mutants(f):
+        for m1, k1 in function_mutants(f):
             f1 = ast.parse(m1).body[0]
-            for m2 in function_mutants(f1):
+            for m2, k2 in function_mutants(f1):
                 if m2 in seen:
                     continue
                 seen.add(m2)
                 cands.append(_replace_function(src, f, m2))
                 meta.append(f.name)
+                kinds.append(SAFE if k1 == k2 == SAFE else RISKY)
                 if len(cands) >= cap:
                     break
-    best = None
-    for start in range(0, len(cands), 1500):
-        results = _evaluate(workspace, test_file, module, cands[start:start + 1500])
-        for j, r in enumerate(results):
+    return cands, meta, kinds
+
+
+def _rank(workspace, test_file, module, cands, failing, batch=1500):
+    """[(gain, index, remaining failures)] for candidates that fix something
+    and break nothing."""
+    scored = []
+    for start in range(0, len(cands), batch):
+        for j, r in enumerate(_evaluate(workspace, test_file, module, cands[start:start + batch])):
             fset = set(r.get("failed", []))
             if "<import>" in fset or not fset <= failing:
-                continue
+                continue  # breaks something that used to work
             gain = len(failing) - len(fset)
-            if gain > 0 and (best is None or gain > best[0]):
-                best = (gain, start + j, fset)
-    return None if best is None else (*best, cands, meta)
+            if gain > 0:
+                scored.append((gain, start + j, frozenset(fset)))
+    return scored
+
+
+# ------------------------------------------------------------------ differential probe
+def _call_templates(test_src, fname):
+    """Literal positional-argument lists of every call to `fname` in the tests."""
+    out = []
+    try:
+        tree = ast.parse(test_src)
+    except SyntaxError:
+        return out
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call) or node.keywords:
+            continue
+        f = node.func
+        name = f.attr if isinstance(f, ast.Attribute) else f.id if isinstance(f, ast.Name) else None
+        if name != fname:
+            continue
+        try:
+            out.append([ast.literal_eval(a) for a in node.args])
+        except Exception:  # noqa: BLE001 - non-literal argument
+            continue
+    return out
+
+
+_LETTERS = "abcdeiouxyzABCDE"
+
+
+def _rand_like(v, rng):
+    if isinstance(v, bool):
+        return rng.random() < 0.5
+    if isinstance(v, int):
+        return rng.randint(-12, 12) if v < 0 else rng.randint(0, 12)
+    if isinstance(v, float):
+        return round(rng.uniform(-10, 10), 2)
+    if isinstance(v, str):
+        if " " in v:
+            return " ".join("".join(rng.choice(_LETTERS) for _ in range(rng.randint(1, 4)))
+                            for _ in range(rng.randint(1, 5)))
+        return "".join(rng.choice(_LETTERS) for _ in range(rng.randint(0, 7)))
+    if isinstance(v, (list, tuple)):
+        proto = v[0] if v else 0
+        items = [_rand_like(proto, rng) for _ in range(rng.randint(1, 8))]
+        return items if isinstance(v, list) else tuple(items)
+    return v
+
+
+def probe_inputs(test_src, fname, n=60, seed=7):
+    templates = _call_templates(test_src, fname)
+    if not templates:
+        return []
+    rng = random.Random(seed)
+    inputs = [list(t) for t in templates]
+    for i in range(n):
+        t = templates[i % len(templates)]
+        inputs.append([_rand_like(a, rng) for a in t])
+    return [list(a) if isinstance(a, tuple) else a for a in inputs]
+
+
+def probe(workspace, module, fname, sources, inputs, timeout=60):
+    """Behaviour of `fname` in each module source on the given inputs."""
+    req = json.dumps({"mode": "probe", "workspace": workspace, "module": module, "function": fname,
+                      "candidates": sources, "inputs": inputs})
+    try:
+        p = subprocess.run([sys.executable, "-I", RUNNER], input=req, capture_output=True, text=True,
+                           timeout=timeout, cwd=workspace)
+        return json.loads(p.stdout)
+    except (subprocess.TimeoutExpired, json.JSONDecodeError):
+        return None
+
+
+DIFF_POLICY = os.environ.get("CODING_DIFF_POLICY", "plurality")
+
+
+def _winner_trusted(beh):
+    """beh[0] is the winner's behaviour, beh[1:] its rivals'. 'strict': all must
+    agree. 'plurality': the winner's behaviour class must be strictly the most
+    common one -- a true fix usually has several equivalent spellings
+    (`% 2 != 1` == `% 2 == 0`), a coincidental pass (`% 3 == 1`) is a loner."""
+    if all(b == beh[0] for b in beh[1:]):
+        return True
+    if DIFF_POLICY == "strict":
+        return False
+    classes = {}
+    for b in beh:
+        key = json.dumps(b)
+        classes[key] = classes.get(key, 0) + 1
+    win = classes[json.dumps(beh[0])]
+    return all(win > n for k, n in classes.items() if k != json.dumps(beh[0]))
+
+
+def _func_src(module_src, name):
+    for n in ast.parse(module_src).body:
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name == name:
+            return ast.unparse(n)
+    return None
 
 
 def run_tests(workspace, test_file, timeout=120):
@@ -316,7 +445,10 @@ def solve(task, workspace, max_rounds=12):
     if not failing:
         return SolveResult.unknown("runner sees no failures but command fails", output=out[-800:])
 
+    test_src = open(tpath, encoding="utf-8").read()
     history = []
+    escalate = None
+    diff_info = None
     for _ in range(max_rounds):
         try:
             tree = ast.parse(src)
@@ -328,40 +460,47 @@ def solve(task, workspace, max_rounds=12):
         # functions named in failing tests first
         fail_text = " ".join(failing).lower()
         funcs.sort(key=lambda f: 0 if f.name.lower() in fail_text else 1)
-        cands, meta = [], []
+        cands, meta, kinds = [], [], []
         for f in funcs:
-            for msrc in function_mutants(f):
+            for msrc, kind in function_mutants(f):
                 cands.append(_replace_function(src, f, msrc))
                 meta.append(f.name)
-        results = _evaluate(workspace, test_file, module, cands)
-        best = None
-        for i, r in enumerate(results):
-            fset = set(r.get("failed", []))
-            if "<import>" in fset or not fset <= failing:
-                continue  # breaks something that used to work
-            gain = len(failing) - len(fset)
-            if gain > 0 and (best is None or gain > best[0]):
-                best = (gain, i, fset)
-        if best is None:
-            best = _second_order(workspace, test_file, module, src, funcs, failing)
-            if best is None:
+                kinds.append(kind)
+        scored = _rank(workspace, test_file, module, cands, failing)
+        if not scored:
+            cands, meta, kinds = _second_order(src, funcs, failing)
+            scored = _rank(workspace, test_file, module, cands, failing)
+            if not scored:
                 break
-            cands, meta = best[3], best[4]
-        _, i, failing = best[:3]
-        src = cands[i]
-        history.append(meta[i])
+        top = max(g for g, _, _ in scored)
+        best = [(i, fset) for g, i, fset in scored if g == top]
+        safe = [(i, fset) for i, fset in best if kinds[i] == SAFE]
+        if not safe:
+            escalate = f"only non-inverse repairs fit {meta[best[0][0]]}()"
+            break
+        win, win_fset = safe[0]
+        rivals = [i for i, fset in best if meta[i] == meta[win] and fset == win_fset]
+        if len(rivals) > 1:
+            inputs = probe_inputs(test_src, meta[win])
+            beh = probe(workspace, module, meta[win], [cands[i] for i in rivals], inputs) if inputs else None
+            if beh is None or not _winner_trusted(beh):
+                escalate = f"{len(rivals)} candidate repairs of {meta[win]}() behave differently"
+                diff_info = [_func_src(cands[i], meta[win]) for i in rivals]
+                break
+        src, failing = cands[win], set(win_fset)
+        history.append(meta[win])
         if not failing:
             break
 
     if failing:
-        return SolveResult.unknown(f"mutation search left {len(failing)} failing tests",
-                                   failing=sorted(failing), partial_src=src, edits=history)
-    with open(spath, "w", encoding="utf-8") as f:
-        f.write(src)
+        if history:  # keep the confirmed inverse flips; the LLM only sees what is still broken
+            atomic_write(spath, src)
+        return SolveResult.unknown(escalate or f"mutation search left {len(failing)} failing tests",
+                                   failing=sorted(failing), edits=history, rivals=diff_info)
+    atomic_write(spath, src)
     ok, out = run_tests(workspace, test_file)
     if not ok:
-        with open(spath, "w", encoding="utf-8") as f:
-            f.write(original)
+        atomic_write(spath, original)
         return SolveResult.unknown("candidate passed runner but not the real test command", output=out[-800:])
     return SolveResult.solved("DONE", f"fixed by {len(history)} mutation(s) in {sorted(set(history))}",
                               edits=history)

@@ -33,6 +33,27 @@ def usage_of(resp):
             getattr(um, "reasoning_tokens", 0) or 0)
 
 
+_STATUS = re.compile(r"(?:Error code|status(?:_code)?|HTTP)[:= ]+(\d{3})\b", re.I)
+
+
+def http_status(exc):
+    """HTTP status of a failed call: from the openai exception chain if present,
+    else parsed from the message the openJiuwen wrapper builds."""
+    seen = set()
+    e = exc
+    while e is not None and id(e) not in seen:
+        seen.add(id(e))
+        code = getattr(e, "status_code", None)
+        if isinstance(code, int):
+            return code
+        resp = getattr(e, "response", None)
+        if isinstance(getattr(resp, "status_code", None), int):
+            return resp.status_code
+        e = e.__cause__ or e.__context__
+    m = _STATUS.search(str(exc))
+    return int(m[1]) if m else None
+
+
 class LLMUnavailable(RuntimeError):
     """The proxy refuses service (budget exhausted / persistent outage)."""
 
@@ -74,14 +95,19 @@ class LLM:
             except Exception as e:  # noqa: BLE001 - network / proxy errors
                 msg = str(e)
                 last = e
+                code = http_status(e)
                 low = msg.lower()
-                if "429" in msg or "ratelimit" in low or "too many" in low or "одновременн" in low:
+                if code == 429 or "ratelimit" in low or "too many requests" in low or "одновременн" in low:
                     if attempt <= 12:  # concurrency limit of the proxy: wait and retry, costs nothing
                         await asyncio.sleep(min(10.0, 1.0 + attempt) + random.random())
                         continue
-                if any(k in low for k in ("budget", "insufficient", "quota", "exceeded", "402")):
+                if code in (402, 403):  # payment required / forbidden: the budget is gone for good
                     self.dead = True
                     raise LLMUnavailable(msg[:300])
+                if code in (400, 404, 413, 422):
+                    # this request is bad (e.g. context too long): fail this call only, no retry,
+                    # and do not count it towards the global circuit breaker
+                    raise RuntimeError(f"LLM request rejected ({code}): {msg[:200]}")
                 failures += 1
             else:
                 self.consecutive_failures = 0

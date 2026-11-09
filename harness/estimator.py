@@ -25,7 +25,7 @@ PRIORS = {
     ("math", "oneshot"): (24, 1.0, 0.92),
     ("data_analysis", "oneshot"): (75, 1.0, 0.90),
     ("search", "oneshot"): (24, 1.0, 0.92),
-    ("coding", "oneshot"): (None, 1.1, 0.85),  # None -> size of the code the model re-emits
+    ("coding", "oneshot"): (None, 1.0, 0.85),  # None -> size of the code the model re-emits
     ("default", "oneshot"): (200, 1.0, 0.6),
     ("any", "reason"): (300, 1.0, 0.8),  # thinking tokens included
     ("any", "react"): (55, 3.5, 0.75),

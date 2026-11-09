@@ -82,6 +82,8 @@ def solve(task, workspace):
                 val = ci[val.lower()]
             else:
                 return SolveResult.infeasible(f"{col} {val!r} does not occur in {fname}")
+        if any(c == col for c, _ in filters):  # "product 'a' and product 'b'": and/or is ambiguous
+            return SolveResult.unknown(f"two filters on column {col!r}")
         filters.append((col, (lambda c, v: (lambda r: r[c] == v))(col, val)))
     q = re.sub(r"\b(\w+) ['\"]([^'\"]+)['\"]", " ", q)
 
@@ -89,7 +91,7 @@ def solve(task, workspace):
     if "month" not in header and re.search(r"\bmonths?\b", q, re.I):
         return SolveResult.unknown("question filters by month but csv has no month column")
     if "month" in header:
-        mr = re.search(r"\bmonths? (\d+) (?:through|to|-|and) (\d+)(?: inclusive)?", q, re.I)
+        mr = re.search(r"\bmonths? (\d+) ?(?:through|to|-) ?(\d+)(?: inclusive)?", q, re.I)
         if mr:
             a, b = int(mr[1]), int(mr[2])
             if not (1 <= a <= 12 and 1 <= b <= 12) or a > b:
@@ -120,8 +122,9 @@ def solve(task, workspace):
 
 
 def _leftover(ql, extra=()):
+    """Words (and numbers: a year, a second month, a percentage...) the template did not consume."""
     allowed = ALLOWED | set(extra)
-    return [w for w in re.findall(r"[a-z]+", ql) if w not in allowed]
+    return [w for w in re.findall(r"[a-z]+|\d+", ql) if w not in allowed]
 
 
 def _col(word, header):

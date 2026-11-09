@@ -15,7 +15,10 @@ NUM_WORDS = {
     "a": 1, "an": 1, "once": 1, "twice": 2, "thrice": 3,
 }
 N = r"(\d[\d,]*|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)"
-W = r"[a-z][a-z\- ]*?"  # unit / container noun (boxes, crates, warehouses, ...)
+W = r"[a-z][a-z\- ]*?"  # entity name in the first sentence ("warehouse", "small shop")
+U = r"(?P<u>[a-z]+)"    # ONE unit noun; must be the stock's unit (checked), so "percent", "deliveries" fail
+C = r"[a-z]+"           # one container noun (warehouses, stores, ...)
+TIME = r"(?:day|week|month|hour)"
 
 # Instruction boilerplate that follows the actual problem statement.
 _TAIL = re.compile(
@@ -41,43 +44,66 @@ def _num(s):
 
 
 def _ops():
-    """(regex, fn(match, stock) -> new stock | None for infeasible)."""
+    """(regex, fn(match, stock) -> new stock | None for division by zero).
+    Every pattern is anchored at both ends, so any extra clause ("to each of
+    three stores", "but returns half of them", "of its stock") falls through
+    to the LLM. Group 'u' (if present) must name the stock's unit."""
     ops = []
 
     def add(pattern, fn):
         ops.append((re.compile("^" + pattern + "$", re.I), fn))
 
     # it ships 36 boxes per day for 3 days
-    add(rf"it (?:ships|sells|sends out|uses|loses) {N} {W} (?:per|a|each|every) (?:day|week|month|hour) for {N} (?:days?|weeks?|months?|hours?)",
-        lambda m, s: s - _num(m[1]) * _num(m[2]))
+    add(rf"it (?:ships|sells|sends out|uses|loses) {N} {U} (?:per|a|each|every) {TIME} for {N} {TIME}s?",
+        lambda m, s: s - _num(m[1]) * _num(m[3]))
     # it receives 2 deliveries of 87 boxes each
-    add(rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads) of {N} {W}(?: each)?",
-        lambda m, s: s + _num(m[1]) * _num(m[2]))
+    add(rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads) "
+        rf"of {N} {U}(?: each)?", lambda m, s: s + _num(m[1]) * _num(m[2]))
     # it receives 40 boxes / a delivery of 40 boxes
-    add(rf"it (?:receives|gets|buys|takes in|accepts)(?: a (?:delivery|shipment) of)? {N} (?:more |new |extra )?{W}",
+    add(rf"it (?:receives|gets|buys|takes in|accepts)(?: a (?:delivery|shipment) of)? {N} (?:more |new |extra )?{U}",
         lambda m, s: s + _num(m[1]))
     # it ships 40 boxes
-    add(rf"it (?:ships|sells|sends out|gives away|donates|loses|discards|returns|uses) {N} {W}",
+    add(rf"it (?:ships|sells|sends out|gives away|donates|loses|discards|returns|uses) {N} {U}",
         lambda m, s: s - _num(m[1]))
     # 12 boxes are damaged and discarded
-    add(rf"{N} {W} (?:are|were|get|got) (?:damaged|lost|stolen|discarded|removed|destroyed|broken)(?: and (?:discarded|removed|thrown away))?",
-        lambda m, s: s - _num(m[1]))
+    add(rf"{N} {U} (?:are|were|get|got) (?:damaged|lost|stolen|discarded|removed|destroyed|broken)"
+        rf"(?: and (?:discarded|removed|thrown away))?", lambda m, s: s - _num(m[1]))
     # the stock is split equally into 3 warehouses and it keeps one share (rounded down)
-    add(rf"the stock is (?:split|divided) (?:equally|evenly) (?:into|among|between) {N} {W} and it keeps one (?:share|part|portion)(?: \(rounded down\)| rounded down)?",
+    add(rf"the stock is (?:split|divided) (?:equally|evenly) (?:into|among|between) {N} {C} and it keeps one "
+        rf"(?:share|part|portion)(?: \(rounded down\)| rounded down)?",
         lambda m, s: None if _num(m[1]) == 0 else s // _num(m[1]))
     # the stock is doubled (by merging with a sister warehouse)
-    add(r"the stock is (doubled|tripled|quadrupled)(?: by .*)?",
+    add(rf"the stock is (doubled|tripled|quadrupled)(?: by merging with (?:a|another|its) sister {C})?",
         lambda m, s: s * SCALE[m[1].lower()])
-    add(rf"the stock is multiplied by {N}(?: by .*)?",
-        lambda m, s: s * _num(m[1]))
-    add(r"the stock is halved(?: \(rounded down\)| rounded down)?",
-        lambda m, s: s // 2)
+    add(rf"the stock is multiplied by {N}", lambda m, s: s * _num(m[1]))
+    add(r"the stock is halved(?: \(rounded down\)| rounded down)?", lambda m, s: s // 2)
     add(rf"the stock is divided by {N}(?: \(rounded down\)| rounded down)?",
         lambda m, s: None if _num(m[1]) == 0 else s // _num(m[1]))
     return ops
 
 
+# operations whose size is not given -> no exact answer
+MISSING = [re.compile("^" + p + "$", re.I) for p in (
+    rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads)",
+    rf"it (?:ships|sells|sends out|uses|loses) {N} {U} (?:per|a|each|every) {TIME}",
+    rf"it (?:ships|sells|sends out|uses|loses) {U} (?:per|a|each|every) {TIME} for {N} {TIME}s?",
+    rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads) "
+    rf"of {U}(?: each)?",
+)]
+
+
+def _same_unit(word, unit):
+    word, unit = word.lower(), unit.lower()
+    return word in (unit, unit[:-1], unit[:-2]) and len(word) >= 2
+
+
 OPS = _ops()
+
+
+def _unit_groups(rx, m):
+    """The unit noun a pattern captured (none for patterns without a unit)."""
+    u = m.groupdict().get("u")
+    return [u] if u else []
 
 
 def _sentences(text):
@@ -99,6 +125,8 @@ def solve(task, workspace=None):
         return SolveResult.unknown(f"start not recognised: {sents[0]!r}")
     stock = _num(m[2])
     unit = m[3].strip().lower()
+    if " " in unit:
+        return SolveResult.unknown(f"unit is not a single noun: {unit!r}")
     q = _QUESTION.match(sents[-1])
     if not q:
         return SolveResult.unknown(f"question not recognised: {sents[-1]!r}")
@@ -109,7 +137,7 @@ def solve(task, workspace=None):
         s = _PREFIX.sub("", sent)
         for rx, fn in OPS:
             mm = rx.match(s)
-            if mm:
+            if mm and all(_same_unit(g, unit) for g in _unit_groups(rx, mm)):
                 new = fn(mm, stock)
                 if new is None:
                     return SolveResult.infeasible(f"division by zero in: {sent!r}")
@@ -119,5 +147,9 @@ def solve(task, workspace=None):
         else:
             if _VAGUE.search(s) and not re.search(r"\d", s):
                 return SolveResult.infeasible(f"quantity not given: {sent!r}")
+            for rx in MISSING:
+                mm = rx.match(s)
+                if mm and all(_same_unit(g, unit) for g in _unit_groups(rx, mm)):
+                    return SolveResult.infeasible(f"quantity not given: {sent!r}")
             return SolveResult.unknown(f"operation not recognised: {sent!r}")
     return SolveResult.solved(stock, "warehouse template", trace=trace)

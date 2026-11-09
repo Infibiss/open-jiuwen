@@ -16,6 +16,7 @@ import os
 import re
 
 from . import sandbox
+from .fsutil import atomic_write
 from .solvers import coding_solver, search_solver
 from .solvers.base import SolveResult
 
@@ -218,6 +219,20 @@ def _implicated(src, tests, out):
     return [ast.get_source_segment(src, funcs[n]) for n in used], tsrc
 
 
+def _rival_hint(task):
+    """Candidate repairs the zero-token search found ambiguous (they all pass the
+    visible tests but behave differently) - let the model pick by intent."""
+    rivals = [r for r in (getattr(task, "det_info", {}) or {}).get("rivals") or [] if r][:4]
+    if len(rivals) < 2:
+        return ""
+    return ("\nThese one-token repairs all pass the visible test but behave differently on other inputs; at most "
+            "one is right:\n```python\n" + "\n\n".join(rivals) + "\n```")
+
+
+def _failing(out):
+    return set(re.findall(r"^(?:FAIL|ERROR): (\w+)", out, re.M))
+
+
 def build_coding(task):
     ws = task.cwd
     test_file, target = coding_solver.parse_names(task.data, ws)
@@ -233,17 +248,19 @@ def build_coding(task):
         fsrc, tsrc = imp
         imports = "\n".join(ln for ln in src.splitlines() if re.match(r"(import|from) \w", ln))
         body = "\n\n".join(fsrc)
-        sys_p = ("Fix the bugs so the failing tests pass; keep signatures and make the logic correct in general. "
-                 "Reply with only the corrected function(s) in one ```python block. If the tests contradict each "
-                 "other, reply INFEASIBLE.")
+        sys_p = ("Fix the bugs so the failing tests pass; keep signatures. Hidden tests use other inputs, so each "
+                 "function must do exactly what its name says, not merely pass these examples: check every operator, "
+                 "constant and index, a function can contain more than one bug. Reply with only the corrected "
+                 "function(s) in one ```python block. If the tests contradict each other, reply INFEASIBLE.")
         user = (f"From {target}:\n```python\n{(imports + chr(10) * 2) if imports else ''}{body}\n```\n"
-                f"Failing tests:\n```python\n" + "\n".join(tsrc) + f"\n```\n{errors}")
+                f"Failing tests:\n```python\n" + "\n".join(tsrc) + f"\n```\n{errors}" + _rival_hint(task))
         return Prompt([{"role": "system", "content": sys_p}, {"role": "user", "content": user}],
                       min(2000, int(len(body) / 2.5) + 120), target_text=body)
-    sys_p = ("Fix the bugs so the tests pass without changing the tests; keep signatures and make the logic correct "
-             "in general. Reply with the complete corrected file in one ```python block. If the tests contradict "
-             "each other, reply INFEASIBLE.")
-    user = f"{target}:\n```python\n{src}\n```\n{test_file}:\n```python\n{tests}\n```\n{errors}"
+    sys_p = ("Fix the bugs so the tests pass without changing the tests; keep signatures. Hidden tests use other "
+             "inputs, so each function must do exactly what its name says: check every operator, constant and "
+             "index, a function can contain more than one bug. Reply with the complete corrected file in one "
+             "```python block. If the tests contradict each other, reply INFEASIBLE.")
+    user = f"{target}:\n```python\n{src}\n```\n{test_file}:\n```python\n{tests}\n```\n{errors}" + _rival_hint(task)
     return Prompt([{"role": "system", "content": sys_p}, {"role": "user", "content": user}],
                   min(4000, int(len(src) / 2.5) + 200), target_text=src)
 
@@ -283,23 +300,26 @@ def finish_coding(task, text):
     spath, tpath = os.path.join(ws, target), os.path.join(ws, test_file)
     original = open(spath, encoding="utf-8").read()
     tests_before = open(tpath, encoding="utf-8").read()
+    _, out0 = coding_solver.run_tests(ws, test_file)
+    failing_before = _failing(out0)
     try:
         patched = _splice(original, code)
     except (SyntaxError, IndexError, ValueError) as e:
         return SolveResult.unknown(f"cannot apply patch: {e}")
-    with open(spath, "w", encoding="utf-8") as f:
-        f.write(patched.rstrip() + "\n")
+    atomic_write(spath, patched.rstrip() + "\n")
     ok, out = coding_solver.run_tests(ws, test_file)
     tests_after = open(tpath, encoding="utf-8").read()
     if tests_after != tests_before:
-        with open(tpath, "w", encoding="utf-8") as f:
-            f.write(tests_before)
+        atomic_write(tpath, tests_before)
         ok = False
     if not ok:
-        with open(spath, "w", encoding="utf-8") as f:
-            f.write(original)
+        atomic_write(spath, original)
         errs = "\n".join(ln for ln in out.splitlines() if re.match(r"\s*(FAIL|ERROR|\w*Error)", ln))
-        return SolveResult.unknown(f"tests still fail: {errs[-400:]}")
+        failing_after = _failing(out)
+        # every originally failing test now passes but a passing one broke: the
+        # tests may be pulling in opposite directions (see the ladder)
+        tradeoff = bool(failing_before) and bool(failing_after) and not (failing_before & failing_after)
+        return SolveResult.unknown(f"tests still fail: {errs[-400:]}", tradeoff=tradeoff)
     return SolveResult.solved("DONE", "llm patch")
 
 

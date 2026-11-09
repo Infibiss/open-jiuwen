@@ -2,9 +2,12 @@
 
     python tools/estimator_eval.py <tasks_dir> <results.json>
 
-Re-prices every task with the current priors (no online correction) and
-compares the prediction for the strategy that was actually used with the
-recorded cost (MAE, mean relative error, share of underestimates).
+1. Whole-task (the honest metric): the forecast the harness recorded *before*
+   starting each LLM task (`predicted_cost.expected_total`, including the
+   expected escalations) vs the task's total recorded spend.
+2. First call only: re-prices every task with the current priors (no online
+   correction) for the strategy that was actually used.
+Run it on a seed the priors were not fitted on.
 """
 import json
 import os
@@ -21,6 +24,15 @@ from harness.tasks import load_tasks  # noqa: E402
 def main():
     tasks = {t.id: t for t in load_tasks(sys.argv[1])}
     res = json.load(open(sys.argv[2], encoding="utf-8"))
+    whole = [(r["task_type"], r["predicted_cost"]["expected_total"], r["actual_cost"]) for r in res["tasks"]
+             if r.get("predicted_cost", {}).get("expected_total") and r["actual_cost"]]
+    if whole:
+        mae = st.mean(abs(p - a) for _, p, a in whole)
+        print(f"WHOLE TASK n={len(whole)} mean actual={st.mean(a for *_, a in whole):.0f} "
+              f"mean predicted={st.mean(p for _, p, _ in whole):.0f} MAE={mae:.0f} "
+              f"median abs err={st.median(abs(p - a) for _, p, a in whole):.0f} "
+              f"underestimates={sum(p < a for _, p, a in whole) / len(whole):.0%} "
+              f"total predicted={sum(p for _, p, _ in whole):.0f} total actual={sum(a for *_, a in whole):.0f}")
     est = Estimator()
     rows = []
     for r in res["tasks"]:

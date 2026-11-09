@@ -7,12 +7,38 @@ correct (coding: DONE + test command passes). For infeasible tasks
 (expected == "__INFEASIBLE__") we additionally report whether the harness
 correctly abstained (no answer.txt) - this earns no points.
 """
+import ast
 import json
 import os
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from harness.solvers.coding_solver import probe, probe_inputs  # noqa: E402
+
 INF = "__INFEASIBLE__"
+
+
+def differential(ws, task):
+    """Hidden-test proxy: every function of the reference solution must behave
+    like the repaired one on random inputs shaped like the visible test's."""
+    ref = task.get("reference_solution")
+    if not ref:
+        return None
+    src = open(os.path.join(ws, "mylib.py"), encoding="utf-8").read()
+    tests = open(os.path.join(ws, "test_mylib.py"), encoding="utf-8").read()
+    bad = []
+    for node in ast.parse(ref).body:
+        if not isinstance(node, ast.FunctionDef):
+            continue
+        inputs = probe_inputs(tests, node.name, n=200, seed=12345)
+        if not inputs:
+            continue
+        beh = probe(ws, "mylib", node.name, [ref, src], inputs)
+        if beh is None or beh[0] != beh[1]:
+            bad.append(node.name)
+    return bad
 
 
 def check(task_dir, task):
@@ -28,7 +54,12 @@ def check(task_dir, task):
         ws = os.path.join(task_dir, "workspace")
         p = subprocess.run([sys.executable, "test_mylib.py"], cwd=ws, capture_output=True, text=True, timeout=60)
         ok = p.returncode == 0 and ans == "DONE"
-        return ok, "tests pass" if ok else f"tests rc={p.returncode} ans={ans!r}"
+        if not ok:
+            return ok, f"tests rc={p.returncode} ans={ans!r}"
+        bad = differential(ws, task)
+        if bad:
+            return False, f"WRONG REPAIR (visible tests pass, differs from reference): {bad}"
+        return True, "tests pass" + (" + differential ok" if bad is not None else "")
     if task.get("check") == "exact_int":
         try:
             ok = int(ans) == int(exp)

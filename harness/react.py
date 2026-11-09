@@ -12,6 +12,7 @@ import uuid
 
 from . import config
 from .oj import AgentCallbackEvent, AgentCard, ReActAgent, ReActAgentConfig, ModelRequestConfig, tool
+from .fsutil import atomic_write
 from .llm import client_config
 from .solvers import coding_solver
 from .solvers.base import SolveResult
@@ -118,8 +119,7 @@ async def run_react(task, ledger, model, token_cap, max_iters=None):
     if tests_before is not None:
         tp = os.path.join(workdir, test_file)
         if open(tp, encoding="utf-8").read() != tests_before:
-            with open(tp, "w", encoding="utf-8") as f:
-                f.write(tests_before)
+            atomic_write(tp, tests_before)
 
     output = ""
     if isinstance(result, dict):

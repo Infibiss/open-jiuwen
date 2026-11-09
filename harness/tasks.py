@@ -5,6 +5,7 @@ import threading
 import time
 
 from . import config
+from .fsutil import atomic_write
 
 
 class Task:
@@ -27,6 +28,7 @@ class Task:
         self.reason = ""
         self.predicted = {}      # plan actually used (0 for zero-token solvers)
         self.predicted_llm = {}  # what the LLM ladder would cost (reported for every task)
+        self.det_info = {}       # what the zero-token solver learned (e.g. ambiguous repairs)
         self.cost = 0.0
         self.t_start = None
         self.t_end = None
@@ -65,11 +67,12 @@ def write_answer(task, answer):
     paths = [os.path.join(task.dir, "answer.txt")]
     if config.ANSWER_IN_WORKSPACE and task.workspace:
         paths.append(os.path.join(task.workspace, "answer.txt"))
-    for p in paths:
-        tmp = p + ".tmp"
-        with open(tmp, "w", encoding="utf-8") as f:
-            f.write(text)
-        os.replace(tmp, p)
+    for i, p in enumerate(paths):
+        try:
+            atomic_write(p, text)
+        except OSError:
+            if i == 0:
+                raise  # the official answer file could not be written
     task.answer = str(answer).strip()
 
 

@@ -18,7 +18,7 @@ from . import config, llm_solvers
 from .budget import Ledger
 from .estimator import Estimator
 from .solvers import coding_solver, data_solver, math_solver, search_solver
-from .solvers.base import INFEASIBLE, SOLVED
+from .solvers.base import INFEASIBLE, SOLVED, SolveResult
 from .tasks import ResultsFile, load_tasks, write_answer
 
 SOLVERS = {"math": math_solver, "data_analysis": data_solver, "search": search_solver, "coding": coding_solver}
@@ -92,6 +92,7 @@ class Harness:
                     self._apply(task, res, "deterministic")
                 elif res is not None:
                     task.reason = res.reason
+                    task.det_info = res.info
         n_s = sum(t.status == "solved" for t in self.tasks)
         n_i = sum(t.status == "infeasible" for t in self.tasks)
         log(f"phase0: {len(self.tasks)} tasks, solved {n_s}, infeasible {n_i}, "
@@ -117,7 +118,11 @@ class Harness:
             return None
         finally:
             self.ledger.release(reserve)
-        res = await asyncio.to_thread(llm_solvers.finish, task, text)
+        try:
+            res = await asyncio.to_thread(llm_solvers.finish, task, text)
+        except Exception as e:  # noqa: BLE001 - e.g. PermissionError while applying a patch
+            log(f"{task.id}: verification error {e!r}")
+            res = SolveResult.unknown(f"verification error: {e!r}"[:300])
         res.info["reply"] = text[-600:]
         self.est.observe(task, strategy, pred["cost"], self.ledger.task_cost(task.id) - before,
                          res.status == SOLVED)
@@ -139,6 +144,10 @@ class Harness:
                 res2 = await self._step(task, "oneshot", prompt, config.MODEL_FAST, fb)
                 if res2 is not None and res2.status == SOLVED:
                     return res2, "oneshot+feedback"
+                if res.info.get("tradeoff") and res2 is not None and res2.info.get("tradeoff"):
+                    # twice: fixing the failing tests broke a passing one -> contradictory tests
+                    return SolveResult.infeasible("tests contradict each other (every fix breaks another test)"), \
+                        "oneshot+feedback"
                 res = res2 or res
             tried_infeasible = res is not None and res.status == INFEASIBLE
             if tried_infeasible:
@@ -182,14 +191,18 @@ class Harness:
                 task.reason = "skipped (budget/time/LLM unavailable)"
                 return
             task.t_start = time.time()
-            res, strat = await self._ladder(task)
-            if res is not None and res.status in (SOLVED, INFEASIBLE):
-                self._apply(task, res, strat)
-            else:
-                task.status, task.strategy = "failed", strat
-                task.reason = res.reason if res is not None else "skipped (budget/time)"
-                task.cost = self.ledger.task_cost(task.id)
-                self.results.save()
+            try:
+                res, strat = await self._ladder(task)
+                if res is not None and res.status in (SOLVED, INFEASIBLE):
+                    self._apply(task, res, strat)
+                else:
+                    task.status, task.strategy = "failed", strat
+                    task.reason = res.reason if res is not None else "skipped (budget/time)"
+            except Exception as e:  # noqa: BLE001 - one broken task must not stop the others
+                task.status, task.reason = "failed", f"worker error: {e!r}"[:300]
+                log(f"{task.id}: worker error {e!r}")
+            task.cost = self.ledger.task_cost(task.id)
+            self.results.save()
             log(f"{task.id}: {task.status} via {task.strategy} answer={task.answer!r} cost={task.cost:.0f} "
                 f"pred={task.predicted.get('cost')} spent={self.ledger.spent:.0f}")
 
@@ -215,7 +228,7 @@ class Harness:
             f"tokens, budget left {self.ledger.remaining():.0f}")
         self.results.save()
         sem = asyncio.Semaphore(config.MAX_PARALLEL)
-        await asyncio.gather(*(self._worker(t, sem) for t in pending))
+        await asyncio.gather(*(self._worker(t, sem) for t in pending), return_exceptions=True)
 
     def predict_only(self):
         """Pre-run forecast without solving: workspaces are copied to /tmp so
@@ -251,6 +264,8 @@ class Harness:
             asyncio.run(asyncio.wait_for(self.phase1(), timeout=max(30, self.time_left())))
         except asyncio.TimeoutError:
             log("time limit reached")
+        except Exception as e:  # noqa: BLE001 - answers already written stay valid
+            log(f"LLM phase aborted: {e!r}")
         self.results.save()
         pts = sum(t.reward for t in self.tasks if t.status == "solved")
         log(f"done: solved {sum(t.status == 'solved' for t in self.tasks)}/{len(self.tasks)}, "
