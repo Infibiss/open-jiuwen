@@ -325,7 +325,8 @@ def probe(workspace, module, fname, sources, inputs, timeout=60):
         return None
 
 
-DIFF_POLICY = os.environ.get("CODING_DIFF_POLICY", "plurality")
+# strict by default: a disputed repair costs ~100 tokens on the LLM, a wrong one costs the task
+DIFF_POLICY = os.environ.get("CODING_DIFF_POLICY", "strict")
 
 
 def _winner_trusted(beh):

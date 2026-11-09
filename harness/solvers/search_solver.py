@@ -28,6 +28,21 @@ SYNONYMS = [
 ]
 
 
+# Questions that need several KB entries at once (reverse lookups, counts, comparisons):
+# not answerable by walking relations from one entity.
+_NON_CHAIN = re.compile(
+    r"\b(?:mentored|employed|founded|headquartered|managed|owned) by\b|\bhow many\b|\bwho (?:works|worked)\b"
+    r"|\bnumber of\b|\bcount\b"
+    r"|\b(?:older|younger|oldest|youngest|earlier|earliest|later|latest|newest|first|last|most|least|fewest"
+    r"|more|fewer|less|before|after|both|same|all|list)\b"
+    # "Who does X mentor?" asks whom X mentors, not X's mentor
+    r"|\b(?:does|did|do)\s+.+?\s+(?:mentor|employ|manage|found|own|lead|supervise|teach|train|hire)\b", re.I)
+
+
+def is_non_chain(question):
+    return bool(_NON_CHAIN.search(question))
+
+
 def load_kb(kb_dir):
     ents = {}
     for root, _, files in os.walk(kb_dir):
@@ -97,13 +112,8 @@ def solve(task, workspace):
         return SolveResult.unknown("no question found")
     q = qs[-1].strip()
     # reverse / aggregate / comparative questions are not simple forward chains
-    if re.search(r"\b(?:mentored|employed|founded|headquartered|managed|owned) by\b|\bhow many\b|\bwho (?:works|worked)\b"
-                 r"|\b(?:older|younger|earlier|later|more|fewer|less|before|after|both|same|all|list)\b", q, re.I):
+    if is_non_chain(q):
         return SolveResult.unknown(f"non-chain question: {q!r}")
-    # "Who does X mentor?" asks the reverse relation (whom X mentors), not X's mentor
-    if re.search(r"\b(?:does|did|do)\s+.+?\s+(?:mentor|employ|manage|found|own|lead|supervise|teach|train|hire)\b",
-                 q, re.I):
-        return SolveResult.unknown(f"reverse relation: {q!r}")
 
     # anchor entity: longest KB title occurring in the question
     hits = [(k, e) for k, e in ents.items() if re.search(r"\b" + re.escape(k) + r"\b", q.lower())]

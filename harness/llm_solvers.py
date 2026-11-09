@@ -12,12 +12,13 @@ A strategy can be re-run on the reasoning model (`model=` argument) as the
 first escalation step. "INFEASIBLE" replies are respected (no answer file).
 """
 import ast
+import json
 import os
 import re
 
 from . import sandbox
 from .fsutil import atomic_write
-from .solvers import coding_solver, search_solver
+from .solvers import coding_solver, math_solver, search_solver
 from .solvers.base import SolveResult
 
 INFEASIBLE_RX = re.compile(r"^\W*INFEASIBLE\b", re.I)
@@ -27,9 +28,11 @@ _TAIL = re.compile(r"\s*(Compute it with|Use bash|Use the file tools|Use the bas
 SYS_CODE = ("Write a minimal Python 3 script (no comments) in one ```python block that prints ONLY the final "
             "answer. If the task cannot be answered exactly from the data (unknown column or value, impossible "
             "range), reply INFEASIBLE.")
-SYS_EXPR = ("Reply with ONE Python expression that evaluates to the final answer, nothing else (integers; "
-            "'rounded down' = //). If a needed quantity is not given or the problem is impossible, reply "
-            "INFEASIBLE.")
+SYS_STEPS = ("Translate the problem into Python, one line per sentence, in order: `s = <start>` for the first "
+             "sentence, then exactly one `s = ...` line for each later statement, then `print(s)`. Integers only; "
+             "'rounded down' = //, applied to the amount the sentence names (selling 25% of s, rounded down: "
+             "`s = s - s * 25 // 100`; keeping one share of k: `s = s // k`). Output only the code. If a needed "
+             "quantity is not given or the problem is impossible, reply INFEASIBLE.")
 
 
 _FILE_DECL = re.compile(r"The file \S+ has columns [\w,]+(?: \(\d+ rows?\))?\.\s*", re.I)
@@ -55,9 +58,31 @@ class Prompt:
 
 
 # ------------------------------------------------------------------ math
+def _math_statements(task):
+    """Statements in the word problem (every sentence except the closing question)."""
+    return max(1, len(math_solver._sentences(problem_text(task))) - 1)
+
+
+# Expected size of one generated `s = ...` line; the estimator prices output tokens from it.
+_STEP_LINE_SIZE = " " * 60
+
+
 def build_math(task):
-    return Prompt([{"role": "system", "content": SYS_EXPR},
-                   {"role": "user", "content": problem_text(task)}], 150)
+    n = _math_statements(task)
+    return Prompt([{"role": "system", "content": SYS_STEPS},
+                   {"role": "user", "content": problem_text(task)}],
+                  min(600, 40 * n + 60), target_text=_STEP_LINE_SIZE * n)
+
+
+def finish_math(task, text):
+    """A fast model sometimes stops mid-chain: every statement must have produced a line."""
+    if not INFEASIBLE_RX.match(text or ""):
+        code = sandbox.extract_code(text) or text or ""
+        lines = len(re.findall(r"^\s*s\s*[-+*/%]*=(?!=)", code, re.M))
+        n = _math_statements(task)
+        if lines and lines < n:
+            return SolveResult.unknown(f"only {lines} steps for {n} statements: write one line per sentence")
+    return finish_code(task, text, task.cwd)
 
 
 def _as_program(text):
@@ -72,13 +97,13 @@ def _as_program(text):
     return "\n".join(lines)
 
 
-def finish_code(task, text, cwd):
+def finish_code(task, text, cwd, preamble=""):
     if INFEASIBLE_RX.match(text or ""):
         return SolveResult.infeasible("model: INFEASIBLE")
     code = _as_program(text)
     if not code:
         return SolveResult.unknown("no code in reply")
-    ok, last, out = sandbox.run_python(code, cwd)
+    ok, last, out = sandbox.run_python(preamble + code, cwd)
     if not ok:
         return SolveResult.unknown(f"code failed: {out[-300:]}")
     ans = last.strip().strip("'\"")
@@ -150,10 +175,45 @@ def _subgraph(ents, question, depth=3):
     return seen
 
 
+def _kb_records(ents):
+    """KB entries as plain records; numeric fields become ints so comparisons just work."""
+    out = []
+    for e in ents.values():
+        rec = {"name": e["_title"], "kind": e["_kind"]}
+        for a, v in e.items():
+            if not a.startswith("_"):
+                rec[a] = int(v) if re.fullmatch(r"-?\d+", v) else v
+        out.append(rec)
+    return out
+
+
+# Expected size of a short query script; the estimator prices output tokens from it.
+_QUERY_SCRIPT_SIZE = " " * 280
+
+
+def _build_search_query(task, ents, question):
+    """Counts, reverse lookups and comparisons need the whole KB. The model gets only the
+    schema and writes a query; the harness runs it over all records."""
+    schema, records = {}, _kb_records(ents)
+    for rec in records:
+        schema.setdefault(rec["kind"], rec)
+    lines = [f"{k}: {json.dumps(v, ensure_ascii=False)}" for k, v in schema.items()]
+    sys_p = ("`E` is a predefined Python list of dicts holding EVERY knowledge-base entry. Only one record per kind is "
+             "shown, to give the format: people and companies named in the question are in E even if not shown. "
+             "Write a minimal Python 3 script (no comments, do not define E) in one ```python block that looks them "
+             "up in E and prints ONLY the final answer. Reply INFEASIBLE only if a field the question needs does not "
+             "exist in the shown format.")
+    user = f"E has {len(records)} records. Format per kind:\n" + "\n".join(lines) + f"\n\nQuestion: {question}"
+    return Prompt([{"role": "system", "content": sys_p}, {"role": "user", "content": user}], 300,
+                  target_text=_QUERY_SCRIPT_SIZE)
+
+
 def build_search(task):
     kb_dir = _kb_dir(task)
     ents = search_solver.load_kb(kb_dir) if os.path.isdir(kb_dir) else {}
     question = problem_text(task)
+    if ents and search_solver.is_non_chain(question):
+        return _build_search_query(task, ents, question)
     lines = []
     for k in _subgraph(ents, question):
         e = ents[k]
@@ -168,6 +228,10 @@ def build_search(task):
 
 
 def finish_search(task, text):
+    kb_dir = _kb_dir(task)
+    if os.path.isdir(kb_dir) and search_solver.is_non_chain(problem_text(task)):
+        data = json.dumps(_kb_records(search_solver.load_kb(kb_dir)), ensure_ascii=False)
+        return finish_code(task, text, task.cwd, preamble=f"import json\nE = json.loads({data!r})\n")
     m = re.findall(r"ANSWER:\s*(.+)", text or "")
     ans = (m[-1] if m else (text or "").strip().splitlines()[-1] if text and text.strip() else "").strip()
     ans = ans.strip().strip("*`'\".").strip()
@@ -341,4 +405,6 @@ def finish(task, text):
         return finish_search(task, text)
     if task.type == "coding":
         return finish_coding(task, text)
+    if task.type == "math":
+        return finish_math(task, text)
     return finish_code(task, text, task.cwd)

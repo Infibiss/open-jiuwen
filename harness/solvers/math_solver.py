@@ -54,8 +54,9 @@ def _ops():
         ops.append((re.compile("^" + pattern + "$", re.I), fn))
 
     # it ships 36 boxes per day for 3 days
-    add(rf"it (?:ships|sells|sends out|uses|loses) {N} {U} (?:per|a|each|every) {TIME} for {N} {TIME}s?",
-        lambda m, s: s - _num(m[1]) * _num(m[3]))
+    # both time words must match: "per day for 2 weeks" needs a conversion and goes to the LLM
+    add(rf"it (?:ships|sells|sends out|uses|loses) {N} {U} (?:per|a|each|every) (?P<t>{TIME}) for {N} (?P=t)s?",
+        lambda m, s: s - _num(m[1]) * _num(m[4]))
     # it receives 2 deliveries of 87 boxes each
     add(rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads) "
         rf"of {N} {U}(?: each)?", lambda m, s: s + _num(m[1]) * _num(m[2]))

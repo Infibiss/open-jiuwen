@@ -53,7 +53,8 @@ class Estimator:
         tin = int(len(prompt_text) / cpt) + TEMPLATE_OVERHEAD if prompt_text else 900
         if strategy == "react":
             tin = REACT_CONTEXT + approx_tokens(task.instruction)
-        if out is None:  # coding: the model re-emits the whole file
+        if out is None or (strategy == "oneshot" and task.type in ("search", "math") and target_text):
+            # the model emits code: coding re-emits the file, math one line per sentence, non-chain search a query
             out = int(len(target_text) / 4.8) + 8  # code: ~4.9 chars per output token
         raw = calls * (tin * config.INPUT_WEIGHT + out)
         with self._lock:
