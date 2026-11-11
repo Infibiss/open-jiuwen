@@ -122,7 +122,8 @@ class Harness:
         pred = self.est.predict(task, strategy, "\n".join(m["content"] for m in messages), prompt.target_text)
         max_tokens = prompt.max_tokens if strategy == "oneshot" else 4000
         worst = pred["input_tokens"] * config.INPUT_WEIGHT + max_tokens
-        reserve = min(worst, max(pred["cost"] * 1.5, pred["cost"] + 60))
+        # generous margin: a waiting worker loses only time, an overrun breaks the budget
+        reserve = min(worst, max(pred["cost"] * 1.5, pred["cost"] + 200))
         if self.time_left() < 60 or not await self._reserve(reserve):
             return None
         before = self.ledger.task_cost(task.id)
@@ -204,6 +205,14 @@ class Harness:
         """Escalation for a task the cheap pass could not close."""
         prompt = None if config.FORCE_REACT else llm_solvers.build(task)
         res = task.last_result
+        fb = self._feedback(res)
+        if prompt is not None and fb:
+            # the other cheap model with the last failure: about the price of one fast call,
+            # often enough when the fast model kept repeating its own mistake
+            r = await self._step(task, "oneshot", prompt, config.MODEL_ALT, fb)
+            if r is not None and r.status == SOLVED:
+                return r, "alt+feedback"
+            res = r if r is not None and r.status != INFEASIBLE else res
         if prompt is not None and config.ENABLE_REASONING_MODEL:
             r = await self._step(task, "reason", prompt, config.MODEL_REASON, self._feedback(res))
             if r is not None and r.status in (SOLVED, INFEASIBLE):

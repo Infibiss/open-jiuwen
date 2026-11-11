@@ -34,6 +34,18 @@ _VAGUE = re.compile(r"\b(some|several|a few|few|many|an unknown|unknown|a certai
 _START = re.compile(rf"^(?:a|an|the) ({W}) (?:starts|begins|starts out|opens) with {N} ({W})$", re.I)
 _QUESTION = re.compile(rf"^how many ({W}) does (?:it|the {W}) have (?:at the end|in the end|now|left)$", re.I)
 SCALE = {"doubled": 2, "tripled": 3, "quadrupled": 4}
+FRACTION = {"half": 2, "a half": 2, "one half": 2, "a third": 3, "one third": 3, "a quarter": 4, "one quarter": 4,
+            "a fourth": 4, "one fourth": 4, "a fifth": 5, "one fifth": 5, "a tenth": 10, "one tenth": 10}
+FR = r"(half|a half|one half|a third|one third|a quarter|one quarter|a fourth|one fourth|a fifth|one fifth|a tenth|one tenth)"
+OUT = r"(?:ships|sells|sends out|gives away|donates|loses|discards|uses)"
+DOWN = r"(?P<down>,? (?:\(rounded down\)|rounded down))?"
+
+
+def _share_out(s, num, den, down):
+    """Stock after giving away num/den of it; the amount is rounded down only when the text says so."""
+    if not down and (s * num) % den:
+        return False  # fractional amount without a rounding rule: leave it to the LLM
+    return s - s * num // den
 
 
 def _num(s):
@@ -57,6 +69,9 @@ def _ops():
     # both time words must match: "per day for 2 weeks" needs a conversion and goes to the LLM
     add(rf"it (?:ships|sells|sends out|uses|loses) {N} {U} (?:per|a|each|every) (?P<t>{TIME}) for {N} (?P=t)s?",
         lambda m, s: s - _num(m[1]) * _num(m[4]))
+    # per day for 2 weeks: a week is always 7 days (months and hours stay with the LLM)
+    add(rf"it (?:ships|sells|sends out|uses|loses) {N} {U} (?:per|a|each|every) day for {N} weeks?",
+        lambda m, s: s - _num(m[1]) * 7 * _num(m[3]))
     # it receives 2 deliveries of 87 boxes each
     add(rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads) "
         rf"of {N} {U}(?: each)?", lambda m, s: s + _num(m[1]) * _num(m[2]))
@@ -80,6 +95,14 @@ def _ops():
     add(r"the stock is halved(?: \(rounded down\)| rounded down)?", lambda m, s: s // 2)
     add(rf"the stock is divided by {N}(?: \(rounded down\)| rounded down)?",
         lambda m, s: None if _num(m[1]) == 0 else s // _num(m[1]))
+    # it gives away a third of its stock (rounded down) / it ships half of its stock
+    add(rf"it {OUT} {FR} of (?:its|the) (?:stock|inventory|{U}){DOWN}",
+        lambda m, s: _share_out(s, 1, FRACTION[m[1].lower()], m["down"]))
+    # it sells 25 percent of its stock, rounded down / 25% of its boxes
+    add(rf"it {OUT} (\d+)(?: percent|%) of (?:its|the) (?:stock|inventory|{U}){DOWN}",
+        lambda m, s: _share_out(s, int(m[1]), 100, m["down"]) if int(m[1]) <= 100 else False)
+    # it ships 16 boxes to each of three stores
+    add(rf"it {OUT} {N} {U} (?:to|for) each of {N} {C}", lambda m, s: s - _num(m[1]) * _num(m[3]))
     return ops
 
 
@@ -90,6 +113,12 @@ MISSING = [re.compile("^" + p + "$", re.I) for p in (
     rf"it (?:ships|sells|sends out|uses|loses) {U} (?:per|a|each|every) {TIME} for {N} {TIME}s?",
     rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads) "
     rf"of {U}(?: each)?",
+    rf"it (?:receives|gets|takes in|accepts) {N} (?:deliveries|shipments|trucks|truckloads|batches|pallets|loads) "
+    rf"of (?:unknown|unspecified|an unknown|an unspecified|varying|random) sizes?",
+    rf"it (?:ships|sells|sends out|uses|loses) {N} {U} (?:per|a|each|every) {TIME} for "
+    rf"(?:several|some|a few|many|a number of|an unknown number of|unknown number of|a couple of) {TIME}s?",
+    rf"it (?:ships|sells|sends out|uses|loses) (?:some|several|a few|many|a number of|an unknown number of) {U} "
+    rf"(?:per|a|each|every) {TIME} for {N} {TIME}s?",
 )]
 
 
@@ -142,6 +171,8 @@ def solve(task, workspace=None):
                 new = fn(mm, stock)
                 if new is None:
                     return SolveResult.infeasible(f"division by zero in: {sent!r}")
+                if new is False:
+                    return SolveResult.unknown(f"no rounding rule in: {sent!r}")
                 stock = new
                 trace.append(stock)
                 break
