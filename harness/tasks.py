@@ -32,6 +32,10 @@ class Task:
         self.cost = 0.0
         self.t_start = None
         self.t_end = None
+        self.laddered = False    # went up the LLM escalation ladder (phase 1)
+        self.tried = []          # ladder rungs already run ("strategy/model", "retry:<rung>")
+        self.prompt = None       # one-shot prompt of the ladder (reused by the second pass)
+        self.last_reply = ""     # last failed model reply (feedback for the second pass)
 
     @property
     def cwd(self):

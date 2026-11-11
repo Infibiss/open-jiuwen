@@ -67,6 +67,8 @@ def solve(task, workspace):
     question = _TAIL.sub("", instr[fm.end():]).strip()
     q = question
     filters = []  # (column, predicate)
+    alts, ors = {}, {}  # column -> accepted values ("or") / end of its last quoted value
+    blank = []  # spans of connector words consumed by the filters ("or", "outside")
 
     # categorical filters:  product 'widget' / region "north"
     for m in list(re.finditer(r"\b(\w+) ['\"]([^'\"]+)['\"]", q)):
@@ -82,10 +84,40 @@ def solve(task, workspace):
                 val = ci[val.lower()]
             else:
                 return SolveResult.infeasible(f"{col} {val!r} does not occur in {fname}")
-        if any(c == col for c, _ in filters):  # "product 'a' and product 'b'": and/or is ambiguous
+        if any(c == col for c, _ in filters):
+            # "region 'a' or region 'b'" (only "or": "and" on one column is ambiguous)
+            prev = [i for i, (c, _) in enumerate(filters) if c == col]
+            between = q[ors[col]:m.start()] if col in ors else ""
+            if len(prev) == 1 and re.fullmatch(r"\s*or\s+(?:in\s+)?", between, re.I) and alts.get(col):
+                alts[col].add(val)
+                blank.append((ors[col], m.start()))
+                ors[col] = m.end()
+                continue
             return SolveResult.unknown(f"two filters on column {col!r}")
-        filters.append((col, (lambda c, v: (lambda r: r[c] == v))(col, val)))
+        neg = re.search(r"\b(?:outside(?: of)?|except(?: in)?|excluding|not in|other than)\s+(?:the\s+)?$",
+                        q[:m.start()], re.I)
+        if neg:  # "sold outside region 'north'"
+            blank.append((neg.start(), neg.end()))
+            filters.append((col, (lambda c, v: (lambda r: r[c] != v))(col, val)))
+            alts[col], ors[col] = None, m.end()  # no "or" after a negation
+            continue
+        alts[col], ors[col] = {val}, m.end()
+        filters.append((col, (lambda c, vs: (lambda r: r[c] in vs))(col, alts[col])))
+    for a, b in sorted(blank, reverse=True):
+        q = q[:a] + " " * (b - a) + q[b:]
     q = re.sub(r"\b(\w+) ['\"]([^'\"]+)['\"]", " ", q)
+    if re.search(r"\b(?:year|years) \d{4}\b|\bin \d{4}\b", q, re.I) and not any(
+            "year" in c or "date" in c for c in header):
+        return SolveResult.infeasible("question filters by year but the csv has no year or date column")
+
+    # numeric conditions: "had more than 12 units", "at a price above 46", "with at least 3 units"
+    for m in list(_NUMCMP.finditer(q)):
+        col = _col(m["c1"] or m["c2"] or "", header) if (m["c1"] or m["c2"]) else None
+        if col is None or (m["c1"] and m["c2"] and _col(m["c2"], header) != col):
+            return SolveResult.unknown(f"comparison on an unknown column in {question!r}")
+        op, t = CMP[m["op"].lower()], float(m["n"])
+        filters.append((col, (lambda c, op, t: (lambda r: op(_to_num(r[c]), t)))(col, op, t)))
+        q = q.replace(m[0], " ", 1)
 
     # month filters
     if "month" not in header and re.search(r"\bmonths?\b", q, re.I):
@@ -134,6 +166,17 @@ def _col(word, header):
             return c
     return None
 
+
+CMP = {"more than": lambda a, b: a > b, "greater than": lambda a, b: a > b, "over": lambda a, b: a > b,
+       "above": lambda a, b: a > b, "exceeding": lambda a, b: a > b, "higher than": lambda a, b: a > b,
+       "less than": lambda a, b: a < b, "fewer than": lambda a, b: a < b, "under": lambda a, b: a < b,
+       "below": lambda a, b: a < b, "lower than": lambda a, b: a < b,
+       "at least": lambda a, b: a >= b, "no less than": lambda a, b: a >= b, "no fewer than": lambda a, b: a >= b,
+       "at most": lambda a, b: a <= b, "no more than": lambda a, b: a <= b}
+_NUMCMP = re.compile(
+    r"\b(?:(?:had|has|have|with|having|at|for)\s+)?(?:(?:a|an)\s+)?(?:(?P<c1>units?|price|prices)\s+(?:of\s+)?)?"
+    r"(?P<op>" + "|".join(sorted(CMP, key=len, reverse=True)) + r")\s+(?P<n>\d+(?:\.\d+)?)"
+    r"(?:\s+(?P<c2>units?|price))?\b", re.I)
 
 MAX_W = {"most", "highest", "largest", "greatest", "biggest", "maximum", "max", "top"}
 MIN_W = {"least", "lowest", "smallest", "fewest", "minimum", "min"}

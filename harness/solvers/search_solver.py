@@ -23,7 +23,7 @@ SYNONYMS = [
     (r"born|birth(?:\s*year)?|birthday", "born"),
     (r"employer|employs|employed|works? (?:for|at)|company .{0,20}work", "employer"),
     (r"mentor(?:ed|s)?", "mentor"),
-    (r"headquarter(?:s|ed)|hq|based|located", "headquarters"),
+    (r"headquarter(?:s|ed)|hq|based|located|head office|main office", "headquarters"),
     (r"founded|established|founding", "founded"),
 ]
 
@@ -41,6 +41,49 @@ _NON_CHAIN = re.compile(
 
 def is_non_chain(question):
     return bool(_NON_CHAIN.search(question))
+
+
+_OLDER = re.compile(r"^who (?:(?:was|is) born (?P<b>first|earlier|later|last)|is (?P<a>older|younger)"
+                    r"|is the (?P<s>oldest|youngest))(?: of the two)?,?\s*(?:between\s+)?(?P<x>.+?)\s+(?:or|and)\s+(?P<y>.+?)\?$",
+                    re.I)
+_COUNT = re.compile(r"^how many (?:people|persons|employees|staff members)(?: in the knowledge base| in the kb)?"
+                    r" (?:work|works|are employed|worked) (?:at|for|by) (?P<c>.+?)\?$", re.I)
+
+
+def _entity(ents, name):
+    e = ents.get(name.strip().strip("'\"").lower())
+    return None if e is None or e.get("_dup") else e
+
+
+def _compare_or_count(q, ents):
+    """Two-entity birth comparisons and head counts by employer (several KB entries at once).
+    None when the question has another shape."""
+    m = _OLDER.match(q)
+    if m:
+        a, b = _entity(ents, m["x"]), _entity(ents, m["y"])
+        for name, e in ((m["x"], a), (m["y"], b)):
+            if e is None:
+                if name.strip().lower() in ents:
+                    return SolveResult.unknown(f"ambiguous entity {name!r}")
+                return SolveResult.infeasible(f"entity {name!r} not found in kb")
+            if not re.fullmatch(r"\d{3,4}", e.get("born", "")):
+                return SolveResult.unknown(f"no birth year for {e['_title']}")
+        ya, yb = int(a["born"]), int(b["born"])
+        if ya == yb:
+            return SolveResult.unknown("same birth year")
+        earlier = (m["b"] or "").lower() in ("first", "earlier") or (m["a"] or "").lower() == "older" \
+            or (m["s"] or "").lower() == "oldest"
+        pick = a if (ya < yb) == earlier else b
+        return SolveResult.solved(pick["_title"], "birth-year comparison")
+    m = _COUNT.match(q)
+    if m:
+        name = m["c"].strip().strip("'\"")
+        known = {e.get("employer", "").lower() for e in ents.values()} | set(ents)
+        if name.lower() not in known:
+            return SolveResult.infeasible(f"company {name!r} not found in kb")
+        n = sum(1 for e in ents.values() if e.get("employer", "").lower() == name.lower())
+        return SolveResult.solved(str(n), "head count by employer")
+    return None
 
 
 def load_kb(kb_dir):
@@ -111,6 +154,13 @@ def solve(task, workspace):
     if not qs:
         return SolveResult.unknown("no question found")
     q = qs[-1].strip()
+    # "the company where X works" -> "X's employer"; "hosts the head office of" -> "is the head office of"
+    q = re.sub(r"\bthe (?:company|firm|employer|organi[sz]ation) (?:where|that) (.+?) works?(?: for| at)?(?=[?,.]|$)",
+               r"\1's employer", q)
+    q = re.sub(r"\b(?:hosts|houses|holds) the (head office|main office|headquarters)\b", r"is the \1", q, flags=re.I)
+    special = _compare_or_count(q, ents)
+    if special is not None:
+        return special
     # reverse / aggregate / comparative questions are not simple forward chains
     if is_non_chain(q):
         return SolveResult.unknown(f"non-chain question: {q!r}")

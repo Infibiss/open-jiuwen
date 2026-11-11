@@ -40,6 +40,11 @@ REQUEST_RETRIES = _int("LLM_RETRIES", 2)
 ENABLE_REACT = os.environ.get("ENABLE_REACT", "1") != "0"
 ENABLE_REASONING_MODEL = os.environ.get("ENABLE_REASONING_MODEL", "1") != "0"
 REACT_MAX_ITERS = _int("REACT_MAX_ITERS", 8)
+# Second pass over failed tasks with the budget left after every ladder (see scheduler.phase2)
+ENABLE_RETRY = os.environ.get("ENABLE_RETRY", "1") != "0"
+RETRY_ROUNDS = _int("RETRY_ROUNDS", 6)
+RETRY_SAMPLES = _int("RETRY_SAMPLES", 2)       # sampled retries of the fast model per task
+RETRY_TEMPERATURE = _float("RETRY_TEMPERATURE", 0.7)
 
 # Write a copy of answer.txt into workspace/ as well (instructions say "current
 # directory"; organisers said "next to task.json" - we do both).

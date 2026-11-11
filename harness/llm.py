@@ -1,7 +1,9 @@
 """LLM access through openJiuwen's `Model` (OpenAI-compatible client).
 
 All calls are charged to the Ledger. The SDK client has no retries, so we
-retry transient failures ourselves (a failed request costs nothing).
+retry transient failures ourselves. The organisers bill the input tokens of
+every request that reached the proxy, failed or not (Q&A 09.11), so a failed
+attempt is charged its estimated input.
 """
 import asyncio
 import random
@@ -93,12 +95,14 @@ class LLM:
                 self.ledger.charge(task_id, model, pin, max_tokens, tag=f"{tag} TIMEOUT")
                 last, failures = "timeout", failures + 1
             except Exception as e:  # noqa: BLE001 - network / proxy errors
+                pin = sum(approx_tokens(str(m.get("content", ""))) for m in messages)
+                self.ledger.charge(task_id, model, pin, 0, tag=f"{tag} ERROR")
                 msg = str(e)
                 last = e
                 code = http_status(e)
                 low = msg.lower()
                 if code == 429 or "ratelimit" in low or "too many requests" in low or "одновременн" in low:
-                    if attempt <= 12:  # concurrency limit of the proxy: wait and retry, costs nothing
+                    if attempt <= 12:  # concurrency limit of the proxy: wait and retry (input charged above)
                         await asyncio.sleep(min(10.0, 1.0 + attempt) + random.random())
                         continue
                 if code in (402, 403):  # payment required / forbidden: the budget is gone for good
