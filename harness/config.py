@@ -40,6 +40,9 @@ REQUEST_RETRIES = _int("LLM_RETRIES", 2)
 ENABLE_REACT = os.environ.get("ENABLE_REACT", "1") != "0"
 ENABLE_REASONING_MODEL = os.environ.get("ENABLE_REASONING_MODEL", "1") != "0"
 REACT_MAX_ITERS = _int("REACT_MAX_ITERS", 8)
+# Pass 3 (reasoning-model ReAct, recheck of LLM INFEASIBLE verdicts) only runs while
+# more than this share of the usable budget is left.
+PASS3_MIN_FRACTION = _float("PASS3_MIN_FRACTION", 0.5)
 
 # Write a copy of answer.txt into workspace/ as well (instructions say "current
 # directory"; organisers said "next to task.json" - we do both).

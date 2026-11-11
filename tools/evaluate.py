@@ -50,6 +50,18 @@ def check(task_dir, task):
         return False, ("abstained" if not has else f"answered infeasible: {ans!r}")
     if not has:
         return False, "no answer"
+    if task.get("hidden_tests"):
+        # the jury's way: their own test file replaces the visible one, with extra checks
+        import shutil
+        import tempfile
+        ws = tempfile.mkdtemp(prefix="hidden_")
+        shutil.copytree(os.path.join(task_dir, "workspace"), ws, dirs_exist_ok=True)
+        test = f"test_{task['module']}.py"
+        with open(os.path.join(ws, test), "w", encoding="utf-8") as f:
+            f.write(task["hidden_tests"])
+        p = subprocess.run([sys.executable, test], cwd=ws, capture_output=True, text=True, timeout=60)
+        shutil.rmtree(ws, ignore_errors=True)
+        return p.returncode == 0, "hidden tests pass" if p.returncode == 0 else "HIDDEN TESTS FAIL"
     if task.get("check") == "unittest" or exp == "tests_pass":
         ws = os.path.join(task_dir, "workspace")
         p = subprocess.run([sys.executable, "test_mylib.py"], cwd=ws, capture_output=True, text=True, timeout=60)
@@ -66,7 +78,8 @@ def check(task_dir, task):
         except ValueError:
             ok = False
     else:
-        ok = ans == str(exp).strip()
+        # the organisers announced a lenient string check (strip + lower case)
+        ok = ans.lower() == str(exp).strip().lower()
     return ok, f"got {ans!r} expected {exp!r}"
 
 

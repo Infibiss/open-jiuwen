@@ -29,6 +29,7 @@ class Task:
         self.predicted = {}      # plan actually used (0 for zero-token solvers)
         self.predicted_llm = {}  # what the LLM ladder would cost (reported for every task)
         self.det_info = {}       # what the zero-token solver learned (e.g. ambiguous repairs)
+        self.last_result = None  # last failed LLM attempt (its reply feeds the next pass)
         self.cost = 0.0
         self.t_start = None
         self.t_end = None

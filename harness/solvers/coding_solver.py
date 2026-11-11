@@ -60,9 +60,12 @@ ATTR_ALT = {
 }
 
 
-def _mutants_of_node(node):
+def _mutants_of_node(node, returned=frozenset()):
     """Yield (mutator, kind): mutator changes `node` in place (on a deep copy)
-    or is an UNWRAP_* marker; kind is SAFE (pure inverse flip) or RISKY."""
+    or is an UNWRAP_* marker; kind is SAFE (pure inverse flip) or RISKY.
+    `returned` holds ids of comparisons that are a function's whole result: flipping
+    one (`return a == b` -> `!=`) negates the function, so a single visible
+    assertTrue/assertFalse cannot tell a fix from an inversion."""
     if isinstance(node, (ast.BinOp, ast.AugAssign)):
         # an operator flip next to a literal (`+ 1` -> `* 1`, `n - 1` -> `n + 1`) is a
         # constant/index tweak in disguise, not a pure inverse flip
@@ -80,7 +83,7 @@ def _mutants_of_node(node):
             for alt in CMP_ALT.get(type(op), []):
                 def f(n, i=i, alt=alt):
                     n.ops[i] = alt()
-                yield f, SAFE if (type(op), alt) in SAFE_CMP else RISKY
+                yield f, SAFE if (type(op), alt) in SAFE_CMP and id(node) not in returned else RISKY
     if isinstance(node, ast.BoolOp):
         yield (lambda n: setattr(n, "op", ast.Or() if isinstance(n.op, ast.And) else ast.And())), SAFE
     if isinstance(node, ast.Constant):
@@ -180,9 +183,10 @@ class _Unwrap(ast.NodeTransformer):
 def function_mutants(func_node):
     """All single-site mutants of a FunctionDef: ordered list of (source, kind)."""
     sites = list(ast.walk(func_node))
+    returned = frozenset(id(n.value) for n in sites if isinstance(n, ast.Return) and isinstance(n.value, ast.Compare))
     out = {}
     for idx, node in enumerate(sites):
-        for mut, kind in _mutants_of_node(node):
+        for mut, kind in _mutants_of_node(node, returned):
             fcopy = copy.deepcopy(func_node)
             target = list(ast.walk(fcopy))[idx]
             if isinstance(mut, str):

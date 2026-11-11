@@ -82,7 +82,10 @@ def finish_math(task, text):
         n = _math_statements(task)
         if lines and lines < n:
             return SolveResult.unknown(f"only {lines} steps for {n} statements: write one line per sentence")
-    return finish_code(task, text, task.cwd)
+    res = finish_code(task, text, task.cwd)
+    if res.status == "solved" and not re.fullmatch(r"-?\d+(?:\.\d+)?", str(res.answer).strip()):
+        return SolveResult.unknown(f"the answer must be a number, got {str(res.answer)[:40]!r}")
+    return res
 
 
 def _as_program(text):

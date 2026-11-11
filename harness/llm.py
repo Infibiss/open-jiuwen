@@ -101,6 +101,10 @@ class LLM:
                     if attempt <= 12:  # concurrency limit of the proxy: wait and retry, costs nothing
                         await asyncio.sleep(min(10.0, 1.0 + attempt) + random.random())
                         continue
+                # the organisers bill every request that reached the proxy (its input tokens),
+                # even when it failed: keep the ledger on the safe side
+                pin = sum(approx_tokens(str(m.get("content", ""))) for m in messages)
+                self.ledger.charge(task_id, model, pin, 0, tag=f"{tag} ERROR {code or ''}".strip())
                 if code in (402, 403):  # payment required / forbidden: the budget is gone for good
                     self.dead = True
                     raise LLMUnavailable(msg[:300])
