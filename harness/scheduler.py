@@ -333,6 +333,8 @@ class Harness:
         log(f"predict-only: {len(self.tasks)} tasks, predicted total spend {total:.0f} tokens")
 
     def run(self):
+        log(f"budget {self.ledger.budget:.0f} output-equivalent tokens (BUDGET={os.environ.get('BUDGET', 'unset')!r}), "
+            f"{len(self.tasks)} tasks")
         self.phase0()
         try:
             asyncio.run(asyncio.wait_for(self.phase1(), timeout=max(30, self.time_left())))

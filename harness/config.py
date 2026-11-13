@@ -16,11 +16,31 @@ def _float(name, default):
         return default
 
 
+def _budget(name, default):
+    """The jury may pass any budget in BUDGET (Q&A: "may differ from 100k").
+    Accepts 100000, 1e5, 100_000, "100 000", 100k, 0.1M; 0 means no LLM at all.
+    An unreadable value falls back to the default rather than crashing."""
+    raw = os.environ.get(name)
+    if raw is None or not raw.strip():
+        return default
+    s = raw.strip().lower().replace("_", "").replace(" ", "").replace(",", "")
+    mult = 1
+    if s.endswith("k"):
+        mult, s = 1_000, s[:-1]
+    elif s.endswith("m"):
+        mult, s = 1_000_000, s[:-1]
+    try:
+        value = int(float(s) * mult)
+    except ValueError:
+        return default
+    return value if value >= 0 else default
+
+
 LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "").rstrip("/")
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 
 # Budget in *output-equivalent* tokens: cost = input/10 + output (+ reasoning).
-BUDGET = _int("BUDGET", 100_000)
+BUDGET = _budget("BUDGET", 100_000)
 INPUT_WEIGHT = _float("INPUT_TOKEN_WEIGHT", 0.1)
 # Never plan to spend the last few percent: our usage accounting may differ
 # slightly from the proxy's, and an exhausted proxy kills the run.
